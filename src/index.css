@@ -57,6 +57,7 @@ code {
   position: fixed;
   left: 40vw;
   top: 40vh;
+  font-size: 22pt;
 }
 
 .login-button:hover {
