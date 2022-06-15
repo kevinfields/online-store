@@ -1,3 +1,4 @@
+import { Grid } from '@mui/material';
 import { Container } from '@mui/system';
 import React, {useState, useEffect} from 'react';
 import Loading from '../components/Loading';
@@ -51,23 +52,28 @@ const DepartmentPage = (props) => {
   }
 
   return (
-    <div>
-      <Container maxWidth='sm'>
-        <h3>{props.department}</h3>
+    <div className='page'>
+        <h1 style={{
+          textAlign: 'center',
+        }}>{props.department}</h1>
         { loading ? <Loading /> : 
         <>
-          {products.map(product => (
-            <ProductCard product={product.data()} 
-            onAdd={
-              !cartIds.includes(product.id) ? 
-              () => addToCart(product) :
-              null
-            } 
-            onRemove={() => removeFromCart(product.id)}/> 
-          ))}
+          <Grid container rowSpacing={4} columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
+            {products.map(product => (
+              <Grid item xs={2} sm={4} md={4}>
+                <ProductCard 
+                  product={product.data()} 
+                  onAdd={
+                    !cartIds.includes(product.id) ? 
+                    () => addToCart(product) :
+                    null
+                  } 
+                  onRemove={() => removeFromCart(product.id)}/> 
+              </Grid>
+            ))}
+          </Grid>
         </>
         }
-      </Container>
     </div>
   )
 }

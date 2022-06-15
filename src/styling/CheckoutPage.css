@@ -1,0 +1,14 @@
+
+.header {
+  position: fixed;
+  top: 5vh;
+  left: 30vw;
+  width: 40vw;
+  text-align: center;
+  font-size: 18pt;
+}
+
+.total-price {
+  text-align: center;
+  margin-bottom: 5vh;
+}

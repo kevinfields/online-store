@@ -12,6 +12,44 @@ code {
     monospace;
 }
 
+.page {
+  position: fixed;
+  width: 95vw;
+  left: 2.5vw;
+  height: 80vh;
+  bottom: 2.5vh;
+  border: 1px solid black;
+  overflow-y: scroll;
+}
+
+.store-header {
+  position: fixed;
+  left: 65vw;
+  width: 30vw;
+  text-align: right;
+  color: blue;
+  display: flex;
+  flex-direction: row;
+}
+
+.logo {
+  width: 10vw;
+  height: 10vw;
+  margin-left: 10vw;
+}
+
+.auth-button {
+  position: fixed;
+  top: 30vh;
+  left: 30vw;
+}
+
+.page-header {
+  text-align: center;
+  position: fixed;
+  width: 40vw;
+  left: 30vw;
+}
 
 .product-image {
   max-width: 20vw;

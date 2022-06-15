@@ -7,6 +7,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import HomePage from './pages/HomePage.js';
 import LoginPage from './pages/LoginPage.js';
 import LogoutPage from './pages/LogoutPage.js';
+import CheckoutPage from './pages/CheckoutPage.js';
 
 firebase.initializeApp({
   apiKey: "AIzaSyCV-bMBng0nyBqgo7V_dnKh832PQoSf9Gs",
@@ -38,7 +39,10 @@ function App() {
         <Route
           exact path='/'
           element={
-            <HomePage firestore={firestore} user={user ? user : null} auth={auth} />
+            <HomePage 
+            firestore={firestore} 
+            user={user ? user : null} 
+            auth={auth} />
           }
         />
         {!user ?
@@ -53,6 +57,7 @@ function App() {
               }
             />
           :
+          <>
             <Route
               path='/logout'
               element={
@@ -60,7 +65,25 @@ function App() {
                   auth={auth}
                 />  
               }
-            /> 
+            />
+            <Route
+              path='/checkout'
+              element={
+                <CheckoutPage 
+                  cartRef={
+                    firestore.collection('users')
+                    .doc(user.uid)
+                    .collection('cart')
+                  }
+                  ordersRef={
+                    firestore.collection('users')
+                    .doc(user.uid)
+                    .collection('orders')
+                  }
+                />
+              }
+            />
+          </>
           }
       </Routes>
     </div>
