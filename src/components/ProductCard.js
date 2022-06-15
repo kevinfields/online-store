@@ -1,0 +1,40 @@
+import { AddShoppingCart, Delete } from '@mui/icons-material';
+import { Button, Card, CardContent, CardHeader, CardMedia } from '@mui/material';
+import React from 'react';
+
+
+
+const ProductCard = (props) => {
+  return (
+    <Card variant='outlined' color='secondary'>
+      <CardHeader title={props.product.title} />
+      <CardContent children={`$${props.product.price}`} />
+      <CardContent children={props.product.description} />
+      <CardMedia>
+        <img src={props.product.photoURL} alt={props.product.title} className='product-image'/>
+      </CardMedia>
+      {props.onAdd ?
+        <Button 
+          variant='contained'
+          color='primary'
+          size='large'
+          endIcon={<AddShoppingCart />}
+          onClick={() => props.onAdd()}
+        >
+          Add to My Cart
+        </Button>
+      : 
+        <Button
+          variant='contained'
+          color='error'
+          size='large'
+          endIcon={<Delete />}
+          onClick={() => props.onRemove()}
+        >
+          Remove from My Cart
+        </Button>}
+    </Card>
+  )
+}
+
+export default ProductCard
