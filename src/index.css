@@ -46,6 +46,24 @@ code {
   left: 45vw;
 }
 
+.login-button {
+  width: 20vw;
+  height: 20vh;
+  border-radius: 10px;
+  background-color: transparent;
+  color: blue;
+  border: 2px solid blue;
+  box-shadow: 1px 1px 1px 1px darkblue;
+  position: fixed;
+  left: 40vw;
+  top: 40vh;
+}
+
+.login-button:hover {
+  background-color: lightblue;
+  cursor: pointer;
+}
+
 .page-header {
   text-align: center;
   position: fixed;
