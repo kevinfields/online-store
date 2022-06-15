@@ -2,6 +2,7 @@ import { Breadcrumbs, Button, Grid, } from '@mui/material';
 import React, {useState, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Loading from '../components/Loading';
+import PlaceOrderCard from '../components/PlaceOrderCard';
 import ProductCard from '../components/ProductCard';
 import '../styling/CheckoutPage.css';
 
@@ -89,16 +90,7 @@ const CheckoutPage = (props) => {
         ))}
       </Grid>
       : <p>Your cart is empty.</p>}
-      <div className='total-price'>
-        Cost: ${total}
-      </div>
-      <Button 
-        onClick={() => placeOrder()}
-        variant='contained'
-        color='primary'
-      >
-        Place Order
-      </Button>
+      <PlaceOrderCard placeOrder={() => placeOrder()} cost={total}/>
     </div>
     </div>
     

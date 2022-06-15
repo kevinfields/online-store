@@ -78,11 +78,23 @@ const Navbar = (props) => {
         <TabPanel value={opened} index={0}>
           {props.user === null ?
             <div className='auth-button'> 
-              <Button href='login'>Log In</Button>
+              <Button 
+                variant='contained' 
+                color='primary' 
+                href='login'
+              >
+                Log In
+              </Button>
             </div>
             :
             <div className='auth-button'> 
-              <Button href='logout'>Log Out</Button>
+              <Button 
+                variant='contained'
+                color='error'
+                href='logout'
+              >
+                Log Out
+              </Button>
             </div>
           }
         </TabPanel>

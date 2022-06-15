@@ -1,5 +1,5 @@
 import { CheckOutlined } from '@mui/icons-material'
-import { Button, Card, CardContent, CardHeader, CardMedia } from '@mui/material'
+import { Button, Card, CardContent, CardHeader} from '@mui/material'
 import React from 'react'
 
 const CheckoutCard = (props) => {

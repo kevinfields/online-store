@@ -9,6 +9,8 @@
 }
 
 .total-price {
-  text-align: center;
+  margin-left: 1vw;
   margin-bottom: 5vh;
+  margin-top: 2vh;
+  font-size: 15pt;
 }

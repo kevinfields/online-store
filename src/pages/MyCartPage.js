@@ -67,13 +67,13 @@ const MyCartPage = (props) => {
             right: '20vw',
             bottom: '7vh',
           }}>Total: ${cost}</Box>
-          <Grid container rowSpacing={4} columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
+          <Grid container rowSpacing={4} columnSpacing={{ xs: 2, sm: 3, md: 3 }}>
             {cart.map(item => (
               <Grid item xs={2} sm={4} md={4}>
                 <ProductCard product={item.data()} onRemove={() => removeFromCart(item)}/>
               </Grid>
             ))}
-            <Grid item xs={4} sm={8} md={8}>
+            <Grid item xs={4} sm={4} md={4}>
               <CheckoutCard price={cost} count={cart.length} />
             </Grid>
           </Grid> 
