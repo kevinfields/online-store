@@ -40,18 +40,27 @@ const DepartmentPage = (props) => {
   }, []);
 
   const addToCart = async (product, quantity) => {
-
-
     await props.cartRef.doc(product.id).set({
       ...product.data(),
       quantity: Number(quantity)
     });
     setCartIds(cartIds.concat(product.id));
+    let catcher = [...products];
+    catcher[products.indexOf(product)].quantity = Number(quantity);
+    setProducts([...catcher]);
   }
 
   const removeFromCart = async (id) => {
     await props.cartRef.doc(id).delete();
     setCartIds(cartIds.filter(item => item !== id));
+
+    let catcher = [...products];
+    for (const sg of catcher) {
+      if (sg.id === id) {
+        sg.quantity = 0;
+      }
+    }
+    setProducts([...catcher]);
   }
 
   return (
@@ -71,6 +80,7 @@ const DepartmentPage = (props) => {
                     () => addToCart(product, 1) :
                     null
                   }
+                  quantity={product.quantity ? product.quantity : 1}
                   onMultiply={(quantity) => addToCart(product, quantity)}
                   onRemove={() => removeFromCart(product.id)}/> 
               </Grid>
