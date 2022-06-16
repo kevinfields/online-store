@@ -10,7 +10,7 @@ const HomePage = (props) => {
 
   return (
     <div>
-      <Navbar firestore={props.firestore} user={props.user} auth={props.auth} />
+      <Navbar firestore={props.firestore} user={props.user} auth={props.auth} loggedIn={props.loggedIn}/>
     </div>
   )
 }

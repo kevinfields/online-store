@@ -54,7 +54,15 @@ const Navbar = (props) => {
     <Tab label='Applicances' {...a11yProps(4)} />,
     <Tab label='My Cart' {...a11yProps(5)} />,
     <Tab label='My Orders' {...a11yProps(6)} />
-  ]
+  ];
+
+  const loggedOutTabs = [
+    <Tab label='Log In' {...a11yProps(0)} />,
+    <Tab label='Clothing' {...a11yProps(1)} />, 
+    <Tab label='Furniture' {...a11yProps(2)} />,
+    <Tab label='Electronics' {...a11yProps(3)} />,
+    <Tab label='Applicances' {...a11yProps(4)} />,
+  ];
 
   const handleChange = (event, num) => {
     setOpened(num);
@@ -70,21 +78,15 @@ const Navbar = (props) => {
           <h2>Kevin's General Store</h2>
         </div>
         <Tabs value={opened} onChange={handleChange}>
-        {props.user === null ?
-          <Tab label='Log In' {...a11yProps(0)} />
+        {!props.loggedIn ?
+          loggedOutTabs
           :
           loggedInTabs         
         }
         </Tabs>
         <TabPanel value={opened} index={0}>
-          {props.user === null ?
-            <LoginScreen inwards={true}/>
-            :
-            <LoginScreen inwards={false} />
-          }
+          <LoginScreen inwards={!props.loggedIn} />
         </TabPanel>
-        {props.user !== null ?
-        <>
         <TabPanel value={opened} index={1}>
           <DepartmentPage 
             productsRef={
@@ -93,10 +95,13 @@ const Navbar = (props) => {
               .collection('products')
             }
             cartRef={
+              props.loggedIn ? 
               props.firestore.collection('users')
               .doc(props.user.uid)
               .collection('cart')
+              : null
             }
+            loggedIn={props.loggedIn}
             department={'Clothing'}
           />
         </TabPanel>
@@ -108,10 +113,13 @@ const Navbar = (props) => {
               .collection('products')
             }
             cartRef={
+              props.loggedIn ?
               props.firestore.collection('users')
               .doc(props.user.uid)
               .collection('cart')
+              : null
             }
+            loggedIn={props.loggedIn}
             department={'Furniture'}
           />
         </TabPanel>
@@ -123,10 +131,13 @@ const Navbar = (props) => {
               .collection('products')
             }
             cartRef={
+              props.loggedIn ?
               props.firestore.collection('users')
               .doc(props.user.uid)
               .collection('cart')
+              : null
             }
+            loggedIn={props.loggedIn}
             department={'Electronics'}
           />
         </TabPanel>
@@ -138,13 +149,18 @@ const Navbar = (props) => {
               .collection('products')
             }
             cartRef={
+              props.loggedIn ?
               props.firestore.collection('users')
               .doc(props.user.uid)
               .collection('cart')
+              : null
             }
+            loggedIn={props.loggedIn}
             department={'Appliances'}
           />
         </TabPanel>
+        {props.loggedIn ?
+        <>
         <TabPanel value={opened} index={5}>
           <MyCartPage 
             cartRef={

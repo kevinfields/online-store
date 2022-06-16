@@ -40,9 +40,11 @@ function App() {
           exact path='/'
           element={
             <HomePage 
-            firestore={firestore} 
-            user={user ? user : null} 
-            auth={auth} />
+              firestore={firestore} 
+              user={user ? user : null} 
+              auth={auth} 
+              loggedIn={user ? true : false}
+            />
           }
         />
         {!user ?

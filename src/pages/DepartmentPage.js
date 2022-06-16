@@ -1,5 +1,4 @@
 import { Grid } from '@mui/material';
-import { Container } from '@mui/system';
 import React, {useState, useEffect} from 'react';
 import Loading from '../components/Loading';
 import ProductCard from '../components/ProductCard';
@@ -11,7 +10,9 @@ const DepartmentPage = (props) => {
   const [loading, setLoading] = useState(true);
 
   const loadCartIds = async () => {
+
     let catcher = [];
+
     await props.cartRef.get().then(snap => {
       snap.forEach(doc => {
         catcher.push(doc.id);
@@ -35,8 +36,12 @@ const DepartmentPage = (props) => {
 
 
   useEffect(() => {
-    loadCartIds();
-    loadProducts();
+    if (props.loggedIn) {
+      loadCartIds();
+      loadProducts();
+    } else {
+      loadProducts();
+    }
   }, []);
 
   const addToCart = async (product, quantity) => {
@@ -81,6 +86,7 @@ const DepartmentPage = (props) => {
                     null
                   }
                   quantity={product.quantity ? product.quantity : 1}
+                  loggedIn={props.loggedIn}
                   onMultiply={(quantity) => addToCart(product, quantity)}
                   onRemove={() => removeFromCart(product.id)}/> 
               </Grid>

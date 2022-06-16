@@ -1,6 +1,7 @@
 import { AddShoppingCart, Check, Delete, Edit } from '@mui/icons-material';
 import { Avatar, Button, Card, CardContent, CardHeader, CardMedia, Chip, Input } from '@mui/material';
 import React, {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -8,6 +9,7 @@ const ProductCard = (props) => {
 
   const [quantity, setQuantity] = useState(props.product.quantity ? props.product.quantity : 0);
   const [editing, setEditing] = useState(false);
+  const navigate = useNavigate();
 
   const addOne = () => {
     setQuantity(1);
@@ -61,7 +63,8 @@ const ProductCard = (props) => {
             marginLeft: '1vh',
             marginBottom: '1vh',
           }}
-          onClick={() => addOne()}
+          onClick={props.loggedIn ? () => addOne() : null}
+          href={!props.loggedIn ? 'login' : null}
         >
           Add to My Cart
         </Button>
