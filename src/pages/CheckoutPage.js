@@ -40,7 +40,7 @@ const CheckoutPage = (props) => {
   }
 
   const placeOrder = async () => {
-    alert('Your order has been sent.');
+    
 
    for (const doc of cartData) {
      await props.cartRef.doc(doc.id).delete();
@@ -50,7 +50,7 @@ const CheckoutPage = (props) => {
     let counter = 0;
 
     cartData.forEach(item => {
-      titleCatcher.push(`${item.data().title} x ${item.data().quantity}`);
+      titleCatcher.push(`${item.data().title} | ${item.data().quantity}`);
       counter += Number(item.data().quantity);
     })
 
@@ -61,6 +61,7 @@ const CheckoutPage = (props) => {
       totalCost: total,
       itemCount: Number(counter),
     });
+    alert('Your order has been sent.');
     navigate('/');
   }
 
