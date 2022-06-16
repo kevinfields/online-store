@@ -39,7 +39,7 @@ const MyOrdersPage = (props) => {
           {
             orders.map(item => (
               <Grid item xs={2} sm={4} md={4}>
-                <OrderCard order={item} key={item.id} index={orders.indexOf(item)} />
+                <OrderCard order={item} key={item.id} id={item.id} index={orders.indexOf(item)} />
               </Grid>
             ))
           }

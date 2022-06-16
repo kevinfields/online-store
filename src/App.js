@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage.js';
 import LoginPage from './pages/LoginPage.js';
 import LogoutPage from './pages/LogoutPage.js';
 import CheckoutPage from './pages/CheckoutPage.js';
+import SingleOrderPage from './pages/SingleOrderPage.js';
 
 firebase.initializeApp({
   apiKey: "AIzaSyCV-bMBng0nyBqgo7V_dnKh832PQoSf9Gs",
@@ -85,7 +86,18 @@ function App() {
                 />
               }
             />
-            
+            <Route
+              path='/order/:id'
+              element={
+                <SingleOrderPage 
+                  ordersRef={
+                    firestore.collection('users')
+                    .doc(user.uid)
+                    .collection('orders')
+                  }
+                />
+              }
+            />
           </>
           }
       </Routes>

@@ -13,7 +13,7 @@ const OrderCard = (props) => {
         margin: '5vh',
       }}
     >
-      <CardActionArea>
+      <CardActionArea href={`order/${props.id}`}>
         <Chip 
           avatar={<Avatar>{props.index + 1}</Avatar>} 
           color='info'

@@ -177,7 +177,8 @@ const Navbar = (props) => {
               .doc(props.user.uid)
               .collection('orders')
             } 
-            user={props.user}/>
+            user={props.user}
+          />
         </TabPanel>
         </>
         : null }

@@ -1,11 +1,12 @@
-import { Grid } from '@mui/material';
+import { Avatar, Badge, Button, Card, Chip, Grid, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import Loading from '../components/Loading';
+import getOrderItem from '../functions/getOrderItem';
 
 const SingleOrderPage = (props) => {
 
-  const params = useParams();
+  const { id } = useParams();
   const [order, setOrder] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -13,7 +14,8 @@ const SingleOrderPage = (props) => {
   const loadOrder = async () => {
 
     let single;
-    await props.ordersRef.doc(params.id).get().then(doc => {
+    await props.ordersRef.doc(id).get().then(doc => {
+      console.table(doc.data());
       single = doc.data();
     });
     setOrder(single);
@@ -30,9 +32,44 @@ const SingleOrderPage = (props) => {
         loading ? 
           <Loading />
         :
-        <Grid container rowSpacing={4} columnSpacing={{ xs: 2, sm: 3, md: 3 }}>
-          
-        </Grid>
+        <>
+          <Button 
+            href='/'
+            variant='contained'
+            color='secondary'
+          >
+            Go Back
+          </Button>
+          <h2>Order Details: </h2>
+          <h5>Order ID: {id}</h5>
+            
+          <List
+            sx={{
+              width: '30vw',
+            }}
+          >
+            {order.items.map(item => (
+              <ListItem
+                key={item}
+              >
+                <ListItemText 
+                  primary={getOrderItem(item, 'title')} 
+                />
+                <ListItemIcon>
+                  <Avatar 
+                    sx={{
+                      bgcolor: 'red',
+                      width: '5vw',
+                    }}
+                    variant='rounded'
+                  >
+                    {'x' + getOrderItem(item, 'quantity')}
+                  </Avatar>
+                </ListItemIcon>
+              </ListItem>
+            ))}
+          </List>
+        </>
       }
     </div>
   )
