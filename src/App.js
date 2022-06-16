@@ -41,7 +41,7 @@ function App() {
         main: "#002984",
       },
       secondary: {
-        main: "#4caf50",
+        main: "#ab47bc",
       },
       success: {
         main: '#1b5e20',

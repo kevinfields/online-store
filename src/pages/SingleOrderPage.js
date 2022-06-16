@@ -94,7 +94,7 @@ const SingleOrderPage = (props) => {
               <ListItemIcon>
                 <Avatar 
                   sx={{
-                    bgcolor: 'red',
+                    bgcolor: order.orderStatus === 'submitted' ? 'red' : 'green',
                     width: '5vw',
                     fontSize: '10pt',
                   }}
