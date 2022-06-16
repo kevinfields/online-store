@@ -77,7 +77,7 @@ const DepartmentPage = (props) => {
         <>
           <Grid container rowSpacing={4} columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
             {products.map(product => (
-              <Grid item xs={2} sm={4} md={4}>
+              <Grid item xs={2} sm={4} md={4} key={product.id}>
                 <ProductCard 
                   product={product.data()} 
                   onAdd={

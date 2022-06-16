@@ -38,8 +38,8 @@ const MyOrdersPage = (props) => {
         <Grid container rowSpacing={4} columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
           {
             orders.map(item => (
-              <Grid item xs={2} sm={4} md={4}>
-                <OrderCard order={item} key={item.id} id={item.id} index={orders.indexOf(item)} />
+              <Grid item xs={2} sm={4} md={4} key={item.id}>
+                <OrderCard order={item} id={item.id} index={orders.indexOf(item)} />
               </Grid>
             ))
           }

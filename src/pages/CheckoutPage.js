@@ -100,7 +100,7 @@ const CheckoutPage = (props) => {
       : cartData.length > 0 ?
       <Grid container rowSpacing={4} columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
         {cartData.map(item => (
-          <Grid item xs={2} sm={4} md={4}>
+          <Grid item xs={2} sm={4} md={4} key={item.id}>
             <ProductCard 
               product={item.data()} 
               onRemove={() => removeFromCart(item.id)}

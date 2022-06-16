@@ -4,6 +4,8 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { green, black } from '@mui/material/colors';
 import HomePage from './pages/HomePage.js';
 import LoginPage from './pages/LoginPage.js';
 import LogoutPage from './pages/LogoutPage.js';
@@ -33,74 +35,90 @@ function App() {
     navigate('/');
   };
 
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#002984",
+      },
+      secondary: {
+        main: "#4caf50",
+      },
+      success: {
+        main: '#1b5e20',
+      }
+    },
+  });
+ 
 
   return (
     <div className="App">
-      <Routes>
-        <Route
-          exact path='/'
-          element={
-            <HomePage 
-              firestore={firestore} 
-              user={user ? user : null} 
-              auth={auth} 
-              loggedIn={user ? true : false}
-            />
-          }
-        />
-        {!user ?
-            <Route
-              path='/login'
-              element={
-                <LoginPage
-                  auth={auth}
-                  usersRef={firestore.collection("users")}
-                  onLogin={() => loginUser()}
-                />
-              }
-            />
-          :
-          <>
-            <Route
-              path='/logout'
-              element={
-                <LogoutPage 
-                  auth={auth}
-                />  
-              }
-            />
-            <Route
-              path='/checkout'
-              element={
-                <CheckoutPage 
-                  cartRef={
-                    firestore.collection('users')
-                    .doc(user.uid)
-                    .collection('cart')
-                  }
-                  ordersRef={
-                    firestore.collection('users')
-                    .doc(user.uid)
-                    .collection('orders')
-                  }
-                />
-              }
-            />
-            <Route
-              path='/order/:id'
-              element={
-                <SingleOrderPage 
-                  ordersRef={
-                    firestore.collection('users')
-                    .doc(user.uid)
-                    .collection('orders')
-                  }
-                />
-              }
-            />
-          </>
-          }
-      </Routes>
+      <ThemeProvider theme={theme}>
+        <Routes>
+          <Route
+            exact path='/'
+            element={
+              <HomePage 
+                firestore={firestore} 
+                user={user ? user : null} 
+                auth={auth} 
+                loggedIn={user ? true : false}
+              />
+            }
+          />
+          {!user ?
+              <Route
+                path='/login'
+                element={
+                  <LoginPage
+                    auth={auth}
+                    usersRef={firestore.collection("users")}
+                    onLogin={() => loginUser()}
+                  />
+                }
+              />
+            :
+            <>
+              <Route
+                path='/logout'
+                element={
+                  <LogoutPage 
+                    auth={auth}
+                  />  
+                }
+              />
+              <Route
+                path='/checkout'
+                element={
+                  <CheckoutPage 
+                    cartRef={
+                      firestore.collection('users')
+                      .doc(user.uid)
+                      .collection('cart')
+                    }
+                    ordersRef={
+                      firestore.collection('users')
+                      .doc(user.uid)
+                      .collection('orders')
+                    }
+                  />
+                }
+              />
+              <Route
+                path='/order/:id'
+                element={
+                  <SingleOrderPage 
+                    ordersRef={
+                      firestore.collection('users')
+                      .doc(user.uid)
+                      .collection('orders')
+                    }
+                  />
+                }
+              />
+            </>
+            }
+        </Routes>
+        </ThemeProvider>
     </div>
   );
 }

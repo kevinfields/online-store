@@ -83,7 +83,7 @@ const MyCartPage = (props) => {
           }}>Total: ${cost}</Box>
           <Grid container rowSpacing={4} columnSpacing={{ xs: 2, sm: 3, md: 3 }}>
             {cart.map(item => (
-              <Grid item xs={2} sm={4} md={4} key={cart.indexOf(item)}>
+              <Grid item xs={2} sm={4} md={4} key={item.id}>
                 <ProductCard 
                   product={item.data()}
                   onMultiply={(quantity) => multiplyItem(item, quantity)}
