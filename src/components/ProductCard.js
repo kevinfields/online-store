@@ -22,6 +22,10 @@ const ProductCard = (props) => {
           color='primary'
           size='large'
           endIcon={<AddShoppingCart />}
+          sx={{
+            marginLeft: '1vh',
+            marginBottom: '1vh',
+          }}
           onClick={() => props.onAdd()}
         >
           Add to My Cart
@@ -32,6 +36,11 @@ const ProductCard = (props) => {
           color='error'
           size='large'
           endIcon={<Delete />}
+          sx={{
+            float: 'right',
+            marginRight: '1vh',
+            marginBottom: '1vh',
+          }}
           onClick={() => props.onRemove()}
         >
           Remove from My Cart
