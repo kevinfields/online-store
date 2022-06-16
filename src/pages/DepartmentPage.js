@@ -39,9 +39,12 @@ const DepartmentPage = (props) => {
     loadProducts();
   }, []);
 
-  const addToCart = async (product) => {
+  const addToCart = async (product, quantity) => {
+
+
     await props.cartRef.doc(product.id).set({
       ...product.data(),
+      quantity: Number(quantity)
     });
     setCartIds(cartIds.concat(product.id));
   }
@@ -65,9 +68,10 @@ const DepartmentPage = (props) => {
                   product={product.data()} 
                   onAdd={
                     !cartIds.includes(product.id) ? 
-                    () => addToCart(product) :
+                    () => addToCart(product, 1) :
                     null
-                  } 
+                  }
+                  onMultiply={(quantity) => addToCart(product, quantity)}
                   onRemove={() => removeFromCart(product.id)}/> 
               </Grid>
             ))}

@@ -8,6 +8,7 @@ import LoginPage from '../pages/LoginPage';
 import LogoutPage from '../pages/LogoutPage';
 import MyCartPage from '../pages/MyCartPage';
 import MyOrdersPage from '../pages/MyOrdersPage';
+import LoginScreen from './LoginScreen';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -77,25 +78,9 @@ const Navbar = (props) => {
         </Tabs>
         <TabPanel value={opened} index={0}>
           {props.user === null ?
-            <div className='auth-button'> 
-              <Button 
-                variant='contained' 
-                color='primary' 
-                href='login'
-              >
-                Log In
-              </Button>
-            </div>
+            <LoginScreen inwards={true}/>
             :
-            <div className='auth-button'> 
-              <Button 
-                variant='contained'
-                color='error'
-                href='logout'
-              >
-                Log Out
-              </Button>
-            </div>
+            <LoginScreen inwards={false} />
           }
         </TabPanel>
         {props.user !== null ?

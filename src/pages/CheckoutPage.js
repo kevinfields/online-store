@@ -24,9 +24,19 @@ const CheckoutPage = (props) => {
     setLoading(false);
   }
 
-  const removeFromCart = async (item) => {
-    await props.cartRef.doc(item).delete();
-    setCartData(cartData.filter(product => product.id !== item));
+  const removeFromCart = async (id) => {
+    await props.cartRef.doc(id).delete();
+    setCartData(cartData.filter(product => product.id !== id));
+  }
+
+  const multiplyItem = async (item, quantity) => {
+
+  
+    await props.cartRef.doc(item.id).set({
+      ...item.data(),
+      quantity: quantity
+    });
+    loadCartData();
   }
 
   const placeOrder = async () => {
@@ -37,14 +47,19 @@ const CheckoutPage = (props) => {
    }
 
     let titleCatcher = [];
+    let counter = 0;
+
     cartData.forEach(item => {
-      titleCatcher.push(item.data().title);
+      titleCatcher.push(`${item.data().title} x ${item.data().quantity}`);
+      counter += Number(item.data().quantity);
     })
+
     await props.ordersRef.add({
       items: titleCatcher,
       orderPlaced: new Date(),
       orderStatus: 'submitted',
       totalCost: total,
+      itemCount: Number(counter),
     });
     navigate('/');
   }
@@ -57,7 +72,7 @@ const CheckoutPage = (props) => {
     
     let aggregator = 0;
     cartData.forEach(item => {
-      aggregator += item.data().price
+      aggregator += (item.data().price * item.data().quantity)
     });
     setTotal(aggregator);
   }, [cartData])
@@ -85,7 +100,11 @@ const CheckoutPage = (props) => {
       <Grid container rowSpacing={4} columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
         {cartData.map(item => (
           <Grid item xs={2} sm={4} md={4}>
-            <ProductCard product={item.data()} onRemove={() => removeFromCart(item.id)}/>
+            <ProductCard 
+              product={item.data()} 
+              onRemove={() => removeFromCart(item.id)}
+              onMultiply={(quantity) => multiplyItem(item, quantity)}
+            />
           </Grid>
         ))}
       </Grid>

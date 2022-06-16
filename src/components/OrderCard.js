@@ -16,7 +16,7 @@ const OrderCard = (props) => {
       <CardActionArea>
         <Chip 
           avatar={<Avatar>{props.index + 1}</Avatar>} 
-          color='secondary'
+          color='info'
           sx={{
             float: 'right',
             marginRight: '1vh',
@@ -24,7 +24,7 @@ const OrderCard = (props) => {
           }}/>
         <CardHeader title={`Order ID: ${props.order.id}`} />
         <CardContent children={`Total Cost: $${props.order.data().totalCost}`} />
-        <CardContent children={`Number of Items: ${props.order.data().items.length}`} />
+        <CardContent children={`Number of Items: ${props.order.data().itemCount}`} />
         <CardContent children={`Order Status: ${props.order.data().orderStatus}`} />
         <CardContent children={`Ordered on ${formatTime(props.order.data().orderPlaced.seconds * 1000)}`} />
       </CardActionArea>
