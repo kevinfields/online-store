@@ -1,4 +1,4 @@
-import { AddShoppingCart, Check, Delete, Edit } from '@mui/icons-material';
+import { AddShoppingCart, Check, Delete, Edit, Error } from '@mui/icons-material';
 import { Avatar, Button, Card, CardContent, CardHeader, CardMedia, Chip, Input } from '@mui/material';
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -54,20 +54,38 @@ const ProductCard = (props) => {
         <img src={props.product.photoURL} alt={props.product.title} className='product-image'/>
       </CardMedia>
       {props.onAdd ?
+        <>
+        {props.product.stock > 0 ?
+          <Button 
+            variant='contained'
+            color='primary'
+            size='large'
+            endIcon={<AddShoppingCart />}
+            sx={{
+              marginLeft: '1vh',
+              marginBottom: '1vh',
+            }}
+            onClick={props.loggedIn ? () => addOne() : null}
+            href={!props.loggedIn ? 'login' : null}
+          >
+            Add to My Cart
+          </Button>
+        :
         <Button 
-          variant='contained'
-          color='primary'
+          variant='outlined'
+          color='error'
           size='large'
-          endIcon={<AddShoppingCart />}
+          endIcon={<Error />}
           sx={{
             marginLeft: '1vh',
             marginBottom: '1vh',
           }}
-          onClick={props.loggedIn ? () => addOne() : null}
-          href={!props.loggedIn ? 'login' : null}
+          onClick={() => alert('This item is out of stock')}
         >
-          Add to My Cart
-        </Button>
+          Out of Stock
+        </Button>  
+        }
+      </>
       : 
         <>
           {editing ? 

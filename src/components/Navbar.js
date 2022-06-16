@@ -52,8 +52,9 @@ const Navbar = (props) => {
     <Tab label='Furniture' {...a11yProps(2)} />,
     <Tab label='Electronics' {...a11yProps(3)} />,
     <Tab label='Applicances' {...a11yProps(4)} />,
-    <Tab label='My Cart' {...a11yProps(5)} />,
-    <Tab label='My Orders' {...a11yProps(6)} />
+    <Tab label='Outdoors' {...a11yProps(5)} />,
+    <Tab label='My Cart' {...a11yProps(6)} />,
+    <Tab label='My Orders' {...a11yProps(7)} />
   ];
 
   const loggedOutTabs = [
@@ -62,6 +63,7 @@ const Navbar = (props) => {
     <Tab label='Furniture' {...a11yProps(2)} />,
     <Tab label='Electronics' {...a11yProps(3)} />,
     <Tab label='Applicances' {...a11yProps(4)} />,
+    <Tab label='Outdoors' {...a11yProps(5)} />
   ];
 
   const handleChange = (event, num) => {
@@ -159,9 +161,27 @@ const Navbar = (props) => {
             department={'Appliances'}
           />
         </TabPanel>
+        <TabPanel value={opened} index={5}>
+          <DepartmentPage 
+            productsRef={
+              props.firestore.collection('departments')
+              .doc('outdoors')
+              .collection('products')
+            }
+            cartRef={
+              props.loggedIn ?
+              props.firestore.collection('users')
+              .doc(props.user.uid)
+              .collection('cart')
+              : null
+            }
+            loggedIn={props.loggedIn}
+            department={'Outdoors'}
+          />
+        </TabPanel>
         {props.loggedIn ?
         <>
-        <TabPanel value={opened} index={5}>
+        <TabPanel value={opened} index={6}>
           <MyCartPage 
             cartRef={
               props.firestore.collection('users')
@@ -170,7 +190,7 @@ const Navbar = (props) => {
             } 
             user={props.user}/>
         </TabPanel>
-        <TabPanel value={opened} index={6}>
+        <TabPanel value={opened} index={7}>
           <MyOrdersPage 
             ordersRef={
               props.firestore.collection('users')
