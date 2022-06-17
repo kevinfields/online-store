@@ -1,6 +1,6 @@
 import { Button, Card, Grid } from '@mui/material';
 import { Box, Container } from '@mui/system';
-import { AddModeratorRounded, CheckOutlined } from '@mui/icons-material';
+import { CheckOutlined, Delete } from '@mui/icons-material';
 import React, {useState, useEffect} from 'react'
 import Loading from '../components/Loading';
 import ProductCard from '../components/ProductCard';
@@ -43,6 +43,15 @@ const MyCartPage = (props) => {
     setCost(cost - (item.data().price * item.data().quantity));
   }
 
+  const clearCart = async () => {
+    if (window.confirm('Are you sure you want to clear your cart?')) {
+      for (const item of cart) {
+        await props.cartRef.doc(item.id).delete();
+      }
+      setCart([]);
+    }
+  }
+
   const multiplyItem = async (item, quantity) => {
 
     await props.cartRef.doc(item.id).set({
@@ -75,11 +84,24 @@ const MyCartPage = (props) => {
           >
             Check Out
           </Button>
+          <Button
+            variant='outlined'
+            color='error'
+            startIcon={<Delete />}
+            sx={{
+              float: 'right',
+              marginTop: '1vh',
+              marginRight: '5vw',
+            }}
+            onClick={() => clearCart()}
+          >
+            Clear My Cart
+          </Button>
           <Box sx={{
             float: 'right',
             position: 'relative',
-            right: '20vw',
-            bottom: '7vh',
+            right: '10vw',
+            bottom: '8vh',
           }}>Total: ${cost}</Box>
           <Grid container rowSpacing={4} columnSpacing={{ xs: 2, sm: 3, md: 3 }}>
             {cart.map(item => (
