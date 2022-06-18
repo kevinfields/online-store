@@ -5,12 +5,14 @@ import React, {useState, useEffect} from 'react'
 import Loading from '../components/Loading';
 import ProductCard from '../components/ProductCard';
 import CheckoutCard from '../components/CheckoutCard';
+import Alert from '../components/Alert';
 
 const MyCartPage = (props) => {
   
   const [cart, setCart] = useState([]);
   const [cost, setCost] = useState(0);
   const [count, setCount] = useState(0);
+  const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const loadMyCart = async () => {
@@ -44,12 +46,12 @@ const MyCartPage = (props) => {
   }
 
   const clearCart = async () => {
-    if (window.confirm('Are you sure you want to clear your cart?')) {
-      for (const item of cart) {
-        await props.cartRef.doc(item.id).delete();
-      }
-      setCart([]);
+
+    for (const item of cart) {
+      await props.cartRef.doc(item.id).delete();
     }
+    setCart([]);
+    setModal(false);
   }
 
   const multiplyItem = async (item, quantity) => {
@@ -93,7 +95,7 @@ const MyCartPage = (props) => {
               marginTop: '1vh',
               marginRight: '5vw',
             }}
-            onClick={() => clearCart()}
+            onClick={() => setModal(true)}
           >
             Clear My Cart
           </Button>
@@ -123,6 +125,15 @@ const MyCartPage = (props) => {
           textAlign: 'center',
         }}>You have no items in your cart.</div>
       }
+      { modal ?
+        <Alert 
+          open={modal}
+          onClose={() => setModal(false)}
+          header={'Are you sure you want to clear your cart?'}
+          description={'This cannot be undone'}
+          onAccept={() => clearCart()}
+        />
+      : null}
     </div>
   )
 }

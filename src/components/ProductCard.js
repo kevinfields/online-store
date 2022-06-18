@@ -80,7 +80,7 @@ const ProductCard = (props) => {
             marginLeft: '1vh',
             marginBottom: '1vh',
           }}
-          onClick={() => alert('This item is out of stock')}
+          onClick={() => props.outOfStockAlert()}
         >
           Out of Stock
         </Button>  

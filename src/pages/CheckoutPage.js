@@ -1,4 +1,4 @@
-import { Breadcrumbs, Button, Grid, } from '@mui/material';
+import { Alert, Breadcrumbs, Button, Grid, Typography, } from '@mui/material';
 import React, {useState, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Loading from '../components/Loading';
@@ -10,6 +10,8 @@ const CheckoutPage = (props) => {
 
   const [cartData, setCartData] = useState([]);
   const [total, setTotal] = useState(0);
+  const [modal, setModal] = useState(false);
+  const [orderID, setOrderID] = useState('');
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -60,9 +62,11 @@ const CheckoutPage = (props) => {
       orderStatus: 'submitted',
       totalCost: total,
       itemCount: Number(counter),
-    });
-    alert('Your order has been sent.');
-    navigate('/');
+    }).then(doc => {
+      setOrderID(doc.id);
+    })
+    setModal(true);
+    setCartData([]);
   }
 
   useEffect(() => {
@@ -108,10 +112,62 @@ const CheckoutPage = (props) => {
             />
           </Grid>
         ))}
+        <Grid item xs={2} sm={4} md={4}>
+          <PlaceOrderCard placeOrder={() => placeOrder()} cost={total}/>
+        </Grid>
       </Grid>
-      : <p>Your cart is empty.</p>}
-      <PlaceOrderCard placeOrder={() => placeOrder()} cost={total}/>
+      : null
+      }
     </div>
+    {
+      modal ? 
+        <Alert 
+          severity='success'
+          open={modal}
+          onClose={() => setModal(false)}
+          sx={{
+            width: '40vw',
+            height: '20vh',
+            position: 'fixed',
+            left: '30vw',
+            marginRight: '10vw',
+            marginTop: '15vh',
+
+          }}
+        >
+          <div
+            style={{
+              width: '30vw',
+              fontSize: '18pt',
+            }}>
+            Your order has been sent!
+          </div>
+          <Button
+            href={`/order/${orderID}`}
+            variant='outlined'
+            color='primary'
+            sx={{
+              marginTop: '3vh',
+            }}
+          >
+            View Order
+          </Button>
+          <Button
+            href='/'
+            variant='outlined'
+            color='secondary'
+            sx={{
+              marginTop: '3vh',
+              marginLeft: '5vw',
+            }}
+          >
+            Return to Home
+          </Button>
+          
+        </Alert>
+      :
+        null
+    }
     </div>
     
   )
