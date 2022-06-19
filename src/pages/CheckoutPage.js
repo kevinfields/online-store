@@ -52,7 +52,7 @@ const CheckoutPage = (props) => {
     let counter = 0;
 
     cartData.forEach(item => {
-      titleCatcher.push(`${item.data().title} | ${item.data().quantity}`);
+      titleCatcher.push(`${item.data().title} | ${item.data().quantity} ~ ${item.data().quantity * item.data().price}`);
       counter += Number(item.data().quantity);
     })
 
@@ -77,9 +77,11 @@ const CheckoutPage = (props) => {
     
     let aggregator = 0;
     cartData.forEach(item => {
-      aggregator += (item.data().price * item.data().quantity)
-    });
-    setTotal(aggregator);
+      let num = (item.data().price * item.data().quantity);
+      num = Math.round(num * 100) / 100;
+      aggregator += num;
+    })
+    setTotal(Math.round(aggregator * 100) / 100);
   }, [cartData])
 
   return (

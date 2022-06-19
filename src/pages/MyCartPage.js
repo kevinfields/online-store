@@ -24,13 +24,15 @@ const MyCartPage = (props) => {
     await props.cartRef.get().then(snap => {
       snap.forEach(doc => {
         catcher.push(doc);
-        aggregator += Number(doc.data().quantity * doc.data().price);
+        let num = Number(doc.data().quantity * doc.data().price);
+        num = Math.round((num + Number.EPSILON) * 100) / 100
+        aggregator += num;
         counter += Number(doc.data().quantity);
       })
     })
 
     setCart(catcher);
-    setCost(aggregator);
+    setCost(Math.round(aggregator * 100) / 100);
     setCount(counter);
     setLoading(false);
   }
@@ -62,6 +64,10 @@ const MyCartPage = (props) => {
     });
     loadMyCart();
   }
+
+  useEffect(() => {
+    
+  }, [cost])
 
   return (
     <div className='page'>

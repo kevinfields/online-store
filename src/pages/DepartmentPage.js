@@ -101,6 +101,7 @@ const DepartmentPage = (props) => {
                 top: '20vh',
                 height: '10vh',
                 fontSize: '15pt',
+                textAlign: 'center',
               }}
             >
               Sorry, {stockAlert.product} is out of stock!

@@ -41,14 +41,25 @@ const Alert = (props) => {
         {props.onAccept ? 
           <>
             <Button
+              variant='outlined'
+              color='success'
+              sx={{
+                marginTop: '1vh',
+              }}
               onClick={() => props.onAccept()}
             >
-              Confirm
+              YES
             </Button>
             <Button 
+              variant='outlined'
+              color='error'
+              sx={{
+                marginTop: '1vh',
+                marginLeft: '1vw',
+              }}
               onClick={() => props.onClose()}
             >
-              Deny
+              NO
             </Button>
           </>
         : null} 

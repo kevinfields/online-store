@@ -16,7 +16,6 @@ const SingleOrderPage = (props) => {
 
     let single;
     await props.ordersRef.doc(id).get().then(doc => {
-      console.table(doc.data());
       single = doc.data();
     });
     setOrder(single);
@@ -79,6 +78,18 @@ const SingleOrderPage = (props) => {
                     variant='rounded'
                   >
                     {'x' + getOrderItem(item, 'quantity')}
+                  </Avatar>
+                </ListItemIcon>
+                <ListItemIcon>
+                  <Avatar
+                    sx={{
+                      bgcolor: 'lightgreen',
+                      width: '5vw',
+                      marginLeft: '1vw',
+                    }}
+                    variant="rounded"
+                  >
+                    {'$' + getOrderItem(item, 'price')}
                   </Avatar>
                 </ListItemIcon>
               </ListItem>

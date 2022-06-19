@@ -71,19 +71,19 @@ const ProductCard = (props) => {
             Add to My Cart
           </Button>
         :
-        <Button 
-          variant='outlined'
-          color='error'
-          size='large'
-          endIcon={<Error />}
-          sx={{
-            marginLeft: '1vh',
-            marginBottom: '1vh',
-          }}
-          onClick={() => props.outOfStockAlert()}
-        >
-          Out of Stock
-        </Button>  
+          <Button 
+            variant='outlined'
+            color='error'
+            size='large'
+            endIcon={<Error />}
+            sx={{
+              marginLeft: '1vh',
+              marginBottom: '1vh',
+            }}
+            onClick={() => props.outOfStockAlert()}
+          >
+            Out of Stock
+          </Button>  
         }
       </>
       : 
