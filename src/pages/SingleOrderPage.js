@@ -83,9 +83,11 @@ const SingleOrderPage = (props) => {
                 <ListItemIcon>
                   <Avatar
                     sx={{
-                      bgcolor: 'lightgreen',
+                      bgcolor: 'transparent',
+                      color: 'blue',
                       width: '5vw',
                       marginLeft: '1vw',
+                      fontSize: '10pt',
                     }}
                     variant="rounded"
                   >

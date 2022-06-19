@@ -22,6 +22,7 @@ const ProductCard = (props) => {
       props.onRemove();
       return;
     }
+
     props.onMultiply(quantity);
     setEditing(false);
   };

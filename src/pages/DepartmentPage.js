@@ -9,7 +9,12 @@ const DepartmentPage = (props) => {
   const [cartIds, setCartIds] = useState([]);
   const [stockAlert, setStockAlert] = useState({
     product: '',
-    open: false
+    open: false,
+  });
+  const [lowStockAlert, setLowStockAlert] = useState({
+    product: '',
+    open: false,
+    max: 0,
   })
   const [loading, setLoading] = useState(true);
 
@@ -49,6 +54,16 @@ const DepartmentPage = (props) => {
   }, []);
 
   const addToCart = async (product, quantity) => {
+
+    if (quantity > product.data().stock) {
+      quantity = product.data().stock;
+      setLowStockAlert({
+        open: true,
+        product: product.data().title,
+        max: product.data().stock,
+      });
+    }
+
     await props.cartRef.doc(product.id).set({
       ...product.data(),
       quantity: Number(quantity)
@@ -108,6 +123,27 @@ const DepartmentPage = (props) => {
             </Alert>
             : null
           }
+          {lowStockAlert.open ?
+          <Alert
+            open={lowStockAlert.open}
+            onClose={() => setLowStockAlert({
+              product: '',
+              open: false,
+            })}
+            severity='error'
+            sx={{
+              position: 'fixed',
+              width: '50vw',
+              left: '25vw',
+              top: '20vh',
+              height: '10vh',
+              fontSize: '15pt',
+              textAlign: 'center',
+            }}
+          >
+            Sorry, {lowStockAlert.product} has too low of a stock for this order. {`(${lowStockAlert.max} left in stock.)`}
+          </Alert>
+          : null  }
           <Grid container rowSpacing={4} columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
             {products.map(product => (
               <Grid item xs={2} sm={4} md={4} key={product.id}>

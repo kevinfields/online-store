@@ -45,7 +45,7 @@ function a11yProps(index) {
 
 const Navbar = (props) => {
 
-  const [opened, setOpened] = useState(5);
+  const [opened, setOpened] = useState(1);
   const loggedInTabs = [
     <Tab label='Log Out' {...a11yProps(0)} />,
     <Tab label='Clothing' {...a11yProps(1)} />, 

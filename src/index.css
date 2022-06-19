@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+html {
+  background-color: rgb(253, 236, 206);
+}
+
 .page {
   position: fixed;
   width: 95vw;
