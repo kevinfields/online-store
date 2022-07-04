@@ -27,12 +27,10 @@ const firestore = firebase.firestore();
 function App() {
   const background = document.getElementsByTagName("html")[0];
   const [user] = useAuthState(auth);
-  const [allow, setAllow] = useState(false);
   const [themeSelect, setThemeSelect] = useState(0);
   const navigate = useNavigate();
 
   const loginUser = () => {
-    setAllow(true);
     navigate("/");
   };
 
