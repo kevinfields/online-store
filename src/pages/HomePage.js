@@ -1,4 +1,5 @@
 import { AppBar, Button, Switch, Toolbar } from '@mui/material';
+import { LightMode, DarkMode} from '@mui/icons-material';
 import React, {useState, useEffect} from 'react';
 import Navbar from '../components/Navbar';
 import StoreHeader from '../components/StoreHeader';
@@ -17,11 +18,21 @@ const HomePage = (props) => {
   return (
     <div>
       <Navbar firestore={props.firestore} user={props.user} auth={props.auth} loggedIn={props.loggedIn} cardColor={props.cardColor} />
-      <Switch 
-        checked={checked}
-        onChange={() => setChecked(!checked)}
-        color='primary'
-      />
+      <Button
+        onClick={() => setChecked(!checked)}
+        color={checked ? 'primary' : 'secondary'}
+        sx={{
+          position: 'fixed',
+          right: '5vw',
+          top: '2.5vh',
+        }}
+      >
+        {checked ? 
+          <DarkMode />
+        : 
+          <LightMode />
+        }
+      </Button>
     </div>
   );
 };
