@@ -9,17 +9,21 @@ import StoreHeader from '../components/StoreHeader';
 
 const HomePage = (props) => {
   
-  const [checked, setChecked] = useState(true);
 
-  useEffect(() => {
-    props.onThemeChange(checked ? 0 : 1);
-  }, [checked])
+  const [checked, setChecked] = useState(!props.checked);
+
+
+  const changeTheme = () => {
+    props.onThemeChange(!checked ? 0 : 1);
+    setChecked(!checked);
+  }
+
 
   return (
     <div>
       <Navbar firestore={props.firestore} user={props.user} auth={props.auth} loggedIn={props.loggedIn} cardColor={props.cardColor} />
       <Button
-        onClick={() => setChecked(!checked)}
+        onClick={() => changeTheme()}
         sx={{
           color: checked ? 'primary' : 'white',
           position: 'fixed',

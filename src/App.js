@@ -25,9 +25,11 @@ const auth = firebase.auth();
 const firestore = firebase.firestore();
 
 function App() {
+
   const background = document.getElementsByTagName("html")[0];
   const [user] = useAuthState(auth);
   const [themeSelect, setThemeSelect] = useState(0);
+  
   const navigate = useNavigate();
 
   const loginUser = () => {
@@ -60,7 +62,43 @@ function App() {
       background.style.backgroundColor = '#07004f';
       background.style.color = 'white';
     }
-  }, [themeSelect])
+  }, [themeSelect]);
+
+  const checkUserTheme = async () => {
+
+    const userRef = firestore.collection('users').doc(user.uid);
+
+    let data;
+    await userRef.get().then(doc => {
+      data = doc.data();
+    })
+    if (data.theme === 'light') {
+      setThemeSelect(0);
+    } else {
+      setThemeSelect(1);
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      checkUserTheme();
+    }
+  }, [user])
+
+  const userThemeChanger = async (num) => {
+
+    const userRef = firestore.collection('users').doc(user.uid);
+    
+    setThemeSelect(num);
+    let data;
+    await userRef.get().then(doc => {
+      data = doc.data();
+    })
+    await userRef.set({
+      ...data,
+      theme: num === 1 ? 'dark' : 'light'
+    })
+  }
 
   return (
     <div className="App">
@@ -75,7 +113,8 @@ function App() {
                 user={user ? user : null}
                 auth={auth}
                 loggedIn={user ? true : false}
-                onThemeChange={(num) => setThemeSelect(num)}
+                onThemeChange={(num) => userThemeChanger(num)}
+                checked={!user ? false : themeSelect === 0 ? false : true}
                 cardColor={themeSelect === 0 ? 'white' : '#2e1b5e'}
               />
             }
