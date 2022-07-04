@@ -158,7 +158,9 @@ const DepartmentPage = (props) => {
                   quantity={product.quantity ? product.quantity : 1}
                   loggedIn={props.loggedIn}
                   onMultiply={(quantity) => addToCart(product, quantity)}
-                  onRemove={() => removeFromCart(product.id)}/> 
+                  onRemove={() => removeFromCart(product.id)}
+                  cardColor={props.cardColor}
+                /> 
               </Grid>
             ))}
           </Grid>

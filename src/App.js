@@ -28,6 +28,7 @@ function App() {
 
   const [user] = useAuthState(auth);
   const [allow, setAllow] = useState(false);
+  const [themeSelect, setThemeSelect] = useState(0);
   const navigate = useNavigate();
 
   const loginUser = () => {
@@ -38,13 +39,16 @@ function App() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#002984",
+        main: themeSelect === 0 ? "#002984" : '#4a51b5',
       },
       secondary: {
-        main: "#ab47bc",
+        main: themeSelect === 0 ? "#ab47bc" : '#ffaaff',
       },
       success: {
-        main: '#1b5e20',
+        main: themeSelect === 0 ? '#1b5e20' : '#6cff53',
+      },
+      error: {
+        main: themeSelect === 0 ? '#8e0000' : '#ff6a51',
       }
     },
   });
@@ -62,6 +66,8 @@ function App() {
                 user={user ? user : null} 
                 auth={auth} 
                 loggedIn={user ? true : false}
+                onThemeChange={(num) => setThemeSelect(num)}
+                cardColor={themeSelect === 0 ? 'white' : '#2e1b5e'}
               />
             }
           />
@@ -100,6 +106,7 @@ function App() {
                       .doc(user.uid)
                       .collection('orders')
                     }
+                    cardColor={themeSelect === 0 ? 'white' : '#2e1b5e'}
                   />
                 }
               />

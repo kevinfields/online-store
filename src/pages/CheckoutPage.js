@@ -111,6 +111,7 @@ const CheckoutPage = (props) => {
               product={item.data()} 
               onRemove={() => removeFromCart(item.id)}
               onMultiply={(quantity) => multiplyItem(item, quantity)}
+              cardColor={props.cardColor}
             />
           </Grid>
         ))}

@@ -105,6 +105,7 @@ const Navbar = (props) => {
             }
             loggedIn={props.loggedIn}
             department={'Clothing'}
+            cardColor={props.cardColor}
           />
         </TabPanel>
         <TabPanel value={opened} index={2}>
@@ -123,6 +124,7 @@ const Navbar = (props) => {
             }
             loggedIn={props.loggedIn}
             department={'Furniture'}
+            cardColor={props.cardColor}
           />
         </TabPanel>
         <TabPanel value={opened} index={3}>
@@ -141,6 +143,7 @@ const Navbar = (props) => {
             }
             loggedIn={props.loggedIn}
             department={'Electronics'}
+            cardColor={props.cardColor}
           />
         </TabPanel>
         <TabPanel value={opened} index={4}>
@@ -159,6 +162,7 @@ const Navbar = (props) => {
             }
             loggedIn={props.loggedIn}
             department={'Appliances'}
+            cardColor={props.cardColor}
           />
         </TabPanel>
         <TabPanel value={opened} index={5}>
@@ -177,6 +181,7 @@ const Navbar = (props) => {
             }
             loggedIn={props.loggedIn}
             department={'Outdoors'}
+            cardColor={props.cardColor}
           />
         </TabPanel>
         {props.loggedIn ?
@@ -188,7 +193,9 @@ const Navbar = (props) => {
               .doc(props.user.uid)
               .collection('cart')
             } 
-            user={props.user}/>
+            user={props.user}
+            cardColor={props.cardColor}
+          />
         </TabPanel>
         <TabPanel value={opened} index={7}>
           <MyOrdersPage 

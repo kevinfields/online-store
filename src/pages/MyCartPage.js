@@ -118,6 +118,7 @@ const MyCartPage = (props) => {
                   product={item.data()}
                   onMultiply={(quantity) => multiplyItem(item, quantity)}
                   onRemove={() => removeFromCart(item)}
+                  cardColor={props.cardColor}
                 />
               </Grid>
             ))}

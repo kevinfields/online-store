@@ -34,6 +34,8 @@ const ProductCard = (props) => {
     <Card variant='outlined' color='secondary' sx={{
       width: '25vw',
       margin: '5vh',
+      backgroundColor: props.cardColor,
+      color: props.cardColor === 'white' ? 'black' : 'white'
     }}>
       <CardHeader 
         title={
@@ -102,6 +104,7 @@ const ProductCard = (props) => {
                   border: '1px solid black',
                   borderRadius: '5px',
                   paddingLeft: '0.5vh',
+                  color: props.cardColor === 'white' ? 'black' : 'white',
                 }}
                 onChange={(e) => setQuantity(e.target.value)}
               />
@@ -111,6 +114,7 @@ const ProductCard = (props) => {
                 endIcon={<Check />}
                 sx={{
                   marginLeft: '5vw',
+                  marginBottom: '1vh',
                 }}
                 onClick={() => editQuantity()}
               >
