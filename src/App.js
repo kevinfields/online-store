@@ -25,7 +25,7 @@ const auth = firebase.auth();
 const firestore = firebase.firestore();
 
 function App() {
-  const background = document.getElementsByTagName("html");
+  const background = document.getElementsByTagName("html")[0];
   const [user] = useAuthState(auth);
   const [allow, setAllow] = useState(false);
   const [themeSelect, setThemeSelect] = useState(0);
@@ -52,6 +52,17 @@ function App() {
       }
     },
   });
+
+  useEffect(() => {
+
+    if (themeSelect === 0) {
+      background.style.backgroundColor = '#edefc4';
+      background.style.color = 'black';
+    } else {
+      background.style.backgroundColor = '#07004f';
+      background.style.color = 'white';
+    }
+  }, [themeSelect])
 
   return (
     <div className="App">

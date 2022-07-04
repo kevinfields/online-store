@@ -45,25 +45,35 @@ function a11yProps(index) {
 
 const Navbar = (props) => {
 
+  const sxDefault = {
+    color: props.cardColor === 'white' ? 'black' : 'white',
+  }
+
   const [opened, setOpened] = useState(1);
   const loggedInTabs = [
-    <Tab label='Log Out' {...a11yProps(0)} />,
-    <Tab label='Clothing' {...a11yProps(1)} />, 
-    <Tab label='Furniture' {...a11yProps(2)} />,
-    <Tab label='Electronics' {...a11yProps(3)} />,
-    <Tab label='Applicances' {...a11yProps(4)} />,
-    <Tab label='Outdoors' {...a11yProps(5)} />,
-    <Tab label='My Cart' {...a11yProps(6)} />,
-    <Tab label='My Orders' {...a11yProps(7)} />
+    <Tab label='Log Out' 
+      sx={sxDefault}
+      {...a11yProps(0)} 
+    />,
+    <Tab label='Clothing' 
+      sx={sxDefault}
+      {...a11yProps(1)} 
+    />, 
+    <Tab label='Furniture' sx={sxDefault} {...a11yProps(2)} />,
+    <Tab label='Electronics' sx={sxDefault} {...a11yProps(3)} />,
+    <Tab label='Applicances' sx={sxDefault} {...a11yProps(4)} />,
+    <Tab label='Outdoors' sx={sxDefault} {...a11yProps(5)} />,
+    <Tab label='My Cart' sx={sxDefault} {...a11yProps(6)} />,
+    <Tab label='My Orders' sx={sxDefault} {...a11yProps(7)} />
   ];
 
   const loggedOutTabs = [
-    <Tab label='Log In' {...a11yProps(0)} />,
-    <Tab label='Clothing' {...a11yProps(1)} />, 
-    <Tab label='Furniture' {...a11yProps(2)} />,
-    <Tab label='Electronics' {...a11yProps(3)} />,
-    <Tab label='Applicances' {...a11yProps(4)} />,
-    <Tab label='Outdoors' {...a11yProps(5)} />
+    <Tab label='Log In' sx={sxDefault} {...a11yProps(0)} />,
+    <Tab label='Clothing' sx={sxDefault} {...a11yProps(1)} />, 
+    <Tab label='Furniture' sx={sxDefault} {...a11yProps(2)} />,
+    <Tab label='Electronics' sx={sxDefault} {...a11yProps(3)} />,
+    <Tab label='Applicances' sx={sxDefault} {...a11yProps(4)} />,
+    <Tab label='Outdoors' sx={sxDefault} {...a11yProps(5)} />
   ];
 
   const handleChange = (event, num) => {

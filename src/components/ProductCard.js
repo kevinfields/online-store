@@ -67,6 +67,7 @@ const ProductCard = (props) => {
             sx={{
               marginLeft: '1vh',
               marginBottom: '1vh',
+              zIndex: '0',
             }}
             onClick={props.loggedIn ? () => addOne() : null}
             href={!props.loggedIn ? 'login' : null}
