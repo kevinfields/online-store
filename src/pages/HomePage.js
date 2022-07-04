@@ -23,7 +23,7 @@ const HomePage = (props) => {
         color='primary'
       />
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
