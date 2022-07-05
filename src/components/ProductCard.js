@@ -1,7 +1,6 @@
 import { AddShoppingCart, Check, Delete, Edit, Error } from '@mui/icons-material';
-import { Avatar, Button, Card, CardContent, CardHeader, CardMedia, Chip, Input } from '@mui/material';
-import React, {useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Button, Card, CardContent, CardHeader, CardMedia, Input } from '@mui/material';
+import React, {useState} from 'react';
 
 
 
@@ -9,7 +8,6 @@ const ProductCard = (props) => {
 
   const [quantity, setQuantity] = useState(props.product.quantity ? props.product.quantity : 0);
   const [editing, setEditing] = useState(false);
-  const navigate = useNavigate();
 
   const addOne = () => {
     setQuantity(1);
@@ -43,15 +41,28 @@ const ProductCard = (props) => {
           (props.product.title + ' x ' + props.product.quantity) 
           : props.quantity && props.quantity > 1 ?
           (props.product.title + ' x ' + props.quantity)
-          : props.product.title} />
-      <CardContent children={`$${props.product.price * (props.product.quantity ? props.product.quantity : 1)}`} />
+          : props.product.title
+        } 
+        sx={{
+          textAlign: 'center'
+        }}
+      />
+      <CardContent 
+        children={`$${props.product.price * (props.product.quantity ? props.product.quantity : 1)}`} 
+        sx={{
+          textAlign: 'center'
+        }}
+      />
       <CardContent children={props.product.description} />
       {props.tag ? 
         <CardContent children={props.tag} />
       : null}
       <CardMedia
         sx={{
-          marginLeft: '1vh',
+          display: 'flex',
+          alignContent: 'center',
+          justifyContent: 'center',
+          marginBottom: '2vh',
         }}
       >
         <img src={props.product.photoURL} alt={props.product.title} className='product-image'/>

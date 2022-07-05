@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, useNavigate, Link } from "react-router-dom";
+import { Routes, Route, useNavigate} from "react-router-dom";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { green, black } from "@mui/material/colors";
 import HomePage from "./pages/HomePage.js";
 import LoginPage from "./pages/LoginPage.js";
 import LogoutPage from "./pages/LogoutPage.js";
