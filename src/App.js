@@ -37,6 +37,9 @@ function App() {
   };
 
   const theme = createTheme({
+    typography: {
+      fontFamily: 'Quicksand',
+    },
     palette: {
       primary: {
         main: themeSelect === 0 ? "#002984" : '#4a51b5',
@@ -59,7 +62,7 @@ function App() {
   useEffect(() => {
 
     if (themeSelect === 0) {
-      background.style.backgroundColor = '#edefc4';
+      background.style.backgroundColor = '#e0f7fa';
       background.style.color = 'black';
     } else {
       background.style.backgroundColor = '#07004f';
@@ -116,7 +119,7 @@ function App() {
                 user={user ? user : null}
                 auth={auth}
                 loggedIn={user ? true : false}
-                onThemeChange={(num) => userThemeChanger(num)}
+                onThemeChange={user ? (num) => userThemeChanger(num) : (num) => setThemeSelect(num)}
                 checked={!user ? false : themeSelect === 0 ? false : true}
                 cardColor={themeSelect === 0 ? 'white' : '#2e1b5e'}
               />

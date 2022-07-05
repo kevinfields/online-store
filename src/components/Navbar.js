@@ -91,7 +91,7 @@ const Navbar = (props) => {
             color: props.cardColor === 'white' ? 'black' : 'yellow',
           }}>Kevin's General Store</h2>
         </div>
-        <Tabs value={opened} onChange={handleChange}>
+        <Tabs value={opened} onChange={handleChange} indicatorColor='secondary' textColor='secondary'>
         {!props.loggedIn ?
           loggedOutTabs
           :

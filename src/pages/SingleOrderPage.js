@@ -84,7 +84,7 @@ const SingleOrderPage = (props) => {
                   <Avatar
                     sx={{
                       bgcolor: 'transparent',
-                      color: 'blue',
+                      color: props.cardColor === 'white' ? 'blue' : 'yellow',
                       width: '5vw',
                       marginLeft: '1vw',
                       fontSize: '10pt',
