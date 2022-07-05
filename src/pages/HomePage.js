@@ -33,9 +33,9 @@ const HomePage = (props) => {
       >
         {
           checked ?
-            <DarkMode />
+            <DarkMode color='primary' />
           :
-            <LightMode />
+            <LightMode color='info' />
         }
       </Button>
     </div>

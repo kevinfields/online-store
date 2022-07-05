@@ -45,10 +45,13 @@ function App() {
         main: themeSelect === 0 ? "#ab47bc" : '#ffaaff',
       },
       success: {
-        main: themeSelect === 0 ? '#1b5e20' : '#6cff53',
+        main: themeSelect === 0 ? '#1b5e20' : '#4caf50',
       },
       error: {
         main: themeSelect === 0 ? '#8e0000' : '#ff6a51',
+      },
+      info: {
+        main: themeSelect === 0 ? '#fbc02d' : '#fdd835',
       }
     },
   });

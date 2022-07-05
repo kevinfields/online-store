@@ -11,12 +11,14 @@ const OrderCard = (props) => {
       sx={{
         width: '25vw',
         margin: '5vh',
+        backgroundColor: props.cardColor,
+        color: props.cardColor === 'white' ? 'black' : 'yellow',
       }}
     >
       <CardActionArea href={`order/${props.id}`}>
         <Chip 
           avatar={<Avatar>{props.index + 1}</Avatar>} 
-          color='info'
+          color='success'
           sx={{
             float: 'right',
             marginRight: '1vh',

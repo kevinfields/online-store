@@ -87,7 +87,9 @@ const Navbar = (props) => {
     }}>
       <Box>
         <div>
-          <h2>Kevin's General Store</h2>
+          <h2 style={{
+            color: props.cardColor === 'white' ? 'black' : 'yellow',
+          }}>Kevin's General Store</h2>
         </div>
         <Tabs value={opened} onChange={handleChange}>
         {!props.loggedIn ?
@@ -215,6 +217,7 @@ const Navbar = (props) => {
               .collection('orders')
             } 
             user={props.user}
+            cardColor={props.cardColor}
           />
         </TabPanel>
         </>

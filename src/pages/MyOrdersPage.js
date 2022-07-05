@@ -29,6 +29,7 @@ const MyOrdersPage = (props) => {
     <div className='page'>
       <h1 style={{
         textAlign: 'center',
+        color: props.cardColor === 'white' ? 'black' : 'yellow',
       }}>My Orders</h1>
       { loading ? 
           <Loading />
@@ -39,7 +40,12 @@ const MyOrdersPage = (props) => {
           {
             orders.map(item => (
               <Grid item xs={2} sm={4} md={4} key={item.id}>
-                <OrderCard order={item} id={item.id} index={orders.indexOf(item)} />
+                <OrderCard 
+                  order={item} 
+                  id={item.id} 
+                  index={orders.indexOf(item)} 
+                  cardColor={props.cardColor}
+                />
               </Grid>
             ))
           }
