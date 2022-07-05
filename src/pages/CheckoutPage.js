@@ -116,7 +116,7 @@ const CheckoutPage = (props) => {
           </Grid>
         ))}
         <Grid item xs={2} sm={4} md={4}>
-          <PlaceOrderCard placeOrder={() => placeOrder()} cost={total}/>
+          <PlaceOrderCard placeOrder={() => placeOrder()} cost={total} cardColor={props.cardColor} />
         </Grid>
       </Grid>
       : null
@@ -147,7 +147,7 @@ const CheckoutPage = (props) => {
           </div>
           <Button
             href={`/order/${orderID}`}
-            variant='outlined'
+            variant='contained'
             color='primary'
             sx={{
               marginTop: '3vh',
@@ -157,7 +157,7 @@ const CheckoutPage = (props) => {
           </Button>
           <Button
             href='/'
-            variant='outlined'
+            variant='contained'
             color='secondary'
             sx={{
               marginTop: '3vh',

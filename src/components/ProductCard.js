@@ -35,7 +35,7 @@ const ProductCard = (props) => {
       width: '25vw',
       margin: '5vh',
       backgroundColor: props.cardColor,
-      color: props.cardColor === 'white' ? 'black' : 'white'
+      color: props.cardColor === 'white' ? 'black' : 'yellow'
     }}>
       <CardHeader 
         title={

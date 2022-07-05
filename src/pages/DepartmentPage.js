@@ -98,6 +98,7 @@ const DepartmentPage = (props) => {
     <div className='page'>
         <h1 style={{
           textAlign: 'center',
+          color: props.cardColor === 'white' ? 'black' : 'yellow',
         }}>{props.department}</h1>
         { loading ? <Loading /> : 
         <>

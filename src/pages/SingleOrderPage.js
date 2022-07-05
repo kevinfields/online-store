@@ -38,7 +38,7 @@ const SingleOrderPage = (props) => {
           position: 'fixed',
           left: '32.5vw',
           height: '60vh',
-          border: '1px solid black',
+          border: `1px solid ${props.cardColor === 'white' ? 'black' : 'yellow'}`,
           borderRadius: '5px',
           overflowY: 'scroll',
         }}>
@@ -61,7 +61,7 @@ const SingleOrderPage = (props) => {
               <ListItem
                 key={item}
                 sx={{
-                  border: '1px solid black',
+                  border: `1px solid ${props.cardColor === 'white' ? 'black' : 'yellow'}`,
                   borderRadius: '5px',
                   marginTop: '1vh',
                 }}
@@ -98,7 +98,7 @@ const SingleOrderPage = (props) => {
             ))}
             <ListItem
               sx={{
-                border: '1px solid black',
+                border: `1px solid ${props.cardColor === 'white' ? 'black' : 'yellow'}`,
                 borderRadius: '5px',
                 marginTop: '1vh',
               }}
@@ -119,7 +119,7 @@ const SingleOrderPage = (props) => {
             </ListItem>
             <ListItem 
               sx={{
-                border: '1px solid black',
+                border: `1px solid ${props.cardColor === 'white' ? 'black' : 'yellow'}`,
                 borderRadius: '5px',
                 marginTop: '1vh',
               }}

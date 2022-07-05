@@ -46,7 +46,7 @@ function a11yProps(index) {
 const Navbar = (props) => {
 
   const sxDefault = {
-    color: props.cardColor === 'white' ? 'black' : 'white',
+    color: props.cardColor === 'white' ? 'black' : 'yellow',
   }
 
   const [opened, setOpened] = useState(1);

@@ -73,6 +73,7 @@ const MyCartPage = (props) => {
     <div className='page'>
       <h1 style={{
         textAlign: 'center',
+        color: props.cardColor === 'white' ? 'black' : 'yellow',
       }}>My Cart</h1>
       
       { loading ? 
@@ -123,7 +124,7 @@ const MyCartPage = (props) => {
               </Grid>
             ))}
             <Grid item xs={4} sm={4} md={4}>
-              <CheckoutCard price={cost} count={count} />
+              <CheckoutCard price={cost} count={count} cardColor={props.cardColor}/>
             </Grid>
           </Grid> 
         </>

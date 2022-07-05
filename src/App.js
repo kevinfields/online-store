@@ -158,6 +158,7 @@ function App() {
                       .collection("users")
                       .doc(user.uid)
                       .collection("orders")}
+                    cardColor={themeSelect === 0 ? 'white' : '#2e1b5e'}
                   />
                 }
               />

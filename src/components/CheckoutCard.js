@@ -7,6 +7,8 @@ const CheckoutCard = (props) => {
     <Card variant='outlined' color='secondary' sx={{
       width: '25vw',
       margin: '5vh',
+      backgroundColor: props.cardColor,
+      color: props.cardColor === 'white' ? 'black' : 'yellow',
     }}>
       <CardHeader title={'Purchase Information'} />
       <CardContent children={`$${props.price}`} />

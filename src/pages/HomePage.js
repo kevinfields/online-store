@@ -10,7 +10,7 @@ import StoreHeader from '../components/StoreHeader';
 const HomePage = (props) => {
   
 
-  const [checked, setChecked] = useState(!props.checked);
+  const [checked, setChecked] = useState(props.checked);
 
 
   const changeTheme = () => {
