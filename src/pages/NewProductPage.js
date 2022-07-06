@@ -2,6 +2,7 @@ import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, Select
 import React, {useState, useEffect} from 'react';
 import getOrderItemTitle from '../functions/getOrderItemTitle';
 import lowerFirst from '../functions/lowerFirst';
+import '../styling/NewProductGrid.css';
 
 const NewProductPage = (props) => {
 
@@ -10,8 +11,8 @@ const NewProductPage = (props) => {
   const [info, setInfo] = useState({
     title: '',
     description: '',
-    stock: 0,
-    price: 0,
+    stock: '',
+    price: '',
     photoURL: '',
   });
 
@@ -92,40 +93,43 @@ const NewProductPage = (props) => {
       </h1>
       <Grid 
         container 
-        spacing={0} 
-        rowSpacing={{
-          xs: 2,
-          sm: 2,
-          md: 2,
-        }}
-        columns={{
-          xs: 2,
-          sm: 4,
-          md: 5,
+        spacing={1} 
+        rowSpacing={1}
+        columns={12}
+        justifyContent='center'
+        alignContent='center'
+        sx={{
+          position: 'fixed',
+          width: '60vw',
+          left: '20vw',
+          border: '1px solid red',
+          height: '60vh',
+          top: '35vh',
+          padding: '0.5vh',
         }}
       >
-        <Grid item xs>
-        <FormControl>
-          <InputLabel>
-            Department
-          </InputLabel>
-          <Select
-            value={department}
-            label="Department"
-            onChange={(e) => setDepartment(e.target.value)}
-            sx={{
-              color: colorDefault
-            }}
-          >
-            <MenuItem value={'appliances'}>Appliances</MenuItem>
-            <MenuItem value={'clothing'}>Clothing</MenuItem>
-            <MenuItem value={'electronics'}>Electronics</MenuItem>
-            <MenuItem value={'furniture'}>Furniture</MenuItem>
-            <MenuItem value={'outdoors'}>Outdoors</MenuItem>
-          </Select>
-        </FormControl>
+        <Grid item md={4}>
+          <FormControl>
+            <InputLabel>
+              Department
+            </InputLabel>
+            <Select
+              value={department}
+              label="Department"
+              onChange={(e) => setDepartment(e.target.value)}
+              sx={{
+                color: colorDefault,
+              }}
+            >
+              <MenuItem value={'appliances'}>Appliances</MenuItem>
+              <MenuItem value={'clothing'}>Clothing</MenuItem>
+              <MenuItem value={'electronics'}>Electronics</MenuItem>
+              <MenuItem value={'furniture'}>Furniture</MenuItem>
+              <MenuItem value={'outdoors'}>Outdoors</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
-        <Grid item xs>
+        <Grid item md={4}>
           <TextField 
             label='Product Name' 
             value={info.title} 
@@ -135,7 +139,7 @@ const NewProductPage = (props) => {
             })}
           />
         </Grid>
-        <Grid item xs >
+        <Grid item md={4} className='OneByTwo'>
           <TextField 
             label='Product Description'
             multiline
@@ -147,17 +151,7 @@ const NewProductPage = (props) => {
             })}
           />
         </Grid>
-        <Grid item xs={8}>
-          <TextField 
-            label='Product Image URL' 
-            value={info.photoURL} 
-            onChange={(e) => setInfo({
-              ...info,
-              photoURL: e.target.value
-            })}
-          />
-        </Grid>
-        <Grid item xs>
+        <Grid item md={4} className='OneByOne'>
           <TextField
             label='Price'
             inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
@@ -171,7 +165,7 @@ const NewProductPage = (props) => {
             }}
           />
         </Grid>
-        <Grid item xs>
+        <Grid item md={4} className='OneByOne'>
           <TextField
             label='Stock'
             inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
@@ -183,6 +177,16 @@ const NewProductPage = (props) => {
             InputProps={{
               startAdornment: <InputAdornment position="start">#</InputAdornment>,
             }}
+          />
+        </Grid>
+        <Grid item md={12} className='ThreeByOne'>
+          <TextField 
+            label='Product Image URL' 
+            value={info.photoURL} 
+            onChange={(e) => setInfo({
+              ...info,
+              photoURL: e.target.value
+            })}
           />
         </Grid>
       </Grid>

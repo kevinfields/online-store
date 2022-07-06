@@ -1,0 +1,62 @@
+.OneByOne {
+  width: '19vw';
+  height: '19vh';
+  padding-left: '0.5vw';
+  padding-top: '0.5vh';
+}
+
+.OneByTwo {
+  width: '19vw';
+  height: '39vh';
+  padding-left: '0.5vw';
+  padding-top: '0.5vh';
+}
+
+.TwoByOne {
+  width: '39vw';
+  height: '19vh';
+  padding-left: '0.5vw';
+  padding-top: '0.5vh';
+}
+
+.TwoByTwo {
+  width: '39vw';
+  height: '39vh';
+  padding-left: '0.5vw';
+  padding-top: '0.5vh';
+}
+
+.ThreeByOne {
+  width: '59vw';
+  height: '19vh';
+  padding-left: '0.5vw';
+  padding-top: '0.5vh';
+}
+
+.ThreeByTwo {
+  width: '59vw';
+  height: '39vh';
+  padding-left: '0.5vw';
+  padding-top: '0.5vh';
+}
+
+.ThreeByThree {
+  width: '59vw';
+  height: '59vh';
+  padding-left: '0.5vw';
+  padding-top: '0.5vh';
+}
+
+.OneByThree {
+  width: '19vw';
+  height: '59vh';
+  padding-left: '0.5vw';
+  padding-top: '0.5vh';
+}
+
+.TwoByThree {
+  width: '39vw';
+  height: '59vh';
+  padding-left: '0.5vw';
+  padding-top: '0.5vh';
+}
