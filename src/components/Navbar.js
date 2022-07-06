@@ -9,6 +9,7 @@ import LogoutPage from '../pages/LogoutPage';
 import MyCartPage from '../pages/MyCartPage';
 import MyOrdersPage from '../pages/MyOrdersPage';
 import LoginScreen from './LoginScreen';
+import NewProductPage from '../pages/NewProductPage';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,7 +50,12 @@ const Navbar = (props) => {
     color: props.cardColor === 'white' ? 'black' : 'yellow',
   }
 
-  const [opened, setOpened] = useState(1);
+  const [opened, setOpened] = useState(props.openedTab);
+
+  useEffect(() => {
+    setOpened(props.openedTab)
+  }, [props.openedTab]);
+
   const loggedInTabs = [
     <Tab label='Log Out' 
       sx={sxDefault}
@@ -64,7 +70,8 @@ const Navbar = (props) => {
     <Tab label='Applicances' sx={sxDefault} {...a11yProps(4)} />,
     <Tab label='Outdoors' sx={sxDefault} {...a11yProps(5)} />,
     <Tab label='My Cart' sx={sxDefault} {...a11yProps(6)} />,
-    <Tab label='My Orders' sx={sxDefault} {...a11yProps(7)} />
+    <Tab label='My Orders' sx={sxDefault} {...a11yProps(7)} />,
+    <Tab label='New Product' sx={sxDefault} {...a11yProps(8)} />
   ];
 
   const loggedOutTabs = [
@@ -77,8 +84,19 @@ const Navbar = (props) => {
   ];
 
   const handleChange = (event, num) => {
+
     setOpened(num);
+
+    if (props.openedTab !== num) {
+      props.changeOpenedTab(num);
+    }
+
   };
+
+  const switchTab = (department) => {
+    let departmentsArray = ['clothing', 'furniture', 'electronics', 'appliances', 'outdoors'];
+    setOpened(departmentsArray.indexOf(department) + 1);
+  }
 
   return (
     <div style={{
@@ -218,6 +236,14 @@ const Navbar = (props) => {
             } 
             user={props.user}
             cardColor={props.cardColor}
+          />
+        </TabPanel>
+        <TabPanel value={opened} index={8}>
+          <NewProductPage
+            user={props.user}
+            cardColor={props.cardColor}
+            productsRef={props.firestore.collection('departments')}
+            switchTab={(department) => switchTab(department)}
           />
         </TabPanel>
         </>

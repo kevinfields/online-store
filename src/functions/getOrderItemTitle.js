@@ -1,4 +1,4 @@
-export default function getOrderItemId(title) {
+export default function getOrderItemTitle(title) {
 
   let titleArr = title.split('');
 

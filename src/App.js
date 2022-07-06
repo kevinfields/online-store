@@ -41,7 +41,7 @@ function App() {
     },
     palette: {
       primary: {
-        main: themeSelect === 0 ? "#002984" : '#4a51b5',
+        main: themeSelect === 0 ? "#002984" : '#64b5f6',
       },
       secondary: {
         main: themeSelect === 0 ? "#ab47bc" : '#ffaaff',
@@ -65,7 +65,7 @@ function App() {
       background.style.color = 'black';
     } else {
       background.style.backgroundColor = '#07004f';
-      background.style.color = 'white';
+      background.style.color = 'yellow';
     }
   }, [themeSelect]);
 

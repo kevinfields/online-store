@@ -99,7 +99,9 @@ const DepartmentPage = (props) => {
         <h1 style={{
           textAlign: 'center',
           color: props.cardColor === 'white' ? 'black' : 'yellow',
-        }}>{props.department}</h1>
+        }}>
+          {props.department}
+        </h1>
         { loading ? <Loading /> : 
         <>
           {stockAlert.open ? 
@@ -118,6 +120,7 @@ const DepartmentPage = (props) => {
                 height: '10vh',
                 fontSize: '15pt',
                 textAlign: 'center',
+                backgroundColor: '#ffa4a2',
               }}
             >
               Sorry, {stockAlert.product} is out of stock!
