@@ -56,6 +56,16 @@ function App() {
         main: themeSelect === 0 ? '#fbc02d' : '#fdd835',
       }
     },
+    // overrides: {
+    //   MuiFormLabel: {
+    //     asterisk: {
+    //       color: '#db3131',
+    //       '&$error': {
+    //         color: '#db3131'
+    //       },
+    //     }
+    //   }
+    // }
   });
 
   useEffect(() => {
