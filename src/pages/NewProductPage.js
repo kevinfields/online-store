@@ -8,7 +8,7 @@ import '../styling/NewProductGrid.css';
 
 const NewProductPage = (props) => {
 
-  const [department, setDepartment] = useState('appliances');
+  const [department, setDepartment] = useState('');
   
 
   const [info, setInfo] = useState({
@@ -157,23 +157,36 @@ const NewProductPage = (props) => {
       </h1>
       <FormControl sx={{
         position: 'fixed',
-        width: '60vw',
-        height: '68vh',
-        left: '20vw',
+        width: '62vw',
+        paddingLeft: '1vw',
+        paddingRight: '1vw',
+        height: '35vh',
+        paddingTop: '3vh',
+        left: '18vw',
         top: '29vh',
+        border: '1px solid white',
+        borderRadius: '5px',
+        boxShadow: '2px 2px 2px 2px gray',
         display: 'flex',
-        flexDirection: 'column',
-        gap: '1.5vh',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignContent: 'start',
+        justifyContent: 'space-between',
+        gap: '2vw',
       }}>
-        <InputLabel id='department-input-label'>Department</InputLabel>
         <Select
           value={department}
-          label="Department"
           onChange={(e) => setDepartment(e.target.value)}
           labelId='department-input-label'
           required={true}
           InputLabelProps={{ required: false }}
+          sx={{
+            width: '27vw',
+            height: '8vh',
+          }}
+          placeholder='Department'
         >
+          <MenuItem disabled value={''}>Department</MenuItem>
           <MenuItem value={'appliances'}>Appliances</MenuItem>
           <MenuItem value={'clothing'}>Clothing</MenuItem>
           <MenuItem value={'electronics'}>Electronics</MenuItem>
@@ -191,7 +204,10 @@ const NewProductPage = (props) => {
           label='Product Name'
           required={true}
           InputLabelProps={{ required: false, shrink: true }}
-          // placeholder={placeholders.title}
+          sx={{
+            width: '27vw',
+            height: '8vh',
+          }}
         />
         <TextField
           label='Stock'
@@ -205,6 +221,11 @@ const NewProductPage = (props) => {
           })}
           InputProps={{
             startAdornment: <InputAdornment position="start">Qty</InputAdornment>,
+          }}
+          sx={{
+            width: '16vw',
+            height: '8vh',
+            marginBottom: 'none',
           }}
         />
         <TextField
@@ -220,6 +241,11 @@ const NewProductPage = (props) => {
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }} 
+          sx={{
+            width: '16vw',
+            height: '8vh',
+            marginBottom: 'none',
+          }}
           // placeholder={placeholders.price}
         />
         <TextField 
@@ -234,6 +260,10 @@ const NewProductPage = (props) => {
           })}
           value={info.description}
           type='string'
+          sx={{
+            width: '20vw',
+            height: '20vh',
+          }}
           // placeholder={placeholders.description}
         />
         <TextField 
@@ -245,7 +275,11 @@ const NewProductPage = (props) => {
             ...info,
             photoURL: e.target.value
           })}
-          // placeholder={placeholders.photoURL}
+          sx={{
+            width: '34vw',
+            height: '8vh',
+            marginTop: '-11.1vh',
+          }}
         />
       </FormControl>
       <Button
