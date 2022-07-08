@@ -8,21 +8,23 @@ import '../styling/NewProductGrid.css';
 
 const NewProductPage = (props) => {
 
-  const [department, setDepartment] = useState('');
+  const [department, setDepartment] = useState('Department');
+  const [departmentError, setDepartmentError] = useState(false);
   
 
   const [info, setInfo] = useState({
     title: '',
     description: '',
-    stock: 0,
-    price: 0,
+    stock: '',
+    price: '',
     photoURL: '',
   });
 
   
 
-  const colorDefault = props.cardColor === 'white' ? 'black' : 'yellow';
-
+  const textColor = props.cardColor === 'white' ? '#002984' : 'yellow';
+  const adornmentColor = props.cardColor === 'white' ? 'gray' : '#64b5f6';
+  
 
   useEffect(() => {
 
@@ -56,14 +58,12 @@ const NewProductPage = (props) => {
 
   const uploadProduct = async () => {
 
+
+
     const checkError = (errorArray, field) => {
 
       for (let i=0; i<errorArray.length; i++) {
-        console.log('field: ' + field);
         if (errorArray[i].field === field) {
-          console.log(errorArray[i].field + '=' + field);
-          console.log('item.mess: ' + errorArray[i].mess)
-          console.log('returning ' + [errorArray[i].mess, 'failed'])
           return [errorArray[i].mess, 'failed'];
         }
       } 
@@ -85,6 +85,14 @@ const NewProductPage = (props) => {
 
 
     let errors = [];
+
+    if (department === 'Department' || department === 'Please select a department.') {
+      errors.push({mess: 'department error', field: 'department'});
+      setDepartmentError(true);
+      setDepartment('Please select a department.');
+    } else {
+      setDepartmentError(false);
+    }
 
     if (Number(info.price) <= 0) {
       errors.push({mess: 'The price must be a number greater than 0.', field: 'price'});
@@ -126,12 +134,11 @@ const NewProductPage = (props) => {
         price: priceErrors[1] === 'passed' ? info.price : priceErrors[0],
         photoURL: photoURLErrors[1] === 'passed' ? info.photoURL : photoURLErrors[0],
       }
-      
+
       setInfo(newInfo);
       return;
     }
 
-    console.log('did not fail.');
 
     await props.productsRef.doc(department).collection('products').doc(getOrderItemTitle(info.title)).set({
       currentlyOrdered: 0,
@@ -150,7 +157,7 @@ const NewProductPage = (props) => {
       <h1 
         style={{
           textAlign: 'center',
-          color: colorDefault,
+          color: textColor,
         }}
       >
           Add a New Product
@@ -173,20 +180,31 @@ const NewProductPage = (props) => {
         alignContent: 'start',
         justifyContent: 'space-between',
         gap: '2vw',
+        color: textColor,
+        backgroundColor: props.cardColor
       }}>
         <Select
           value={department}
           onChange={(e) => setDepartment(e.target.value)}
-          labelId='department-input-label'
           required={true}
-          InputLabelProps={{ required: false }}
+          InputLabelProps={{ required: false, shrink: true, style: {color: textColor} }}
           sx={{
             width: '27vw',
             height: '8vh',
+            color: textColor,
+            border: `1px solid ${textColor}`,
+            "& .MuiSvgIcon-root": {
+                fill: textColor
+            },
+            
           }}
-          placeholder='Department'
         >
-          <MenuItem disabled value={''}>Department</MenuItem>
+          <MenuItem 
+            value={departmentError ? 'Please select a department.' : 'Department'} 
+            disabled
+          >
+            {departmentError ? 'Please select a department.' : 'Department'}
+          </MenuItem>
           <MenuItem value={'appliances'}>Appliances</MenuItem>
           <MenuItem value={'clothing'}>Clothing</MenuItem>
           <MenuItem value={'electronics'}>Electronics</MenuItem>
@@ -203,48 +221,110 @@ const NewProductPage = (props) => {
           })}
           label='Product Name'
           required={true}
-          InputLabelProps={{ required: false, shrink: true }}
+          InputLabelProps={{ required: false, shrink: true, style: {color: textColor} }}
           sx={{
             width: '27vw',
             height: '8vh',
+            input: {
+              color: textColor,
+            },
+            "& .MuiOutlinedInput-root": {
+              "& > fieldset": {
+                borderColor: textColor
+              }
+            },
+            "& .MuiOutlinedInput-root:hover": {
+              "& > fieldset": {
+                borderColor: textColor
+              }
+            },
+            "& .MuiOutlinedInput-root.Mui-focused": {
+              "& > fieldset": {
+                borderColor: textColor
+              }
+            },
           }}
+          color='primary'
         />
         <TextField
           label='Stock'
           value={Number(info.stock)}
           type='number'
           required={true}
-          InputLabelProps={{ required: false }}
+          InputLabelProps={{ required: false, style: {color: textColor} }}
           onChange={(e) => setInfo({
             ...info,
             stock: e.target.value,
           })}
           InputProps={{
-            startAdornment: <InputAdornment position="start">Qty</InputAdornment>,
+            startAdornment: 
+              <InputAdornment sx={{}} position="start">
+                <div style={{color: adornmentColor}}>Qty</div>
+              </InputAdornment>
           }}
           sx={{
             width: '16vw',
             height: '8vh',
             marginBottom: 'none',
+            input: {
+              color: textColor,
+            },
+            borderColor: textColor,
+            "& .MuiOutlinedInput-root": {
+              "& > fieldset": {
+                borderColor: textColor
+              }
+            },
+            "& .MuiOutlinedInput-root:hover": {
+              "& > fieldset": {
+                borderColor: textColor
+              }
+            },
+            "& .MuiOutlinedInput-root.Mui-focused": {
+              "& > fieldset": {
+                borderColor: textColor
+              }
+            },
           }}
         />
         <TextField
           label='Price'
           type='number'
           required={true}
-          InputLabelProps={{ required: false }}
+          InputLabelProps={{ required: false, style: {color: textColor} }}
           value={Number(info.price)}
           onChange={(e) => setInfo({
             ...info,
             price: Number(e.target.value),
           })}
           InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+            startAdornment: 
+              <InputAdornment sx={{color: textColor}} position="start">
+                <div style={{color: adornmentColor}}>$</div>
+              </InputAdornment>
           }} 
           sx={{
             width: '16vw',
             height: '8vh',
             marginBottom: 'none',
+            input: {
+              color: textColor,
+            },
+            "& .MuiOutlinedInput-root": {
+              "& > fieldset": {
+                borderColor: textColor
+              }
+            },
+            "& .MuiOutlinedInput-root:hover": {
+              "& > fieldset": {
+                borderColor: textColor
+              }
+            },
+            "& .MuiOutlinedInput-root.Mui-focused": {
+              "& > fieldset": {
+                borderColor: textColor
+              }
+            },
           }}
           // placeholder={placeholders.price}
         />
@@ -253,7 +333,7 @@ const NewProductPage = (props) => {
           multiline
           rows={5} 
           required={true}
-          InputLabelProps={{ required: false, shrink: true }}
+          InputLabelProps={{ required: false, shrink: true, style: {color: textColor} }}
           onChange={(e) => setInfo({
             ...info,
             description: e.target.value
@@ -263,14 +343,30 @@ const NewProductPage = (props) => {
           sx={{
             width: '20vw',
             height: '20vh',
+            "& .MuiOutlinedInput-root": {
+              "& > fieldset": {
+                borderColor: textColor
+              }
+            },
+            "& .MuiOutlinedInput-root:hover": {
+              "& > fieldset": {
+                borderColor: textColor
+              }
+            },
+            "& .MuiOutlinedInput-root.Mui-focused": {
+              "& > fieldset": {
+                borderColor: textColor
+              }
+            },
           }}
+          inputProps={{style: {color: textColor}}}
           // placeholder={placeholders.description}
         />
         <TextField 
           label='Product Image URL' 
-          value={info.photoURL.length > 0 ? info.photoURL : null} 
+          value={info.photoURL.length > 0 ? info.photoURL : ''} 
           required={true}
-          InputLabelProps={{ required: false, shrink: true }}
+          InputLabelProps={{ required: false, shrink: true, style: {color: textColor}  }}
           onChange={(e) => setInfo({
             ...info,
             photoURL: e.target.value
@@ -279,6 +375,24 @@ const NewProductPage = (props) => {
             width: '34vw',
             height: '8vh',
             marginTop: '-11.1vh',
+            input: {
+              color: textColor,
+            },
+            "& .MuiOutlinedInput-root": {
+              "& > fieldset": {
+                borderColor: textColor
+              }
+            },
+            "& .MuiOutlinedInput-root:hover": {
+              "& > fieldset": {
+                borderColor: textColor
+              }
+            },
+            "& .MuiOutlinedInput-root.Mui-focused": {
+              "& > fieldset": {
+                borderColor: textColor
+              }
+            },
           }}
         />
       </FormControl>

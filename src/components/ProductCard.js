@@ -33,7 +33,7 @@ const ProductCard = (props) => {
       width: '25vw',
       margin: '5vh',
       backgroundColor: props.cardColor,
-      color: props.cardColor === 'white' ? 'black' : 'yellow'
+      color: props.cardColor === 'white' ? '#002984' : 'yellow'
     }}>
       <CardHeader 
         title={
@@ -116,7 +116,7 @@ const ProductCard = (props) => {
                   border: '1px solid black',
                   borderRadius: '5px',
                   paddingLeft: '0.5vh',
-                  color: props.cardColor === 'white' ? 'black' : 'white',
+                  color: props.cardColor === 'white' ? '#002984' : 'white',
                 }}
                 onChange={(e) => setQuantity(e.target.value)}
               />

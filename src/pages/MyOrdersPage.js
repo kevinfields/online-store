@@ -27,10 +27,14 @@ const MyOrdersPage = (props) => {
 
   return (
     <div className='page'>
-      <h1 style={{
-        textAlign: 'center',
-        color: props.cardColor === 'white' ? 'black' : 'yellow',
-      }}>My Orders</h1>
+      <h1 
+        style={{
+          textAlign: 'center',
+          color: props.cardColor === 'white' ? 'black' : 'yellow',
+        }}
+      >
+        My Orders
+      </h1>
       { loading ? 
           <Loading />
       :

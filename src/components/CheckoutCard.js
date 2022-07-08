@@ -8,7 +8,7 @@ const CheckoutCard = (props) => {
       width: '25vw',
       margin: '5vh',
       backgroundColor: props.cardColor,
-      color: props.cardColor === 'white' ? 'black' : 'yellow',
+      color: props.cardColor === 'white' ? '#002984' : 'yellow',
     }}>
       <CardHeader title={'Purchase Information'} />
       <CardContent children={`$${props.price}`} />

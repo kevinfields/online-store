@@ -56,23 +56,13 @@ function App() {
         main: themeSelect === 0 ? '#fbc02d' : '#fdd835',
       }
     },
-    // overrides: {
-    //   MuiFormLabel: {
-    //     asterisk: {
-    //       color: '#db3131',
-    //       '&$error': {
-    //         color: '#db3131'
-    //       },
-    //     }
-    //   }
-    // }
   });
 
   useEffect(() => {
 
     if (themeSelect === 0) {
       background.style.backgroundColor = '#e0f7fa';
-      background.style.color = 'black';
+      background.style.color = '#002984';
     } else {
       background.style.backgroundColor = '#07004f';
       background.style.color = 'yellow';
