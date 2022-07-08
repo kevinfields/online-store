@@ -30,7 +30,7 @@ const MyOrdersPage = (props) => {
       <h1 
         style={{
           textAlign: 'center',
-          color: props.cardColor === 'white' ? 'black' : 'yellow',
+          color: props.cardColor === 'white' ? '#002984' : 'yellow',
         }}
       >
         My Orders

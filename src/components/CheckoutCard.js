@@ -9,13 +9,14 @@ const CheckoutCard = (props) => {
       margin: '5vh',
       backgroundColor: props.cardColor,
       color: props.cardColor === 'white' ? '#002984' : 'yellow',
+      boxShadow: `2px 2px ${props.cardColor === 'white' ? "#002984" : '#000091'}`
     }}>
       <CardHeader title={'Purchase Information'} />
       <CardContent children={`$${props.price}`} />
       <CardContent children={`Total Items: ${props.count}`} />
       <Button 
         href='checkout' 
-        variant='contained'
+        variant={props.cardColor === 'white' ? 'contained' : 'outlined'}
         color='primary'
         startIcon={<CheckOutlined />}
         sx={{

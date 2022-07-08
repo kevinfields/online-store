@@ -29,12 +29,18 @@ const ProductCard = (props) => {
 
 
   return (
-    <Card variant='outlined' color='secondary' sx={{
-      width: '25vw',
-      margin: '5vh',
-      backgroundColor: props.cardColor,
-      color: props.cardColor === 'white' ? '#002984' : 'yellow'
-    }}>
+    <Card 
+      raised={true} 
+      variant='outlined' 
+      color='secondary' 
+      sx={{
+        width: '25vw',
+        margin: '5vh',
+        backgroundColor: props.cardColor,
+        color: props.cardColor === 'white' ? '#002984' : 'yellow',
+        boxShadow: `2px 2px ${props.cardColor === 'white' ? "#002984" : '#000091'}`
+      }}
+    >
       <CardHeader 
         title={
           props.product.quantity && props.product.quantity > 1 ? 
@@ -71,7 +77,7 @@ const ProductCard = (props) => {
         <>
         {props.product.stock > 0 ?
           <Button 
-            variant='contained'
+            variant={props.cardColor === 'white' ? 'contained' : 'outlined'}
             color='primary'
             size='large'
             endIcon={<AddShoppingCart />}
@@ -121,7 +127,7 @@ const ProductCard = (props) => {
                 onChange={(e) => setQuantity(e.target.value)}
               />
               <Button 
-                variant='outlined'
+                variant={props.cardColor === 'white' ? 'contained' : 'outlined'}
                 color='success'
                 endIcon={<Check />}
                 sx={{
@@ -134,7 +140,7 @@ const ProductCard = (props) => {
               </Button>
             </>
           : <Button
-              variant='outlined'
+              variant={props.cardColor === 'white' ? 'contained' : 'outlined'}
               color='secondary'
               size='smaller'
               endIcon={<Edit />}
@@ -147,7 +153,7 @@ const ProductCard = (props) => {
             >Edit Quantity</Button>
           }
           <Button
-            variant='contained'
+            variant={props.cardColor === 'white' ? 'contained' : 'outlined'}
             color='error'
             size='large'
             endIcon={<Delete />}

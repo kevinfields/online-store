@@ -173,7 +173,6 @@ const NewProductPage = (props) => {
         top: '29vh',
         border: '1px solid white',
         borderRadius: '5px',
-        boxShadow: '2px 2px 2px 2px gray',
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
@@ -181,6 +180,7 @@ const NewProductPage = (props) => {
         justifyContent: 'space-between',
         gap: '2vw',
         color: textColor,
+        boxShadow: `2px 2px ${props.cardColor === 'white' ? "#002984" : '#64b5f6'}`,
         backgroundColor: props.cardColor
       }}>
         <Select

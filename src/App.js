@@ -64,7 +64,7 @@ function App() {
       background.style.backgroundColor = '#e0f7fa';
       background.style.color = '#002984';
     } else {
-      background.style.backgroundColor = '#07004f';
+      background.style.backgroundColor = '#000035';
       background.style.color = 'yellow';
     }
   }, [themeSelect]);
@@ -120,7 +120,7 @@ function App() {
                 loggedIn={user ? true : false}
                 onThemeChange={user ? (num) => userThemeChanger(num) : (num) => setThemeSelect(num)}
                 checked={!user ? false : themeSelect === 0 ? false : true}
-                cardColor={themeSelect === 0 ? 'white' : '#2e1b5e'}
+                cardColor={themeSelect === 0 ? 'white' : '#121858'}
               />
             }
           />
@@ -151,7 +151,7 @@ function App() {
                       .doc(user.uid)
                       .collection('orders')
                     }
-                    cardColor={themeSelect === 0 ? 'white' : '#2e1b5e'}
+                    cardColor={themeSelect === 0 ? 'white' : '#121858'}
                   />
                 }
               />
@@ -163,7 +163,7 @@ function App() {
                       .collection("users")
                       .doc(user.uid)
                       .collection("orders")}
-                    cardColor={themeSelect === 0 ? 'white' : '#2e1b5e'}
+                    cardColor={themeSelect === 0 ? 'white' : '#121858'}
                   />
                 }
               />

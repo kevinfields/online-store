@@ -13,6 +13,7 @@ const OrderCard = (props) => {
         margin: '5vh',
         backgroundColor: props.cardColor,
         color: props.cardColor === 'white' ? '#002984' : 'yellow',
+        boxShadow: `2px 2px ${props.cardColor === 'white' ? "#002984" : '#000091'}`
       }}
     >
       <CardActionArea href={`order/${props.id}`}>

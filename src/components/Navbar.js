@@ -48,7 +48,7 @@ function a11yProps(index) {
 const Navbar = (props) => {
 
   const sxDefault = {
-    color: props.cardColor === 'white' ? 'black' : 'yellow',
+    color: props.cardColor === 'white' ? '#002984' : 'yellow',
   }
 
   const [opened, setOpened] = useState(props.openedTab);
@@ -58,14 +58,8 @@ const Navbar = (props) => {
   }, [props.openedTab]);
 
   const loggedInTabs = [
-    <Tab label='Log Out' 
-      sx={sxDefault}
-      {...a11yProps(0)} 
-    />,
-    <Tab label='Clothing' 
-      sx={sxDefault}
-      {...a11yProps(1)} 
-    />, 
+    <Tab label='Log Out' sx={sxDefault} {...a11yProps(0)} />,
+    <Tab label='Clothing' sx={sxDefault} {...a11yProps(1)} />, 
     <Tab label='Furniture' sx={sxDefault} {...a11yProps(2)} />,
     <Tab label='Electronics' sx={sxDefault} {...a11yProps(3)} />,
     <Tab label='Applicances' sx={sxDefault} {...a11yProps(4)} />,
@@ -87,7 +81,7 @@ const Navbar = (props) => {
 
   const handleChange = (event, num) => {
 
-    setOpened(num);
+    setOpened(Number(num));
 
     if (props.openedTab !== num) {
       props.changeOpenedTab(num);
@@ -107,9 +101,13 @@ const Navbar = (props) => {
     }}>
       <Box>
         <div>
-          <h2 style={{
-            color: props.cardColor === 'white' ? 'black' : 'yellow',
-          }}>Kevin's General Store</h2>
+          <h2 
+            style={{
+              color: props.cardColor === 'white' ? '#002984' : 'yellow',
+            }}
+          >
+            Kevin's General Store
+          </h2>
         </div>
         <Tabs value={opened} onChange={handleChange} indicatorColor='secondary' textColor='secondary'>
         {!props.loggedIn ?
@@ -245,6 +243,7 @@ const Navbar = (props) => {
             user={props.user}
             cardColor={props.cardColor}
             userRef={props.firestore.collection('users').doc(props.user.uid)}
+            openOrders={(num, e) => handleChange(e, num)}
           />
         </TabPanel>
         <TabPanel value={opened} index={9}>
