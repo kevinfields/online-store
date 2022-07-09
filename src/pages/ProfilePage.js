@@ -85,7 +85,7 @@ const ProfilePage = (props) => {
             margin: '5vh',
             backgroundColor: props.cardColor,
             color: getColor(props.themeSelect, 'text'),
-            boxShadow: `2px 2px ${getColor(props.themeSelect, 'box_shadow')}`,
+            boxShadow: `1px 1px 3px 3px ${getColor(props.themeSelect, 'box_shadow')}`,
             display: 'flex',
             flexDirection: 'column',
           }}

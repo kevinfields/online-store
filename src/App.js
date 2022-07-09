@@ -11,6 +11,7 @@ import LogoutPage from "./pages/LogoutPage.js";
 import CheckoutPage from "./pages/CheckoutPage.js";
 import SingleOrderPage from "./pages/SingleOrderPage.js";
 import getColor from "./functions/getColor.js";
+import getFont from "./functions/getFont.js";
 
 firebase.initializeApp({
   apiKey: "AIzaSyCV-bMBng0nyBqgo7V_dnKh832PQoSf9Gs",
@@ -38,10 +39,9 @@ function App() {
 
   const theme = createTheme({
     typography: {
-      fontFamily: 'Quicksand',
+      fontFamily: getFont(themeSelect)
     },
     palette: {
-      type: themeSelect === 'day' ? 'main' : 'dark',
       primary: {
         main: getColor(themeSelect, 'primary'),
       },

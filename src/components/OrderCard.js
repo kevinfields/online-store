@@ -14,7 +14,7 @@ const OrderCard = (props) => {
         margin: '5vh',
         backgroundColor: getColor(props.themeSelect, 'card_background'),
         color: getColor(props.themeSelect, 'text'),
-        boxShadow: `2px 2px ${getColor(props.themeSelect, 'box_shadow')}`
+        boxShadow: `1px 1px 3px 3px ${getColor(props.themeSelect, 'box_shadow')}`
       }}
     >
       <CardActionArea href={`order/${props.id}`}>

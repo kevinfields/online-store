@@ -98,27 +98,22 @@ const NewProductPage = (props) => {
 
     if (Number(info.price) <= 0) {
       errors.push({mess: 'The price must be a number greater than 0.', field: 'price'});
-      console.log('price failed')
     };
 
     if (info.title.length <= 1) {
       errors.push({mess: 'Title is too short.', field: 'title'});
-      console.log('name failed')
     };
 
     if (info.description.length <= 1) {
       errors.push({mess: 'The description must be at least two characters.', field: 'description'});
-      console.log('description failed')
     };
 
     if (Number(info.stock) < 0) {
       errors.push({mess: 'The stock cannot be lower than 0.', field: 'stock'})
-      console.log('stock failed')
     };
 
     if (!goodPhotoURL(info.photoURL)) {
       errors.push({mess: 'Please use a valid photo URL (.jpg, .jpeg, .png, .gif)', field: 'photoURL'})
-      console.log('url failed')
     };
 
     if (errors.length > 0) {
@@ -182,8 +177,8 @@ const NewProductPage = (props) => {
         justifyContent: 'space-between',
         gap: '2vw',
         color: textColor,
-        boxShadow: `2px 2px ${getColor(props.themeSelect, 'box_shadow')}`,
-        backgroundColor: getColor(props.themeSelect, 'background_color')
+        boxShadow: `1px 1px 3px 3px ${getColor(props.themeSelect, 'box_shadow')}`,
+        backgroundColor: getColor(props.themeSelect, 'card_background')
       }}>
         <Select
           value={department}
@@ -310,7 +305,7 @@ const NewProductPage = (props) => {
             height: '8vh',
             marginBottom: 'none',
             input: {
-              color: borderColor,
+              color: textColor,
             },
             "& .MuiOutlinedInput-root": {
               "& > fieldset": {
@@ -328,7 +323,6 @@ const NewProductPage = (props) => {
               }
             },
           }}
-          // placeholder={placeholders.price}
         />
         <TextField 
           label='Product Description'
@@ -362,7 +356,6 @@ const NewProductPage = (props) => {
             },
           }}
           inputProps={{style: {color: textColor}}}
-          // placeholder={placeholders.description}
         />
         <TextField 
           label='Product Image URL' 
