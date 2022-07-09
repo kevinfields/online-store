@@ -6,6 +6,7 @@ import Loading from '../components/Loading';
 import ProductCard from '../components/ProductCard';
 import CheckoutCard from '../components/CheckoutCard';
 import Alert from '../components/Alert';
+import getColor from '../functions/getColor';
 
 const MyCartPage = (props) => {
   
@@ -74,7 +75,7 @@ const MyCartPage = (props) => {
       <h1 
         style={{
           textAlign: 'center',
-          color: props.cardColor === 'white' ? '#002984' : 'yellow',
+          color: getColor(props.themeSelect, 'text'),
         }}
       >
         My Cart
@@ -124,11 +125,17 @@ const MyCartPage = (props) => {
                   onMultiply={(quantity) => multiplyItem(item, quantity)}
                   onRemove={() => removeFromCart(item)}
                   cardColor={props.cardColor}
+                  themeSelect={props.themeSelect}
                 />
               </Grid>
             ))}
             <Grid item xs={4} sm={4} md={4}>
-              <CheckoutCard price={cost} count={count} cardColor={props.cardColor}/>
+              <CheckoutCard 
+                price={cost} 
+                count={count} 
+                cardColor={props.cardColor}
+                themeSelect={props.themeSelect}
+              />
             </Grid>
           </Grid> 
         </>

@@ -10,6 +10,7 @@ import LoginPage from "./pages/LoginPage.js";
 import LogoutPage from "./pages/LogoutPage.js";
 import CheckoutPage from "./pages/CheckoutPage.js";
 import SingleOrderPage from "./pages/SingleOrderPage.js";
+import getColor from "./functions/getColor.js";
 
 firebase.initializeApp({
   apiKey: "AIzaSyCV-bMBng0nyBqgo7V_dnKh832PQoSf9Gs",
@@ -27,7 +28,7 @@ function App() {
 
   const background = document.getElementsByTagName("html")[0];
   const [user] = useAuthState(auth);
-  const [themeSelect, setThemeSelect] = useState(0);
+  const [themeSelect, setThemeSelect] = useState('day');
   
   const navigate = useNavigate();
 
@@ -40,33 +41,30 @@ function App() {
       fontFamily: 'Quicksand',
     },
     palette: {
+      type: themeSelect === 'day' ? 'main' : 'dark',
       primary: {
-        main: themeSelect === 0 ? "#002984" : '#64b5f6',
+        main: getColor(themeSelect, 'primary'),
       },
       secondary: {
-        main: themeSelect === 0 ? "#ab47bc" : '#ffaaff',
+        main: getColor(themeSelect, 'secondary'),
       },
       success: {
-        main: themeSelect === 0 ? '#1b5e20' : '#4caf50',
+        main: getColor(themeSelect, 'success'),
       },
       error: {
-        main: themeSelect === 0 ? '#8e0000' : '#ff6a51',
+        main: getColor(themeSelect, 'error'),
       },
       info: {
-        main: themeSelect === 0 ? '#fbc02d' : '#fdd835',
+        main: getColor(themeSelect, 'info'),
       }
     },
   });
 
   useEffect(() => {
 
-    if (themeSelect === 0) {
-      background.style.backgroundColor = '#e0f7fa';
-      background.style.color = '#002984';
-    } else {
-      background.style.backgroundColor = '#000035';
-      background.style.color = 'yellow';
-    }
+    background.style.backgroundColor = getColor(themeSelect, 'full_background');
+    background.style.color = getColor(themeSelect, 'text');
+
   }, [themeSelect]);
 
   const checkUserTheme = async () => {
@@ -77,11 +75,7 @@ function App() {
     await userRef.get().then(doc => {
       data = doc.data();
     })
-    if (data.theme === 'light') {
-      setThemeSelect(0);
-    } else {
-      setThemeSelect(1);
-    }
+    setThemeSelect(data.theme)
   };
 
   useEffect(() => {
@@ -90,18 +84,18 @@ function App() {
     }
   }, [user])
 
-  const userThemeChanger = async (num) => {
+  const userThemeChanger = async (theme) => {
 
     const userRef = firestore.collection('users').doc(user.uid);
     
-    setThemeSelect(num);
+    setThemeSelect(theme);
     let data;
     await userRef.get().then(doc => {
       data = doc.data();
     })
     await userRef.set({
       ...data,
-      theme: num === 1 ? 'dark' : 'light'
+      theme: theme
     })
   }
 
@@ -118,9 +112,10 @@ function App() {
                 user={user ? user : null}
                 auth={auth}
                 loggedIn={user ? true : false}
-                onThemeChange={user ? (num) => userThemeChanger(num) : (num) => setThemeSelect(num)}
-                checked={!user ? false : themeSelect === 0 ? false : true}
-                cardColor={themeSelect === 0 ? 'white' : '#121858'}
+                onThemeChange={user ? (theme) => userThemeChanger(theme) : (theme) => setThemeSelect(theme)}
+                theme={themeSelect}
+                cardColor={getColor(themeSelect, 'card_background')}
+                themeSelect={themeSelect}
               />
             }
           />
@@ -132,6 +127,8 @@ function App() {
                   auth={auth}
                   usersRef={firestore.collection("users")}
                   onLogin={() => loginUser()}
+                  cardColor={getColor(themeSelect, 'card_background')}
+                  themeSelect={themeSelect}
                 />
               }
             />
@@ -151,7 +148,8 @@ function App() {
                       .doc(user.uid)
                       .collection('orders')
                     }
-                    cardColor={themeSelect === 0 ? 'white' : '#121858'}
+                    cardColor={getColor(themeSelect, 'card_background')}
+                    themeSelect={themeSelect}
                   />
                 }
               />
@@ -163,7 +161,8 @@ function App() {
                       .collection("users")
                       .doc(user.uid)
                       .collection("orders")}
-                    cardColor={themeSelect === 0 ? 'white' : '#121858'}
+                    cardColor={getColor(themeSelect, 'card_background')}
+                    themeSelect={themeSelect}
                   />
                 }
               />

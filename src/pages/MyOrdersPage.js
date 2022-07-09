@@ -2,6 +2,7 @@ import { Grid } from '@mui/material';
 import React, {useState, useEffect} from 'react';
 import Loading from '../components/Loading';
 import OrderCard from '../components/OrderCard';
+import getColor from '../functions/getColor';
 
 
 const MyOrdersPage = (props) => {
@@ -30,7 +31,7 @@ const MyOrdersPage = (props) => {
       <h1 
         style={{
           textAlign: 'center',
-          color: props.cardColor === 'white' ? '#002984' : 'yellow',
+          color: getColor(props.themeSelect, 'text')
         }}
       >
         My Orders
@@ -48,7 +49,7 @@ const MyOrdersPage = (props) => {
                   order={item} 
                   id={item.id} 
                   index={orders.indexOf(item)} 
-                  cardColor={props.cardColor}
+                  themeSelect={props.themeSelect}
                 />
               </Grid>
             ))
@@ -57,7 +58,11 @@ const MyOrdersPage = (props) => {
       : 
         <p style={{
           textAlign: 'center',
-        }}>You do not have any current orders.</p>
+          color: getColor(props.themeSelect, 'text')
+        }}
+        >
+          You do not have any current orders.
+        </p>
       }
     </div>
   )

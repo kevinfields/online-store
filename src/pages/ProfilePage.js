@@ -1,11 +1,13 @@
 
 import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Input, TextField, Typography } from '@mui/material';
 import React, {useState, useEffect} from 'react';
+import Loading from '../components/Loading';
+import getColor from '../functions/getColor';
 import goodPhotoURL from '../functions/goodPhotoURL';
 
 const ProfilePage = (props) => {
 
-  const textColor = props.cardColor === 'white' ? '#002984' : 'yellow';
+  const textColor = getColor(props.themeSelect, 'text');
   const [userData, setUserData] = useState({});
   const [editingImage, setEditingImage] = useState(false);
   const [newImageURL, setNewImageURL] = useState('');
@@ -68,7 +70,7 @@ const ProfilePage = (props) => {
         My Profile
       </h1>
       { loading ? 
-        <div>Loading ...</div>
+        <Loading />
         :
         <Card 
           raised={true} 
@@ -78,12 +80,12 @@ const ProfilePage = (props) => {
             width: '35vw',
             height: 'fit-content',
             position: 'fixed',
-            left: '32.5vw',
+            left: '29vw',
             top: '25vh',
             margin: '5vh',
             backgroundColor: props.cardColor,
-            color: props.cardColor === 'white' ? '#002984' : 'yellow',
-            boxShadow: `2px 2px ${props.cardColor === 'white' ? "#002984" : '#000091'}`,
+            color: getColor(props.themeSelect, 'text'),
+            boxShadow: `2px 2px ${getColor(props.themeSelect, 'box_shadow')}`,
             display: 'flex',
             flexDirection: 'column',
           }}
@@ -98,7 +100,10 @@ const ProfilePage = (props) => {
             children={`Email: ${userData.email}`}
           />
           <CardContent
-            children={`Preferred Theme: ${props.cardColor === 'white' ? 'light' : 'dark'}`}
+            children={`Preferred Theme: ${props.themeSelect}`}
+          />
+          <CardContent
+            children={`Reward Points: ${userData.rewardPoints}`}
           />
           <CardMedia
             component='img'
@@ -109,7 +114,8 @@ const ProfilePage = (props) => {
               height: '10vw',
               alignSelf: 'flex-end',
               marginRight: '5vw',
-              marginTop: '-10vh',
+              marginTop: '-18vh',
+              marginBottom: '2vh',
             }}
           />
           {editingImage ?
@@ -131,6 +137,8 @@ const ProfilePage = (props) => {
                     input: {
                       color: textColor,
                     },
+                    '& .MuiInput-underline:before': { borderBottomColor: getColor(props.themeSelect, 'border') },
+                    '& .MuiInput-underline:after': { borderBottomColor: getColor(props.themeSelect, 'border') },
                     marginLeft: '3vw',
                   }}
                   placeholder={imgError ? 'Please use a valid photoURL.' : ''}

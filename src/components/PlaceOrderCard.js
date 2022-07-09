@@ -1,5 +1,6 @@
 import { Button, Card } from '@mui/material'
 import React from 'react'
+import getColor from '../functions/getColor'
 
 const PlaceOrderCard = (props) => {
 
@@ -8,8 +9,8 @@ const PlaceOrderCard = (props) => {
       width: '25vw',
       margin: '5vh',
       backgroundColor: props.cardColor,
-      color: props.cardColor === 'white' ? '#002984' : 'yellow',
-      boxShadow: `2px 2px ${props.cardColor === 'white' ? "#002984" : '#000091'}`
+      color: getColor(props.themeSelect, 'text'),
+      boxShadow: `2px 2px ${getColor(props.themeSelect, 'box_shadow')}`
     }}>
       <div className='total-price'>
         Total: ${props.cost}

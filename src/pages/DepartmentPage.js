@@ -2,6 +2,7 @@ import { Alert, Grid } from '@mui/material';
 import React, {useState, useEffect} from 'react';
 import Loading from '../components/Loading';
 import ProductCard from '../components/ProductCard';
+import getColor from '../functions/getColor';
 
 const DepartmentPage = (props) => {
 
@@ -98,7 +99,7 @@ const DepartmentPage = (props) => {
     <div className='page'>
         <h1 style={{
           textAlign: 'center',
-          color: props.cardColor === 'white' ? '#002984' : 'yellow',
+          color: getColor(props.themeSelect, 'text'),
         }}>
           {props.department}
         </h1>
@@ -120,7 +121,7 @@ const DepartmentPage = (props) => {
                 height: '10vh',
                 fontSize: '15pt',
                 textAlign: 'center',
-                backgroundColor: '#ffa4a2',
+                backgroundColor: getColor(props.themeSelect, 'card_background'),
               }}
             >
               Sorry, {stockAlert.product} is out of stock!
@@ -164,6 +165,7 @@ const DepartmentPage = (props) => {
                   onMultiply={(quantity) => addToCart(product, quantity)}
                   onRemove={() => removeFromCart(product.id)}
                   cardColor={props.cardColor}
+                  themeSelect={props.themeSelect}
                 /> 
               </Grid>
             ))}

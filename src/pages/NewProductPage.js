@@ -1,6 +1,7 @@
 
 import { Alert, Button, FormControl, Grid, Input, InputAdornment, InputLabel, MenuItem, Select, TextField } from '@mui/material'
 import React, {useState, useEffect} from 'react';
+import getColor from '../functions/getColor';
 import getOrderItemTitle from '../functions/getOrderItemTitle';
 import goodPhotoURL from '../functions/goodPhotoURL';
 import lowerFirst from '../functions/lowerFirst';
@@ -22,8 +23,9 @@ const NewProductPage = (props) => {
 
   
 
-  const textColor = props.cardColor === 'white' ? '#002984' : 'yellow';
-  const adornmentColor = props.cardColor === 'white' ? 'gray' : '#64b5f6';
+  const textColor = getColor(props.themeSelect, 'text');
+  const borderColor = getColor(props.themeSelect, 'border')
+  const adornmentColor = getColor(props.themeSelect, 'text');
   
 
   useEffect(() => {
@@ -171,7 +173,7 @@ const NewProductPage = (props) => {
         paddingTop: '3vh',
         left: '18vw',
         top: '29vh',
-        border: '1px solid white',
+        border: getColor(props.themeSelect, "border"),
         borderRadius: '5px',
         display: 'flex',
         flexDirection: 'row',
@@ -180,8 +182,8 @@ const NewProductPage = (props) => {
         justifyContent: 'space-between',
         gap: '2vw',
         color: textColor,
-        boxShadow: `2px 2px ${props.cardColor === 'white' ? "#002984" : '#64b5f6'}`,
-        backgroundColor: props.cardColor
+        boxShadow: `2px 2px ${getColor(props.themeSelect, 'box_shadow')}`,
+        backgroundColor: getColor(props.themeSelect, 'background_color')
       }}>
         <Select
           value={department}
@@ -192,7 +194,7 @@ const NewProductPage = (props) => {
             width: '27vw',
             height: '8vh',
             color: textColor,
-            border: `1px solid ${textColor}`,
+            border: `1px solid ${borderColor}`,
             "& .MuiSvgIcon-root": {
                 fill: textColor
             },
@@ -230,17 +232,17 @@ const NewProductPage = (props) => {
             },
             "& .MuiOutlinedInput-root": {
               "& > fieldset": {
-                borderColor: textColor
+                borderColor: borderColor
               }
             },
             "& .MuiOutlinedInput-root:hover": {
               "& > fieldset": {
-                borderColor: textColor
+                borderColor: borderColor
               }
             },
             "& .MuiOutlinedInput-root.Mui-focused": {
               "& > fieldset": {
-                borderColor: textColor
+                borderColor: borderColor
               }
             },
           }}
@@ -269,20 +271,20 @@ const NewProductPage = (props) => {
             input: {
               color: textColor,
             },
-            borderColor: textColor,
+            borderColor: borderColor,
             "& .MuiOutlinedInput-root": {
               "& > fieldset": {
-                borderColor: textColor
+                borderColor: borderColor
               }
             },
             "& .MuiOutlinedInput-root:hover": {
               "& > fieldset": {
-                borderColor: textColor
+                borderColor: borderColor
               }
             },
             "& .MuiOutlinedInput-root.Mui-focused": {
               "& > fieldset": {
-                borderColor: textColor
+                borderColor: borderColor
               }
             },
           }}
@@ -308,21 +310,21 @@ const NewProductPage = (props) => {
             height: '8vh',
             marginBottom: 'none',
             input: {
-              color: textColor,
+              color: borderColor,
             },
             "& .MuiOutlinedInput-root": {
               "& > fieldset": {
-                borderColor: textColor
+                borderColor: borderColor
               }
             },
             "& .MuiOutlinedInput-root:hover": {
               "& > fieldset": {
-                borderColor: textColor
+                borderColor: borderColor
               }
             },
             "& .MuiOutlinedInput-root.Mui-focused": {
               "& > fieldset": {
-                borderColor: textColor
+                borderColor: borderColor
               }
             },
           }}
@@ -345,17 +347,17 @@ const NewProductPage = (props) => {
             height: '20vh',
             "& .MuiOutlinedInput-root": {
               "& > fieldset": {
-                borderColor: textColor
+                borderColor: borderColor
               }
             },
             "& .MuiOutlinedInput-root:hover": {
               "& > fieldset": {
-                borderColor: textColor
+                borderColor: borderColor
               }
             },
             "& .MuiOutlinedInput-root.Mui-focused": {
               "& > fieldset": {
-                borderColor: textColor
+                borderColor: borderColor
               }
             },
           }}
@@ -380,17 +382,17 @@ const NewProductPage = (props) => {
             },
             "& .MuiOutlinedInput-root": {
               "& > fieldset": {
-                borderColor: textColor
+                borderColor: borderColor
               }
             },
             "& .MuiOutlinedInput-root:hover": {
               "& > fieldset": {
-                borderColor: textColor
+                borderColor: borderColor
               }
             },
             "& .MuiOutlinedInput-root.Mui-focused": {
               "& > fieldset": {
-                borderColor: textColor
+                borderColor: borderColor
               }
             },
           }}

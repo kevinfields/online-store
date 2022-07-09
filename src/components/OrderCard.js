@@ -1,6 +1,7 @@
 import { Avatar, Card, CardActionArea, CardContent, CardHeader, Chip } from '@mui/material'
 import React from 'react'
 import formatTime from '../functions/formatTime'
+import getColor from '../functions/getColor'
 
 const OrderCard = (props) => {
 
@@ -11,9 +12,9 @@ const OrderCard = (props) => {
       sx={{
         width: '25vw',
         margin: '5vh',
-        backgroundColor: props.cardColor,
-        color: props.cardColor === 'white' ? '#002984' : 'yellow',
-        boxShadow: `2px 2px ${props.cardColor === 'white' ? "#002984" : '#000091'}`
+        backgroundColor: getColor(props.themeSelect, 'card_background'),
+        color: getColor(props.themeSelect, 'text'),
+        boxShadow: `2px 2px ${getColor(props.themeSelect, 'box_shadow')}`
       }}
     >
       <CardActionArea href={`order/${props.id}`}>

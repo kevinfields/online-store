@@ -3,7 +3,13 @@ import React from 'react'
 
 const Loading = () => {
   return (
-    <CircularProgress />
+    <div style={{
+      position: 'fixed',
+      left: '45vw',
+      top: '50vh',
+    }}>
+      <CircularProgress />
+    </div>
   )
 }
 

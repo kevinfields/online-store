@@ -1,6 +1,7 @@
 import { AddShoppingCart, Check, Delete, Edit, Error } from '@mui/icons-material';
 import { Button, Card, CardContent, CardHeader, CardMedia, Input } from '@mui/material';
 import React, {useState} from 'react';
+import getColor from '../functions/getColor';
 
 
 
@@ -37,8 +38,8 @@ const ProductCard = (props) => {
         width: '25vw',
         margin: '5vh',
         backgroundColor: props.cardColor,
-        color: props.cardColor === 'white' ? '#002984' : 'yellow',
-        boxShadow: `2px 2px ${props.cardColor === 'white' ? "#002984" : '#000091'}`
+        color: getColor(props.themeSelect, 'text'),
+        boxShadow: `1px 1px 3px 3px ${getColor(props.themeSelect, 'box_shadow')}`
       }}
     >
       <CardHeader 
@@ -119,15 +120,15 @@ const ProductCard = (props) => {
                   float: 'right',
                   marginRight: '1vh',
                   marginBottom: '1vh',
-                  border: '1px solid black',
+                  border: `1px solid ${getColor(props.themeSelect, 'border')}`,
                   borderRadius: '5px',
                   paddingLeft: '0.5vh',
-                  color: props.cardColor === 'white' ? '#002984' : 'white',
+                  color: getColor(props.themeSelect, 'text'),
                 }}
                 onChange={(e) => setQuantity(e.target.value)}
               />
               <Button 
-                variant={props.cardColor === 'white' ? 'contained' : 'outlined'}
+                variant='contained'
                 color='success'
                 endIcon={<Check />}
                 sx={{
@@ -140,7 +141,7 @@ const ProductCard = (props) => {
               </Button>
             </>
           : <Button
-              variant={props.cardColor === 'white' ? 'contained' : 'outlined'}
+              variant='contained'
               color='secondary'
               size='smaller'
               endIcon={<Edit />}
@@ -153,7 +154,7 @@ const ProductCard = (props) => {
             >Edit Quantity</Button>
           }
           <Button
-            variant={props.cardColor === 'white' ? 'contained' : 'outlined'}
+            variant='contained'
             color='error'
             size='large'
             endIcon={<Delete />}

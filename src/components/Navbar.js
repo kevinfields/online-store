@@ -11,6 +11,7 @@ import MyOrdersPage from '../pages/MyOrdersPage';
 import LoginScreen from './LoginScreen';
 import NewProductPage from '../pages/NewProductPage';
 import ProfilePage from '../pages/ProfilePage';
+import getColor from '../functions/getColor';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,7 +49,7 @@ function a11yProps(index) {
 const Navbar = (props) => {
 
   const sxDefault = {
-    color: props.cardColor === 'white' ? '#002984' : 'yellow',
+    color: getColor(props.themeSelect, 'text'),
   }
 
   const [opened, setOpened] = useState(props.openedTab);
@@ -103,7 +104,7 @@ const Navbar = (props) => {
         <div>
           <h2 
             style={{
-              color: props.cardColor === 'white' ? '#002984' : 'yellow',
+              color: getColor(props.themeSelect, 'text'),
             }}
           >
             Kevin's General Store
@@ -136,6 +137,7 @@ const Navbar = (props) => {
             loggedIn={props.loggedIn}
             department={'Clothing'}
             cardColor={props.cardColor}
+            themeSelect={props.themeSelect}
           />
         </TabPanel>
         <TabPanel value={opened} index={2}>
@@ -155,6 +157,7 @@ const Navbar = (props) => {
             loggedIn={props.loggedIn}
             department={'Furniture'}
             cardColor={props.cardColor}
+            themeSelect={props.themeSelect}
           />
         </TabPanel>
         <TabPanel value={opened} index={3}>
@@ -174,6 +177,7 @@ const Navbar = (props) => {
             loggedIn={props.loggedIn}
             department={'Electronics'}
             cardColor={props.cardColor}
+            themeSelect={props.themeSelect}
           />
         </TabPanel>
         <TabPanel value={opened} index={4}>
@@ -193,6 +197,7 @@ const Navbar = (props) => {
             loggedIn={props.loggedIn}
             department={'Appliances'}
             cardColor={props.cardColor}
+            themeSelect={props.themeSelect}
           />
         </TabPanel>
         <TabPanel value={opened} index={5}>
@@ -212,6 +217,7 @@ const Navbar = (props) => {
             loggedIn={props.loggedIn}
             department={'Outdoors'}
             cardColor={props.cardColor}
+            themeSelect={props.themeSelect}
           />
         </TabPanel>
         {props.loggedIn ?
@@ -225,6 +231,7 @@ const Navbar = (props) => {
             } 
             user={props.user}
             cardColor={props.cardColor}
+            themeSelect={props.themeSelect}
           />
         </TabPanel>
         <TabPanel value={opened} index={7}>
@@ -236,6 +243,7 @@ const Navbar = (props) => {
             } 
             user={props.user}
             cardColor={props.cardColor}
+            themeSelect={props.themeSelect}
           />
         </TabPanel>
         <TabPanel value={opened} index={8}>
@@ -244,6 +252,7 @@ const Navbar = (props) => {
             cardColor={props.cardColor}
             userRef={props.firestore.collection('users').doc(props.user.uid)}
             openPage={(num, e) => handleChange(e, num)}
+            themeSelect={props.themeSelect}
           />
         </TabPanel>
         <TabPanel value={opened} index={9}>
@@ -252,6 +261,7 @@ const Navbar = (props) => {
             cardColor={props.cardColor}
             productsRef={props.firestore.collection('departments')}
             switchTab={(department) => switchTab(department)}
+            themeSelect={props.themeSelect}
           />
         </TabPanel>
         </>
