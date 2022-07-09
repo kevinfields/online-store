@@ -243,7 +243,7 @@ const Navbar = (props) => {
             user={props.user}
             cardColor={props.cardColor}
             userRef={props.firestore.collection('users').doc(props.user.uid)}
-            openOrders={(num, e) => handleChange(e, num)}
+            openPage={(num, e) => handleChange(e, num)}
           />
         </TabPanel>
         <TabPanel value={opened} index={9}>
