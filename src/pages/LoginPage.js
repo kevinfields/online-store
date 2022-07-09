@@ -18,7 +18,8 @@ const LoginPage = (props) => {
       await props.usersRef.doc(user.uid).set({
         name: user.displayName,
         email: user.email,
-        theme: 'light'
+        theme: 'light',
+        photoURL: user.photoURL
       })
     }
   }
