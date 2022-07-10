@@ -112,9 +112,9 @@ const NewProductPage = (props) => {
       errors.push({mess: 'The stock cannot be lower than 0.', field: 'stock'})
     };
 
-    if (!goodPhotoURL(info.photoURL)) {
-      errors.push({mess: 'Please use a valid photo URL (.jpg, .jpeg, .png, .gif)', field: 'photoURL'})
-    };
+    // if (!goodPhotoURL(info.photoURL)) {
+    //   errors.push({mess: 'Please use a valid photo URL (.jpg, .jpeg, .png, .gif)', field: 'photoURL'})
+    // };
 
     if (errors.length > 0) {
 

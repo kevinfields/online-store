@@ -12,6 +12,7 @@ import LoginScreen from './LoginScreen';
 import NewProductPage from '../pages/NewProductPage';
 import ProfilePage from '../pages/ProfilePage';
 import getColor from '../functions/getColor';
+import ChooseEditProductPage from '../pages/ChooseEditProductPage';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -68,7 +69,8 @@ const Navbar = (props) => {
     <Tab label='My Cart' sx={sxDefault} {...a11yProps(6)} />,
     <Tab label='My Orders' sx={sxDefault} {...a11yProps(7)} />,
     <Tab label='My Profile' sx={sxDefault} {...a11yProps(8)} />,
-    <Tab label='New Product' sx={sxDefault} {...a11yProps(9)} />
+    <Tab label='New Product' sx={sxDefault} {...a11yProps(9)} />,
+    <Tab label='Edit Product' sx={sxDefault} {...a11yProps(10)} />,
   ];
 
   const loggedOutTabs = [
@@ -262,6 +264,13 @@ const Navbar = (props) => {
             productsRef={props.firestore.collection('departments')}
             switchTab={(department) => switchTab(department)}
             themeSelect={props.themeSelect}
+          />
+        </TabPanel>
+        <TabPanel value={opened} index={10}>
+          <ChooseEditProductPage
+            user={props.user}
+            themeSelect={props.themeSelect}
+            departmentsRef={props.firestore.collection('departments')}
           />
         </TabPanel>
         </>

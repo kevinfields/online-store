@@ -12,6 +12,7 @@ import CheckoutPage from "./pages/CheckoutPage.js";
 import SingleOrderPage from "./pages/SingleOrderPage.js";
 import getColor from "./functions/getColor.js";
 import getFont from "./functions/getFont.js";
+import ProductEditorPage from "./pages/ProductEditorPage.js";
 
 firebase.initializeApp({
   apiKey: "AIzaSyCV-bMBng0nyBqgo7V_dnKh832PQoSf9Gs",
@@ -167,6 +168,51 @@ function App() {
                     cardColor={getColor(themeSelect, 'card_background')}
                     themeSelect={themeSelect}
                     returnToOrders={() => setTab(7)}
+                  />
+                }
+              />
+              <Route
+                path='/appliances/:id'
+                element={
+                  <ProductEditorPage
+                    productsRef={firestore.collection('departments').doc('appliances').collection('products')}
+                    themeSelect={themeSelect}
+                  />
+                }
+              />
+              <Route
+                path='/clothing/:id'
+                element={
+                  <ProductEditorPage
+                    productsRef={firestore.collection('departments').doc('clothing').collection('products')}
+                    themeSelect={themeSelect}
+                  />
+                }
+              />
+              <Route
+                path='/electronics/:id'
+                element={
+                  <ProductEditorPage
+                    productsRef={firestore.collection('departments').doc('electronics').collection('products')}
+                    themeSelect={themeSelect}
+                  />
+                }
+              />
+              <Route
+                path='/furniture/:id'
+                element={
+                  <ProductEditorPage
+                    productsRef={firestore.collection('departments').doc('furniture').collection('products')}
+                    themeSelect={themeSelect}
+                  />
+                }
+              />
+              <Route
+                path='/outdoors/:id'
+                element={
+                  <ProductEditorPage
+                    productsRef={firestore.collection('departments').doc('outdoors').collection('products')}
+                    themeSelect={themeSelect}
                   />
                 }
               />
