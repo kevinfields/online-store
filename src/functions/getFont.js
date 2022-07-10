@@ -13,5 +13,6 @@ export default function getFont(theme) {
       return 'Futura';
     default:
       return 'Times New Roman';
-  }
+  };
+
 }

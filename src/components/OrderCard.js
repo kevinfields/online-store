@@ -1,5 +1,6 @@
 import { Avatar, Card, CardActionArea, CardContent, CardHeader, Chip } from '@mui/material'
 import React from 'react'
+import fixCost from '../functions/fixCost'
 import formatTime from '../functions/formatTime'
 import getColor from '../functions/getColor'
 
@@ -27,7 +28,7 @@ const OrderCard = (props) => {
             marginTop: '1vh',
           }}/>
         <CardHeader title={`Order ID: ${props.order.id}`} />
-        <CardContent children={`Total Cost: $${props.order.data().totalCost}`} />
+        <CardContent children={`Total Cost: $${fixCost(props.order.data().totalCost)}`} />
         <CardContent children={`Number of Items: ${props.order.data().itemCount}`} />
         <CardContent children={`Reward Points Earned: ${props.order.data().rewardPoints ? props.order.data().rewardPoints : 0}`} />
         <CardContent children={`Order Status: ${props.order.data().orderStatus}`} />

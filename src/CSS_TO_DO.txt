@@ -1,0 +1,7 @@
+css things to fix:
+
+  night mode: new product card input borders
+    - too dark on dark background
+  night, synth, and cyber mode: checkout card checkout button
+    - should be contained, not filled
+  day mode: 

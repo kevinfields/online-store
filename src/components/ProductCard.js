@@ -1,6 +1,7 @@
 import { AddShoppingCart, Check, Delete, Edit, Error } from '@mui/icons-material';
 import { Button, Card, CardContent, CardHeader, CardMedia, Input } from '@mui/material';
 import React, {useState} from 'react';
+import fixCost from '../functions/fixCost';
 import getColor from '../functions/getColor';
 
 
@@ -55,7 +56,7 @@ const ProductCard = (props) => {
         }}
       />
       <CardContent 
-        children={`$${props.product.price * (props.product.quantity ? props.product.quantity : 1)}`} 
+        children={`$${fixCost(props.product.price * (props.product.quantity ? props.product.quantity : 1))}`} 
         sx={{
           textAlign: 'center'
         }}

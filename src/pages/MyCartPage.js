@@ -7,6 +7,7 @@ import ProductCard from '../components/ProductCard';
 import CheckoutCard from '../components/CheckoutCard';
 import Alert from '../components/Alert';
 import getColor from '../functions/getColor';
+import fixCost from '../functions/fixCost';
 
 const MyCartPage = (props) => {
   
@@ -66,10 +67,6 @@ const MyCartPage = (props) => {
     loadMyCart();
   }
 
-  useEffect(() => {
-    
-  }, [cost])
-
   return (
     <div className='page'>
       <h1 
@@ -116,7 +113,7 @@ const MyCartPage = (props) => {
             position: 'relative',
             right: '10vw',
             bottom: '8vh',
-          }}>Total: ${cost}</Box>
+          }}>Total: ${fixCost(cost)}</Box>
           <Grid container rowSpacing={4} columnSpacing={{ xs: 2, sm: 3, md: 3 }}>
             {cart.map(item => (
               <Grid item xs={2} sm={4} md={4} key={item.id}>
@@ -131,7 +128,7 @@ const MyCartPage = (props) => {
             ))}
             <Grid item xs={4} sm={4} md={4}>
               <CheckoutCard 
-                price={cost} 
+                price={fixCost(cost)} 
                 count={count} 
                 cardColor={props.cardColor}
                 themeSelect={props.themeSelect}
