@@ -21,7 +21,7 @@ const CheckoutCard = (props) => {
       <CardContent children={`Total Items: ${props.count}`} />
       <Button 
         href='checkout' 
-        variant={props.themeSelect === 'day' ? 'contained' : 'outlined'}
+        variant='contained'
         color='primary'
         startIcon={<CheckOutlined />}
         sx={{

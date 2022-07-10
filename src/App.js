@@ -30,6 +30,7 @@ function App() {
   const background = document.getElementsByTagName("html")[0];
   const [user] = useAuthState(auth);
   const [themeSelect, setThemeSelect] = useState('day');
+  const [tab, setTab] = useState(1);
   
   const navigate = useNavigate();
 
@@ -116,6 +117,7 @@ function App() {
                 theme={themeSelect}
                 cardColor={getColor(themeSelect, 'card_background')}
                 themeSelect={themeSelect}
+                openedTab={tab}
               />
             }
           />
@@ -164,6 +166,7 @@ function App() {
                       .collection("orders")}
                     cardColor={getColor(themeSelect, 'card_background')}
                     themeSelect={themeSelect}
+                    returnToOrders={() => setTab(7)}
                   />
                 }
               />

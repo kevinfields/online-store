@@ -1,16 +1,18 @@
 import { Avatar, Badge, Button, Card, Chip, Grid, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import React, {useState, useEffect} from 'react'
-import { useParams } from 'react-router-dom'
+import { NavigationType, useParams } from 'react-router-dom'
 import Loading from '../components/Loading';
 import capitalizeFirst from '../functions/capitalizeFirst';
 import getColor from '../functions/getColor';
 import getOrderItem from '../functions/getOrderItem';
+import { useNavigate } from 'react-router-dom';
 
 const SingleOrderPage = (props) => {
 
   const { id } = useParams();
   const [order, setOrder] = useState({});
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
 
   const loadOrder = async () => {
@@ -25,7 +27,13 @@ const SingleOrderPage = (props) => {
 
   useEffect(() => {
     loadOrder();
-  }, [])
+  }, []);
+
+  const returnToOrders = () => {
+
+    props.returnToOrders();
+    navigate('/');
+  }
 
   return (
     <div className='page'>
@@ -41,12 +49,13 @@ const SingleOrderPage = (props) => {
           height: '60vh',
           border: `1px solid ${getColor(props.themeSelect, 'border')}`,
           borderRadius: '5px',
+          boxShadow: `1px 1px 3px 3px ${getColor(props.themeSelect, 'box_shadow')}`,
           overflowY: 'scroll',
         }}>
-          <Button 
-            href='/'
+          <Button
             variant='contained'
             color='secondary'
+            onClick={() => returnToOrders()}
           >
             Go Back
           </Button>

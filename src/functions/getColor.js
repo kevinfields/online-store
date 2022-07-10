@@ -11,7 +11,7 @@ export default function getColor(theme, type) {
       themeArray = ['#00199c', '#FFFFFF', '#111466', '#000000'];
       break;
     case 'border':
-      themeArray = ['#00fff7', '#c2c2c4', '#000000', '#09f205'];
+      themeArray = ['#00fff7', '#c2c2c4', '#00fbff', '#09f205'];
       break;
     case 'box_shadow':
       themeArray = ['#00c3ff', '#03005e', '#0802c2', '#015c07'];

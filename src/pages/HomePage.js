@@ -8,7 +8,7 @@ import getColor from '../functions/getColor';
 const HomePage = (props) => {
   
 
-  const [openedTab, setOpenedTab] = useState(1);
+  const [openedTab, setOpenedTab] = useState(props.openedTab);
 
   const changeTheme = (mode) => {
     props.onThemeChange(mode);
