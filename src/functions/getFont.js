@@ -6,11 +6,11 @@ export default function getFont(theme) {
     case ('day'):
       return 'Quicksand';
     case ('night'):
-      return 'Futura';
+      return 'Helvetica';
     case ('cyber'):
       return 'Consolas, monaco, monospace';
     case ('synth'):
-      return 'Helvetica';
+      return 'Futura';
     default:
       return 'Times New Roman';
   }

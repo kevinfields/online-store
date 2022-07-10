@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import Loading from '../components/Loading';
 import capitalizeFirst from '../functions/capitalizeFirst';
+import getColor from '../functions/getColor';
 import getOrderItem from '../functions/getOrderItem';
 
 const SingleOrderPage = (props) => {
@@ -38,7 +39,7 @@ const SingleOrderPage = (props) => {
           position: 'fixed',
           left: '32.5vw',
           height: '60vh',
-          border: `1px solid ${props.cardColor === 'white' ? 'black' : 'yellow'}`,
+          border: `1px solid ${getColor(props.themeSelect, 'border')}`,
           borderRadius: '5px',
           overflowY: 'scroll',
         }}>
@@ -61,7 +62,7 @@ const SingleOrderPage = (props) => {
               <ListItem
                 key={item}
                 sx={{
-                  border: `1px solid ${props.cardColor === 'white' ? 'black' : 'yellow'}`,
+                  border: `1px solid ${getColor(props.themeSelect, 'border')}`,
                   borderRadius: '5px',
                   marginTop: '1vh',
                 }}
@@ -83,8 +84,8 @@ const SingleOrderPage = (props) => {
                 <ListItemIcon>
                   <Avatar
                     sx={{
-                      bgcolor: 'transparent',
-                      color: props.cardColor === 'white' ? 'blue' : 'yellow',
+                      bgcolor: getColor(props.themeSelect, 'card_background'),
+                      color: getColor(props.themeSelect, 'text'),
                       width: '5vw',
                       marginLeft: '1vw',
                       fontSize: '10pt',
@@ -98,7 +99,7 @@ const SingleOrderPage = (props) => {
             ))}
             <ListItem
               sx={{
-                border: `1px solid ${props.cardColor === 'white' ? 'black' : 'yellow'}`,
+                border: `1px solid ${getColor(props.themeSelect, 'border')}`,
                 borderRadius: '5px',
                 marginTop: '1vh',
               }}
@@ -107,7 +108,8 @@ const SingleOrderPage = (props) => {
               <ListItemIcon>
                 <Avatar 
                   sx={{
-                    bgcolor: order.orderStatus === 'submitted' ? 'red' : 'green',
+                    bgcolor: getColor(props.themeSelect, 'card_background'),
+                    color: getColor(props.themeSelect, 'text'),
                     width: '5vw',
                     fontSize: '10pt',
                   }}
@@ -119,7 +121,7 @@ const SingleOrderPage = (props) => {
             </ListItem>
             <ListItem 
               sx={{
-                border: `1px solid ${props.cardColor === 'white' ? 'black' : 'yellow'}`,
+                border: `1px solid ${getColor(props.themeSelect, 'border')}`,
                 borderRadius: '5px',
                 marginTop: '1vh',
               }}

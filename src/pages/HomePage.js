@@ -36,7 +36,8 @@ const HomePage = (props) => {
           position: 'fixed',
           right: '30vw',
           top: '2.5vh',
-          boxShadow: props.themeSelect === 'cyber' ? `2px 2px ${getColor(props.themeSelect, 'box_shadow')}` : 'none'
+          border: props.themeSelect === 'cyber' ? `1px solid ${getColor(props.themeSelect, 'border')}` : 'none',
+          boxShadow: props.themeSelect === 'cyber' ? `3px 3px ${getColor(props.themeSelect, 'box_shadow')}` : 'none'
         }}
       >
         <Computer color='info'/>
@@ -47,6 +48,7 @@ const HomePage = (props) => {
           position: 'fixed',
           right: '25vw',
           top: '2.5vh',
+          border: props.themeSelect === 'synth' ? `1px solid ${getColor(props.themeSelect, 'border')}` : 'none',
           boxShadow: props.themeSelect === 'synth' ? `2px 2px ${getColor(props.themeSelect, 'box_shadow')}` : 'none'
         }}>
           <WbTwilightSharp color='info' />
@@ -57,6 +59,7 @@ const HomePage = (props) => {
           position: 'fixed',
           right: '20vw',
           top: '2.5vh',
+          border: props.themeSelect === 'day' ? `1px solid ${getColor(props.themeSelect, 'border')}` : 'none',
           boxShadow: props.themeSelect === 'day' ? `2px 2px ${getColor(props.themeSelect, 'box_shadow')}` : 'none'
         }}
       >
@@ -68,6 +71,7 @@ const HomePage = (props) => {
           position: 'fixed',
           right: '15vw',
           top: '2.5vh',
+          border: props.themeSelect === 'night' ? `1px solid ${getColor(props.themeSelect, 'border')}` : 'none',
           boxShadow: props.themeSelect === 'night' ? `2px 2px ${getColor(props.themeSelect, 'box_shadow')}` : 'none'
         }}
       >

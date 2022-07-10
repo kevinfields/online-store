@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Loading from '../components/Loading';
 import PlaceOrderCard from '../components/PlaceOrderCard';
 import ProductCard from '../components/ProductCard';
+import calculateRewards from '../functions/calculateRewards';
 import '../styling/CheckoutPage.css';
 
 const CheckoutPage = (props) => {
@@ -56,15 +57,33 @@ const CheckoutPage = (props) => {
       counter += Number(item.data().quantity);
     })
 
+    let rewards = 0;
+    if (total >= 20) {
+      rewards = calculateRewards(total);
+    }
+
     await props.ordersRef.add({
       items: titleCatcher,
       orderPlaced: new Date(),
       orderStatus: 'submitted',
       totalCost: total,
       itemCount: Number(counter),
+      rewardPoints: rewards,
     }).then(doc => {
       setOrderID(doc.id);
     })
+
+    let userData;
+
+    await props.userRef.get().then(doc => {
+      userData = doc.data();
+    });
+
+    await props.userRef.set({
+      ...userData,
+      rewardPoints: Number(userData.rewardPoints) + Number(rewards),
+    })
+
     setModal(true);
     setCartData([]);
   }

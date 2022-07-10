@@ -29,6 +29,7 @@ const OrderCard = (props) => {
         <CardHeader title={`Order ID: ${props.order.id}`} />
         <CardContent children={`Total Cost: $${props.order.data().totalCost}`} />
         <CardContent children={`Number of Items: ${props.order.data().itemCount}`} />
+        <CardContent children={`Reward Points Earned: ${props.order.data().rewardPoints ? props.order.data().rewardPoints : 0}`} />
         <CardContent children={`Order Status: ${props.order.data().orderStatus}`} />
         <CardContent children={`Ordered on ${formatTime(props.order.data().orderPlaced.seconds * 1000)}`} />
       </CardActionArea>
