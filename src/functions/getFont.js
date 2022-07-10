@@ -8,7 +8,7 @@ export default function getFont(theme) {
     case ('night'):
       return 'Helvetica';
     case ('cyber'):
-      return 'Consolas, monaco, monospace';
+      return "Courier, monospace";
     case ('synth'):
       return 'Futura';
     default:

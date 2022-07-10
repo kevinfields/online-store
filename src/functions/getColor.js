@@ -8,13 +8,13 @@ export default function getColor(theme, type) {
       themeArray = ['#ff0080', '#011c45', '#fffb00', '#1ecc18'];
       break;
     case 'card_background':
-      themeArray = ['#00199c', '#FFFFFF', '#111466', '#000000'];
+      themeArray = ['#0e02b5', '#FFFFFF', '#111466', '#000000'];
       break;
     case 'border':
       themeArray = ['#00fff7', '#c2c2c4', '#00fbff', '#09f205'];
       break;
     case 'box_shadow':
-      themeArray = ['#00c3ff', '#03005e', '#0802c2', '#015c07'];
+      themeArray = ['#00d5ff', '#03005e', '#0802c2', '#015c07'];
       break;
     case 'full_background':
       themeArray = ['#1f0140', '#d7f1f7', '#01032e', '#000000'];
@@ -23,7 +23,7 @@ export default function getColor(theme, type) {
       themeArray = ['#b030e3', '#111466', '#30bbe6', '#3dd422'];
       break;
     case 'secondary':
-      themeArray = ['#1f18db', '#c61df0', '#61cfe8', '#eef765'];
+      themeArray = ['#4d69ff', '#c61df0', '#61cfe8', '#eef765'];
       break;
     case 'success':
       themeArray = ['#adffa1', '#19690e', '#34bf21', '#22f505'];

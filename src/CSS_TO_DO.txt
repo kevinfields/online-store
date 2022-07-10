@@ -1,8 +1,0 @@
-css things to fix:
-
-  day mode: single order page order card borders
-    - the light gray is awkward on the light blue
-  synth, night mode: department page headers
-    - header tags are bolded which looks too big
-  cyber mode:
-    - font is supposed to be consolas, maybe it is but it looks weird
