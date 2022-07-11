@@ -50,6 +50,7 @@ const ProfilePage = (props) => {
     });
 
     setLoading(true);
+    setEditingImage(false);
     loadUserData();
   }
 

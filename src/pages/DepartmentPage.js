@@ -56,7 +56,7 @@ const DepartmentPage = (props) => {
 
   const addToCart = async (product, quantity) => {
 
-    if (quantity > product.data().stock) {
+    if (Number(quantity) > Number(product.data().stock)) {
       quantity = product.data().stock;
       setLowStockAlert({
         open: true,

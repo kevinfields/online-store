@@ -51,7 +51,7 @@ const EditProductPage = (props) => {
       case 'clothing':
         setLoadedProducts({
           ...loadedProducts,
-          appliances: catcher,
+          clothing: catcher,
         });
         break;
       case 'furniture':
@@ -82,6 +82,7 @@ const EditProductPage = (props) => {
           loadProducts('appliances');
         } else {
           setProducts(loadedProducts.appliances);
+          setSelectedProduct('');
         };
         break;
       case 'clothing':
@@ -89,6 +90,7 @@ const EditProductPage = (props) => {
           loadProducts('clothing');
         } else {
           setProducts(loadedProducts.clothing);
+          setSelectedProduct('');
         };
         break;
       case 'electronics':
@@ -96,6 +98,7 @@ const EditProductPage = (props) => {
           loadProducts('electronics');
         } else {
           setProducts(loadedProducts.electronics);
+          setSelectedProduct('');
         };
         break;
       case 'furniture':
@@ -103,6 +106,7 @@ const EditProductPage = (props) => {
           loadProducts('furniture');
         } else {
           setProducts(loadedProducts.furniture);
+          setSelectedProduct('');
         };
         break;
       case 'outdoors':
@@ -110,6 +114,7 @@ const EditProductPage = (props) => {
           loadProducts('outdoors');
         } else {
           setProducts(loadedProducts.outdoors);
+          setSelectedProduct('');
         };
         break;
       default:
@@ -144,10 +149,10 @@ const EditProductPage = (props) => {
         border: borderColor,
         borderRadius: '5px',
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         flexWrap: 'wrap',
         alignContent: 'start',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         gap: '2vw',
         color: textColor,
         boxShadow: `1px 1px 3px 3px ${shadowColor}`,
@@ -157,17 +162,24 @@ const EditProductPage = (props) => {
           style={{
             display: 'flex',
             flexDirection: 'row',
-            gap: '5vw',
+            gap: '7vw',
           }}
         >
-          <Typography color='primary'>Select a Department</Typography>
+          <Typography 
+            color='primary'
+            sx={{
+              width: '15vw',
+            }}
+          >
+            Select a Department: 
+          </Typography>
           <Select
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
             required={true}
             InputLabelProps={{ required: false, shrink: true, style: {color: textColor} }}
             sx={{
-              width: '27vw',
+              width: '28vw',
               height: '8vh',
               color: textColor,
               border: `1px solid ${borderColor}`,
@@ -191,18 +203,25 @@ const EditProductPage = (props) => {
           <div
             style={{
               display: 'flex',
-              flexDircetion: 'row',
-              gap: '5vw',
+              flexDirection: 'row',
+              gap: '7vw',
             }}
           >
-            <Typography color='primary'>Select a Product: </Typography>
+            <Typography 
+              color='primary'
+              sx={{
+                width: '15vw',
+              }}
+            >
+              Select a Product: 
+            </Typography>
             <Select 
               value={selectedProduct}
               onChange={(e) => setSelectedProduct(e.target.value)}
               required={true}
               InputLabelProps={{ required: false, shrink: true, style: {color: textColor} }}
               sx={{
-                width: '27vw',
+                width: '28vw',
                 height: '8vh',
                 color: textColor,
                 border: `1px solid ${borderColor}`,
@@ -217,12 +236,18 @@ const EditProductPage = (props) => {
             </Select>
           </div>
         : null }
+        {department !== 'Department' && selectedProduct !== '' ?
         <Button
           onClick={() => openProduct(department, selectedProduct)}
           variant='contained'
+          sx={{
+            width: 'fit-content',
+            marginBottom: '5vh',
+          }}
         >
           Edit {selectedProduct}
         </Button>
+        : null}
       </FormControl>
     </div>
   )

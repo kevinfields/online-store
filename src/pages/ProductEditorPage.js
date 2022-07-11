@@ -1,7 +1,7 @@
 import { Button, Card, CardContent, CardHeader, CardMedia, TextField } from '@mui/material';
 import {Edit, Save, Undo} from '@mui/icons-material';
 import React, {useState, useEffect} from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Loading from '../components/Loading';
 import getColor from '../functions/getColor';
 import capitalizeFirst from '../functions/lowerFirst';
@@ -17,6 +17,7 @@ const ProductEditorPage = (props) => {
   const [editableData, setEditableData] = useState({});
 
   const {id} = useParams();
+  const navigate = useNavigate();
 
   const textColor = getColor(props.themeSelect, 'text');
   const borderColor = getColor(props.themeSelect, 'border');
@@ -51,6 +52,18 @@ const ProductEditorPage = (props) => {
     setEditableData(productData);
   }
 
+  const viewDepartmentPage = () => {
+
+    props.openDepartmentPage();
+    navigate('/');
+  }
+
+  const openSelector = () => {
+
+    props.openSelector();
+    navigate('/');
+  }
+
   useEffect(() => {
     loadProductData();
   }, [])
@@ -59,6 +72,37 @@ const ProductEditorPage = (props) => {
     <div className='page'>
       {
         loading ? <Loading /> :
+        <div>
+          <div>
+            <Button 
+              onClick={() => viewDepartmentPage()}
+              sx={{
+                position: 'fixed',
+                width: '10vw',
+                left: '40vw',
+                height: '10vh',
+                top: '10vh',
+              }}
+              color='primary'
+              variant='contained'
+            >
+              Show in Store.
+            </Button>
+            <Button
+              onClick={() => openSelector()}
+              sx={{
+                position: 'fixed',
+                width: '10vw',
+                left: '55vw',
+                height: '10vh',
+                top: '10vh',
+              }}
+              color='primary'
+              variant='contained'
+            >
+              Return to Product Selector
+            </Button>
+          </div>
         <Card 
           variant='outlined'
           sx={{
@@ -80,7 +124,7 @@ const ProductEditorPage = (props) => {
               }}
             >
             <TextField
-              value={productData.title}
+              value={editableData.title}
               onChange={(e) => setEditableData({
                 ...editableData,
                 title: e.target.value
@@ -114,6 +158,7 @@ const ProductEditorPage = (props) => {
             <Button
               variant='contained'
               color='primary'
+              size='small'
               onClick={() => saveDetail()}
             >
               <Save />
@@ -121,6 +166,7 @@ const ProductEditorPage = (props) => {
             <Button
               variant='contained'
               color='error'
+              size='small'
               onClick={() => undoDetail()}
             >
               <Undo />
@@ -141,6 +187,7 @@ const ProductEditorPage = (props) => {
               <Button 
                 variant='contained'
                 onClick={() => setEditor({open: true, field: 'title'})}
+                size='small'
                 sx={{
                   height: '3vw',
                   marginTop: '2vh',
@@ -194,12 +241,14 @@ const ProductEditorPage = (props) => {
               variant='contained'
               color='primary'
               onClick={() => saveDetail()}
+              size='small'
             >
               <Save />
             </Button>
             <Button
               variant='contained'
               color='error'
+              size='small'
               onClick={() => undoDetail()}
             >
               <Undo />
@@ -218,10 +267,12 @@ const ProductEditorPage = (props) => {
               />
               <Button 
                 variant='contained'
+                size='small'
                 onClick={() => setEditor({open: true, field: 'description'})}
                 sx={{
                   height: '3vw',
                   marginTop: '2vh',
+                  marginBottom: '2vh',
                 }}
               >
                 <Edit />
@@ -238,9 +289,172 @@ const ProductEditorPage = (props) => {
           >
             <img src={productData.photoURL} alt={productData.title} className='product-image'/>
           </CardMedia>
-          <CardContent children={'Price: $' + productData.price} />
-          <CardContent children={'Stock: ' + productData.stock} />
+          { editor.open && editor.field === 'price' ?
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                gap: '1vw',
+              }}
+            >
+              <TextField
+                value={editableData.price}
+                onChange={(e) => setEditableData({
+                  ...editableData,
+                  price: e.target.value
+                })}
+                type='number'
+                required={true}
+                InputLabelProps={{ required: false, shrink: true, style: {color: textColor} }}
+                sx={{
+                  width: 'fit-content',
+                  height: '8vh',
+                  input: {
+                    color: textColor,
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    "& > fieldset": {
+                      borderColor: borderColor
+                    }
+                  },
+                  "& .MuiOutlinedInput-root:hover": {
+                    "& > fieldset": {
+                      borderColor: borderColor
+                    }
+                  },
+                  "& .MuiOutlinedInput-root.Mui-focused": {
+                    "& > fieldset": {
+                      borderColor: borderColor
+                    }
+                  },
+                }}
+              />
+              <Button
+                variant='contained'
+                color='primary'
+                onClick={() => saveDetail()}
+                size='small'
+              >
+                <Save />
+              </Button>
+              <Button
+                variant='contained'
+                color='error'
+                size='small'
+                onClick={() => undoDetail()}
+              >
+                <Undo />
+              </Button>
+            </div>
+            :
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                gap: '2vw',
+              }}
+            > 
+              <CardContent 
+                children={`Price: $${productData.price}`}
+              />
+              <Button 
+                variant='contained'
+                size='small'
+                onClick={() => setEditor({open: true, field: 'price'})}
+                sx={{
+                  height: '3vw',
+                  marginTop: '2vh',
+                  marginBottom: '2vh',
+                }}
+              >
+                <Edit />
+              </Button>
+            </div>
+          }
+          { editor.open && editor.field === 'stock' ?
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                gap: '1vw',
+              }}
+            >
+              <TextField
+                value={editableData.stock}
+                onChange={(e) => setEditableData({
+                  ...editableData,
+                  stock: e.target.value
+                })}
+                type='number'
+                required={true}
+                InputLabelProps={{ required: false, shrink: true, style: {color: textColor} }}
+                sx={{
+                  width: 'fit-content',
+                  height: '8vh',
+                  input: {
+                    color: textColor,
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    "& > fieldset": {
+                      borderColor: borderColor
+                    }
+                  },
+                  "& .MuiOutlinedInput-root:hover": {
+                    "& > fieldset": {
+                      borderColor: borderColor
+                    }
+                  },
+                  "& .MuiOutlinedInput-root.Mui-focused": {
+                    "& > fieldset": {
+                      borderColor: borderColor
+                    }
+                  },
+                }}
+              />
+              <Button
+                variant='contained'
+                color='primary'
+                onClick={() => saveDetail()}
+                size='small'
+              >
+                <Save />
+              </Button>
+              <Button
+                variant='contained'
+                color='error'
+                size='small'
+                onClick={() => undoDetail()}
+              >
+                <Undo />
+              </Button>
+            </div>
+            :
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                gap: '2vw',
+              }}
+            > 
+              <CardContent 
+                children={`Stock: ${productData.stock}`}
+              />
+              <Button 
+                variant='contained'
+                size='small'
+                onClick={() => setEditor({open: true, field: 'stock'})}
+                sx={{
+                  height: '3vw',
+                  marginTop: '2vh',
+                  marginBottom: '2vh',
+                }}
+              >
+                <Edit />
+              </Button>
+            </div>
+          }
         </Card>
+        </div>
       }
     </div>
   )

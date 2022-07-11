@@ -13,6 +13,7 @@ import NewProductPage from '../pages/NewProductPage';
 import ProfilePage from '../pages/ProfilePage';
 import getColor from '../functions/getColor';
 import ChooseEditProductPage from '../pages/ChooseEditProductPage';
+import {MODERATOR_LIST} from '../store/MODERATOR_LIST';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -59,7 +60,7 @@ const Navbar = (props) => {
     setOpened(props.openedTab)
   }, [props.openedTab]);
 
-  const loggedInTabs = [
+  const moderatorTabs = [
     <Tab label='Log Out' sx={sxDefault} {...a11yProps(0)} />,
     <Tab label='Clothing' sx={sxDefault} {...a11yProps(1)} />, 
     <Tab label='Furniture' sx={sxDefault} {...a11yProps(2)} />,
@@ -71,6 +72,18 @@ const Navbar = (props) => {
     <Tab label='My Profile' sx={sxDefault} {...a11yProps(8)} />,
     <Tab label='New Product' sx={sxDefault} {...a11yProps(9)} />,
     <Tab label='Edit Product' sx={sxDefault} {...a11yProps(10)} />,
+  ];
+
+  const loggedInTabs = [
+    <Tab label='Log Out' sx={sxDefault} {...a11yProps(0)} />,
+    <Tab label='Clothing' sx={sxDefault} {...a11yProps(1)} />, 
+    <Tab label='Furniture' sx={sxDefault} {...a11yProps(2)} />,
+    <Tab label='Electronics' sx={sxDefault} {...a11yProps(3)} />,
+    <Tab label='Applicances' sx={sxDefault} {...a11yProps(4)} />,
+    <Tab label='Outdoors' sx={sxDefault} {...a11yProps(5)} />,
+    <Tab label='My Cart' sx={sxDefault} {...a11yProps(6)} />,
+    <Tab label='My Orders' sx={sxDefault} {...a11yProps(7)} />,
+    <Tab label='My Profile' sx={sxDefault} {...a11yProps(8)} />,
   ];
 
   const loggedOutTabs = [
@@ -114,9 +127,10 @@ const Navbar = (props) => {
         </div>
         <Tabs value={opened} onChange={handleChange} indicatorColor='secondary' textColor='secondary'>
         {!props.loggedIn ?
-          loggedOutTabs
-          :
-          loggedInTabs         
+            loggedOutTabs
+          : props.loggedIn && !MODERATOR_LIST.includes(props.user.uid) ?
+            loggedInTabs
+          : moderatorTabs
         }
         </Tabs>
         <TabPanel value={opened} index={0}>

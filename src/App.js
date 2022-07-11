@@ -13,6 +13,7 @@ import SingleOrderPage from "./pages/SingleOrderPage.js";
 import getColor from "./functions/getColor.js";
 import getFont from "./functions/getFont.js";
 import ProductEditorPage from "./pages/ProductEditorPage.js";
+import { MODERATOR_LIST } from "./store/MODERATOR_LIST.js";
 
 firebase.initializeApp({
   apiKey: "AIzaSyCV-bMBng0nyBqgo7V_dnKh832PQoSf9Gs",
@@ -171,12 +172,16 @@ function App() {
                   />
                 }
               />
+              { user && MODERATOR_LIST.includes(user.uid) ?
+              <>
               <Route
                 path='/appliances/:id'
                 element={
                   <ProductEditorPage
                     productsRef={firestore.collection('departments').doc('appliances').collection('products')}
                     themeSelect={themeSelect}
+                    openDepartmentPage={() => setTab(4)}
+                    openSelector={() => setTab(10)}
                   />
                 }
               />
@@ -186,6 +191,8 @@ function App() {
                   <ProductEditorPage
                     productsRef={firestore.collection('departments').doc('clothing').collection('products')}
                     themeSelect={themeSelect}
+                    openDepartmentPage={() => setTab(1)}
+                    openSelector={() => setTab(10)}
                   />
                 }
               />
@@ -195,6 +202,8 @@ function App() {
                   <ProductEditorPage
                     productsRef={firestore.collection('departments').doc('electronics').collection('products')}
                     themeSelect={themeSelect}
+                    openDepartmentPage={() => setTab(3)}
+                    openSelector={() => setTab(10)}
                   />
                 }
               />
@@ -204,6 +213,8 @@ function App() {
                   <ProductEditorPage
                     productsRef={firestore.collection('departments').doc('furniture').collection('products')}
                     themeSelect={themeSelect}
+                    openDepartmentPage={() => setTab(2)}
+                    openSelector={() => setTab(10)}
                   />
                 }
               />
@@ -213,9 +224,13 @@ function App() {
                   <ProductEditorPage
                     productsRef={firestore.collection('departments').doc('outdoors').collection('products')}
                     themeSelect={themeSelect}
+                    openDepartmentPage={() => setTab(5)}
+                    openSelector={() => setTab(10)}
                   />
                 }
               />
+            </>
+            : null }
             </>
           )}
         </Routes>
