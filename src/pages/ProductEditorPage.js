@@ -140,17 +140,17 @@ const ProductEditorPage = (props) => {
                 },
                 "& .MuiOutlinedInput-root": {
                   "& > fieldset": {
-                    borderColor: borderColor
+                    borderColor: borderColor,
                   }
                 },
                 "& .MuiOutlinedInput-root:hover": {
                   "& > fieldset": {
-                    borderColor: borderColor
+                    borderColor: borderColor,
                   }
                 },
                 "& .MuiOutlinedInput-root.Mui-focused": {
                   "& > fieldset": {
-                    borderColor: borderColor
+                    borderColor: borderColor,
                   }
                 },
               }}

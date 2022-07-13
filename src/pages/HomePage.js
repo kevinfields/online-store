@@ -1,6 +1,6 @@
-import { Computer, DarkMode, LightMode, Schedule, ShoppingCart, WbTwilightSharp } from '@mui/icons-material';
-import { AppBar, Button, Switch, Toolbar } from '@mui/material';
-import React, {useState, useEffect} from 'react';
+import { Computer, DarkMode, LightMode, Schedule, Search, ShoppingCart, WbTwilightSharp } from '@mui/icons-material';
+import { AppBar, Button, InputAdornment, Switch, TextField, Toolbar } from '@mui/material';
+import React, {useState, useEffect, useRef} from 'react';
 import Navbar from '../components/Navbar';
 import getColor from '../functions/getColor';
 
@@ -9,6 +9,12 @@ const HomePage = (props) => {
   
 
   const [openedTab, setOpenedTab] = useState(props.openedTab);
+  const [searchBar, setSearchBar] = useState(false);
+  const [search, setSearch] = useState('');
+  const searchRef = useRef();
+  
+  const borderColor = getColor(props.themeSelect, props.themeSelect !== 'day' ? 'border' : 'text');
+  const textColor = getColor(props.themeSelect, 'text');
 
   const changeTheme = (mode) => {
     props.onThemeChange(mode);
@@ -16,6 +22,25 @@ const HomePage = (props) => {
 
   const changeOpenedTab = (num) => {
     setOpenedTab(num)
+  }
+
+  const openSearchBar = () => {
+    
+    setSearch('');
+    setSearchBar(true);
+    window.addEventListener('keydown', enterHandler);
+  }
+
+  const submitSearch = () => {
+    console.log(search)
+    setSearchBar(false);
+    window.removeEventListener('keydown', enterHandler);
+  }
+
+  const enterHandler = (e) => {
+    if (e.key === 'Enter') {
+      submitSearch();
+    }
   }
 
   return (
@@ -30,6 +55,60 @@ const HomePage = (props) => {
         openedTab={openedTab}
         changeOpenedTab={(num) => changeOpenedTab(num)}
       />
+      { !searchBar ?
+        <Button
+          onClick={() => openSearchBar()}
+          sx={{
+            position: 'fixed',
+            right: '35vw',
+            top: '2.5vh',
+          }}
+        >
+          <Search color='info' />
+        </Button>
+      : 
+        <>
+          <TextField
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            type='string'
+            required={true}
+            ref={searchRef}
+            InputLabelProps={{ required: false, shrink: true, style: {color: textColor}}}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <Search color='info' onClick={() => submitSearch()}/>
+                </InputAdornment>
+              )
+            }}
+            sx={{
+              position: 'fixed',
+              right: '35vw',
+              top: '2.5vh',
+              width: '20vw',
+              input: {
+                color: textColor,
+              },
+              "& .MuiOutlinedInput-root": {
+                "& > fieldset": {
+                  borderColor: borderColor
+                }
+              },
+              "& .MuiOutlinedInput-root:hover": {
+                "& > fieldset": {
+                  borderColor: borderColor
+                }
+              },
+              "& .MuiOutlinedInput-root.Mui-focused": {
+                "& > fieldset": {
+                  borderColor: borderColor
+                }
+              },
+            }}
+          />
+        </>
+      }
       <Button
         onClick={() => changeTheme('cyber')}
         sx={{
