@@ -67,7 +67,6 @@ const SearchPage = (props) => {
         }
       })
     });
-
     setSearchResults(catcher);
     setLoading(false);
   };
@@ -110,11 +109,24 @@ const SearchPage = (props) => {
           Search Results for: {id}
         </Typography>
         <div>
+          { searchResults.length === 0 ?
+          <Typography
+            align='center'
+            variant='h5'
+            sx={{
+              color: textColor,
+              marginTop: '3vh',
+            }}
+          >
+            Your search did not return any results. Please try another term.
+          </Typography>
+          :
           <ul>
             {searchResults.map(item => (
               <li>{item.product} - {item.department}</li>
             ))}
           </ul>
+          }
         </div>
       </>
       }
