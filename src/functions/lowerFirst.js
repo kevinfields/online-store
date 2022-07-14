@@ -1,4 +1,4 @@
-export default function capitalizeFirst(word) {
+export default function lowerFirst(word) {
 
   let wordArr = word.split('');
 

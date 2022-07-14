@@ -14,6 +14,7 @@ import getColor from "./functions/getColor.js";
 import getFont from "./functions/getFont.js";
 import ProductEditorPage from "./pages/ProductEditorPage.js";
 import { MODERATOR_LIST } from "./store/MODERATOR_LIST.js";
+import SearchPage from "./pages/SearchPage.js";
 
 firebase.initializeApp({
   apiKey: "AIzaSyCV-bMBng0nyBqgo7V_dnKh832PQoSf9Gs",
@@ -226,6 +227,15 @@ function App() {
                     themeSelect={themeSelect}
                     openDepartmentPage={() => setTab(5)}
                     openSelector={() => setTab(10)}
+                  />
+                }
+              />
+              <Route
+                path='/search/:id'
+                element={
+                  <SearchPage 
+                    departmentsRef={firestore.collection('departments')}
+                    themeSelect={themeSelect}
                   />
                 }
               />

@@ -1,6 +1,7 @@
-import { Computer, DarkMode, LightMode, Schedule, Search, ShoppingCart, WbTwilightSharp } from '@mui/icons-material';
+import { Close, Computer, DarkMode, LightMode, Schedule, Search, ShoppingCart, WbTwilightSharp } from '@mui/icons-material';
 import { AppBar, Button, InputAdornment, Switch, TextField, Toolbar } from '@mui/material';
 import React, {useState, useEffect, useRef} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import getColor from '../functions/getColor';
 
@@ -11,7 +12,7 @@ const HomePage = (props) => {
   const [openedTab, setOpenedTab] = useState(props.openedTab);
   const [searchBar, setSearchBar] = useState(false);
   const [search, setSearch] = useState('');
-  const searchRef = useRef();
+  const navigate = useNavigate();
   
   const borderColor = getColor(props.themeSelect, props.themeSelect !== 'day' ? 'border' : 'text');
   const textColor = getColor(props.themeSelect, 'text');
@@ -25,14 +26,23 @@ const HomePage = (props) => {
   }
 
   const openSearchBar = () => {
-    
     setSearch('');
     setSearchBar(true);
     window.addEventListener('keydown', enterHandler);
   }
 
+  const closeSearchBar = () => {
+    setSearch('');
+    setSearchBar(false);
+    window.removeEventListener('keydown', enterHandler);
+  }
+
   const submitSearch = () => {
-    console.log(search)
+
+    if (search === '') {
+      return;
+    }
+    navigate(`/search/${search}`);
     setSearchBar(false);
     window.removeEventListener('keydown', enterHandler);
   }
@@ -73,12 +83,29 @@ const HomePage = (props) => {
             onChange={(e) => setSearch(e.target.value)}
             type='string'
             required={true}
-            ref={searchRef}
             InputLabelProps={{ required: false, shrink: true, style: {color: textColor}}}
             InputProps={{
               endAdornment: (
                 <InputAdornment position='end'>
-                  <Search color='info' onClick={() => submitSearch()}/>
+                  <Search 
+                    sx={{
+                      "&:hover": {
+                        cursor: 'pointer'
+                      }
+                    }}
+                    color='info'
+                    onClick={() => submitSearch()}
+                  />
+                  <Close 
+                    sx={{
+                      "&:hover": {
+                        cursor: 'pointer'
+                      },
+                      marginLeft: '1vw',
+                    }}
+                    color='error' 
+                    onClick={() => closeSearchBar()} 
+                  />
                 </InputAdornment>
               )
             }}
@@ -86,7 +113,7 @@ const HomePage = (props) => {
               position: 'fixed',
               right: '35vw',
               top: '2.5vh',
-              width: '20vw',
+              width: '25vw',
               input: {
                 color: textColor,
               },
