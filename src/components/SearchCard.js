@@ -1,4 +1,4 @@
-import { Button, Card, CardActionArea, CardActions, CardContent, CardHeader } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardHeader } from '@material-ui/core';
 import React from 'react';
 import getColor from '../functions/getColor';
 

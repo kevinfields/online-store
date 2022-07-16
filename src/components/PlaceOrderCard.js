@@ -1,5 +1,6 @@
 import { Button, Card } from '@mui/material'
 import React from 'react'
+import fixCost from '../functions/fixCost'
 import getColor from '../functions/getColor'
 
 const PlaceOrderCard = (props) => {
@@ -13,7 +14,7 @@ const PlaceOrderCard = (props) => {
       boxShadow: `1px 1px 3px 3px ${getColor(props.themeSelect, 'box_shadow')}`
     }}>
       <div className='total-price'>
-        Total: ${props.cost}
+        Total: ${fixCost(props.cost)}
       </div>
       <Button
         variant='contained'

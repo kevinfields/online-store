@@ -6,6 +6,7 @@ import capitalizeFirst from '../functions/capitalizeFirst';
 import getColor from '../functions/getColor';
 import getOrderItem from '../functions/getOrderItem';
 import { useNavigate } from 'react-router-dom';
+import fixCost from '../functions/fixCost';
 
 const SingleOrderPage = (props) => {
 
@@ -135,7 +136,7 @@ const SingleOrderPage = (props) => {
                 marginTop: '1vh',
               }}
             >
-              Total Cost: ${order.totalCost}
+              Total Cost: ${fixCost(order.totalCost)}
             </ListItem>
           </List>
         </div>

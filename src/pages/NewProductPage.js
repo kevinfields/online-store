@@ -1,4 +1,5 @@
 
+import { Box } from '@material-ui/core';
 import { Alert, Button, FormControl, Grid, Input, InputAdornment, InputLabel, MenuItem, Select, TextField } from '@mui/material'
 import React, {useState, useEffect} from 'react';
 import getColor from '../functions/getColor';
@@ -164,7 +165,7 @@ const NewProductPage = (props) => {
         width: '62vw',
         paddingLeft: '1vw',
         paddingRight: '1vw',
-        height: '35vh',
+        height: '55vh',
         paddingTop: '3vh',
         left: '18vw',
         top: '29vh',
@@ -388,6 +389,18 @@ const NewProductPage = (props) => {
                 borderColor: borderColor
               }
             },
+          }}
+        />
+        <img 
+          src={info.photoURL} 
+          alt={'Not Available'} 
+          style={{
+            width: '20vh',
+            height: '20vh',
+            border: `1px solid ${borderColor}`,
+            position: 'fixed',
+            left: '20vw',
+            top: '66vh',
           }}
         />
       </FormControl>
