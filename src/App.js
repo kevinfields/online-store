@@ -236,6 +236,7 @@ function App() {
                   <SearchPage 
                     departmentsRef={firestore.collection('departments')}
                     themeSelect={themeSelect}
+                    viewInStore={(dep) => setTab(dep)}
                   />
                 }
               />

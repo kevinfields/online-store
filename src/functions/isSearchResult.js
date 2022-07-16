@@ -13,15 +13,16 @@ export default function isSearchResult(search, result) {
 
     if (searchArr[i] === resultArr[i]) {
       score += 4;
-    }
-
-    if (resultArr.includes(searchArr[i])) {
+    } else if (resultArr.includes(searchArr[i])) {
       score += 1;
       let startIndex = resultArr.indexOf(searchArr[i]);
-      if (resultArr[startIndex + 1] === searchArr[i + 1]){
+      if (resultArr[startIndex + 1] === searchArr[i + 1]) {
         score += 1;
         if (resultArr[startIndex + 2] === searchArr[i + 2]) {
           score += 1;
+          if (resultArr[startIndex + 3] === searchArr[i + 3]) {
+            score += 1;
+          }
         }
       }
     }

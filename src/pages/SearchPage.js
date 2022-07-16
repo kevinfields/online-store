@@ -1,7 +1,10 @@
+import { Card } from '@material-ui/core';
 import { Button, Typography } from '@mui/material';
 import React, {useState, useEffect} from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Loading from '../components/Loading';
+import ProductCard from '../components/ProductCard';
+import SearchCard from '../components/SearchCard';
 import getColor from '../functions/getColor';
 import isSearchResult from '../functions/isSearchResult';
 
@@ -10,6 +13,7 @@ const SearchPage = (props) => {
 
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
   const { id } = useParams();
 
 
@@ -54,7 +58,7 @@ const SearchPage = (props) => {
       snap.forEach(doc => {
         if (isSearchResult(doc.data().title, id).pass) {
           catcher.push({
-            department: 'furnitures',
+            department: 'furniture',
             product: doc.data().title,
             score: isSearchResult(doc.data().title, id).score,
           });
@@ -84,6 +88,15 @@ const SearchPage = (props) => {
   const borderColor = getColor(props.themeSelect, 'border');
   const cardColor = getColor(props.themeSelect, 'card_background');
   const shadowColor = getColor(props.themeSelect, 'box_shadow');
+
+  const viewInStore = (dep) => {
+    
+    props.viewInStore(dep)
+    navigate('/');
+    
+  }
+
+ 
 
 
   
@@ -126,9 +139,25 @@ const SearchPage = (props) => {
             Your search did not return any results. Please try another term.
           </Typography>
           :
-          <ul>
+          <ul
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              width: '70vw',
+              position: 'fixed',
+              left: '15vw',
+              top: '35vh',
+              height: '50vh',
+              overflowY: 'scroll',
+            }}
+          >
             {searchResults.map(item => (
-              <li>{item.product} - {item.department} - Score: {item.score}</li>
+              <SearchCard
+                item={item}
+                themeSelect={props.themeSelect}
+                viewInStore={(dep) => viewInStore(dep)}
+              /> 
             ))}
           </ul>
           }
