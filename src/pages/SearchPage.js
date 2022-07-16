@@ -19,55 +19,60 @@ const SearchPage = (props) => {
 
     await props.departmentsRef.doc('appliances').collection('products').get().then(snap => {
       snap.forEach(doc => {
-        if (isSearchResult(doc.data().title, id)) {
+        if (isSearchResult(doc.data().title, id).pass) {
           catcher.push({
             department: 'appliances',
             product: doc.data().title,
+            score: isSearchResult(doc.data().title, id).score,
           });
         }
       })
     });
     await props.departmentsRef.doc('clothing').collection('products').get().then(snap => {
       snap.forEach(doc => {
-        if (isSearchResult(doc.data().title, id)) {
+        if (isSearchResult(doc.data().title, id).pass) {
           catcher.push({
             department: 'clothing',
             product: doc.data().title,
+            score: isSearchResult(doc.data().title, id).score,
           });
         }
       })
     });
     await props.departmentsRef.doc('electronics').collection('products').get().then(snap => {
       snap.forEach(doc => {
-        if (isSearchResult(doc.data().title, id)) {
+        if (isSearchResult(doc.data().title, id).pass) {
           catcher.push({
             department: 'electronics',
             product: doc.data().title,
+            score: isSearchResult(doc.data().title, id).score,
           });
         }
       })
     });
     await props.departmentsRef.doc('furniture').collection('products').get().then(snap => {
       snap.forEach(doc => {
-        if (isSearchResult(doc.data().title, id)) {
+        if (isSearchResult(doc.data().title, id).pass) {
           catcher.push({
             department: 'furnitures',
             product: doc.data().title,
+            score: isSearchResult(doc.data().title, id).score,
           });
         }
       })
     });
     await props.departmentsRef.doc('outdoors').collection('products').get().then(snap => {
       snap.forEach(doc => {
-        if (isSearchResult(doc.data().title, id)) {
+        if (isSearchResult(doc.data().title, id).pass) {
           catcher.push({
             department: 'outdoors',
             product: doc.data().title,
+            score: isSearchResult(doc.data().title, id).score,
           });
         }
       })
     });
-    setSearchResults(catcher);
+    setSearchResults(catcher.sort((a , b) => b.score - a.score));
     setLoading(false);
   };
 
@@ -123,7 +128,7 @@ const SearchPage = (props) => {
           :
           <ul>
             {searchResults.map(item => (
-              <li>{item.product} - {item.department}</li>
+              <li>{item.product} - {item.department} - Score: {item.score}</li>
             ))}
           </ul>
           }

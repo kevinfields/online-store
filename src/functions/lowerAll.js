@@ -1,11 +1,17 @@
-export default function lowerAll(term) {
+export default function lowerAll(term, type) {
 
-  let termArr = term.split('');
+  let termArr = term;
 
   let catcher = [];
 
   termArr.forEach(item => {
     catcher.push(item.toLowerCase());
   });
-  return catcher.join('');
+
+  if (type === 'string') {
+    return catcher.join('');
+  } else {
+    return catcher;
+  }
+  
 }
