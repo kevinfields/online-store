@@ -23,55 +23,75 @@ const SearchPage = (props) => {
 
     await props.departmentsRef.doc('appliances').collection('products').get().then(snap => {
       snap.forEach(doc => {
-        if (isSearchResult(doc.data().title, id).pass) {
+
+        let searchResult = isSearchResult(doc.data().title, id);
+
+        if (searchResult.pass) {
           catcher.push({
             department: 'appliances',
             product: doc.data().title,
-            score: isSearchResult(doc.data().title, id).score,
+            score: searchResult.score,
+            maxScore: searchResult.maxScore,
           });
         }
       })
     });
     await props.departmentsRef.doc('clothing').collection('products').get().then(snap => {
       snap.forEach(doc => {
-        if (isSearchResult(doc.data().title, id).pass) {
+
+        let searchResult = isSearchResult(doc.data().title, id);
+
+        if (searchResult.pass) {
           catcher.push({
             department: 'clothing',
             product: doc.data().title,
-            score: isSearchResult(doc.data().title, id).score,
+            score: searchResult.score,
+            maxScore: searchResult.maxScore,
           });
         }
       })
     });
     await props.departmentsRef.doc('electronics').collection('products').get().then(snap => {
       snap.forEach(doc => {
-        if (isSearchResult(doc.data().title, id).pass) {
+
+        let searchResult = isSearchResult(doc.data().title, id);
+
+        if (searchResult.pass) {
           catcher.push({
             department: 'electronics',
             product: doc.data().title,
-            score: isSearchResult(doc.data().title, id).score,
+            score: searchResult.score,
+            maxScore: searchResult.maxScore,
           });
         }
       })
     });
     await props.departmentsRef.doc('furniture').collection('products').get().then(snap => {
       snap.forEach(doc => {
-        if (isSearchResult(doc.data().title, id).pass) {
+
+        let searchResult = isSearchResult(doc.data().title, id);
+
+        if (searchResult.pass) {
           catcher.push({
             department: 'furniture',
             product: doc.data().title,
-            score: isSearchResult(doc.data().title, id).score,
+            score: searchResult.score,
+            maxScore: searchResult.maxScore,
           });
         }
       })
     });
     await props.departmentsRef.doc('outdoors').collection('products').get().then(snap => {
       snap.forEach(doc => {
-        if (isSearchResult(doc.data().title, id).pass) {
+
+        let searchResult = isSearchResult(doc.data().title, id);
+
+        if (searchResult.pass) {
           catcher.push({
             department: 'outdoors',
             product: doc.data().title,
-            score: isSearchResult(doc.data().title, id).score,
+            score: searchResult.score,
+            maxScore: searchResult.maxScore,
           });
         }
       })
@@ -94,12 +114,9 @@ const SearchPage = (props) => {
     props.viewInStore(dep)
     navigate('/');
     
-  }
-
- 
+  };
 
 
-  
 
   return (
     <div className='page'>
@@ -122,6 +139,7 @@ const SearchPage = (props) => {
           variant='h3'
           sx={{
             color: textColor,
+            paddingTop: '5vh',
           }}
         >
           Search Results for: {id}

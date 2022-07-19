@@ -1,4 +1,5 @@
 import { Button, Card, CardActions, CardContent, CardHeader } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import React from 'react';
 import getColor from '../functions/getColor';
 
@@ -33,28 +34,37 @@ const SearchCard = (props) => {
         backgroundColor: getColor(props.themeSelect, 'card_background'),
         boxShadow: `1px 1px 3px 3px ${getColor(props.themeSelect, 'box_shadow')}`,
         width: '15vw',
-        maxHeight: '15vw',
+        height: 'fit-content',
         marginLeft: '2.5vw',
         marginRight: '2.5vw',
         marginTop: '2.5vh',
+        padding: '0px',
       }}
     >
-    <Card>
-      <CardHeader 
-        title={props.item.product}
-      />
-      <CardContent children={`Department: ${props.item.department}`} />
-      <CardContent children={`Score: ${props.item.score}`} />
-      <CardActions>
-        <Button 
-          onClick={() => viewInStore(props.item.department)}
-          variant='contained'
-          color='secondary'
-        >
-          View In Store
-        </Button>
-      </CardActions>
-    </Card>
+      <Card>
+        <CardHeader 
+          title={props.item.product}
+        />
+        <CardContent children={`Department: ${props.item.department}`} />
+        <CardContent>
+          <Typography
+            sx={{
+              color: getColor(props.themeSelect, 'success')
+            }}
+          >
+            {`Result Strength: ${props.item.score} / ${props.item.maxScore}`}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button 
+            onClick={() => viewInStore(props.item.department)}
+            variant='contained'
+            color='secondary'
+          >
+            View In Store
+          </Button>
+        </CardActions>
+      </Card>
     </div>
   )
 }

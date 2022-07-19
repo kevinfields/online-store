@@ -12,8 +12,16 @@ const NewProductPage = (props) => {
 
   const [department, setDepartment] = useState('Department');
   const [departmentError, setDepartmentError] = useState(false);
+  const [invalidFields, setInvalidFields] = useState([]);
+  const [loadedProducts, setLoadedProducts] = useState({
+    appliances: [],
+    clothing: [],
+    electronics: [],
+    furniture: [],
+    outdoors: [],
+  });
+  const [currentDepartmentProducts, setCurrentDepartmentProducts] = useState([]);
   
-
   const [info, setInfo] = useState({
     title: '',
     description: '',
@@ -25,16 +33,17 @@ const NewProductPage = (props) => {
   
 
   const textColor = getColor(props.themeSelect, 'text');
-  const borderColor = getColor(props.themeSelect, 'border')
+  const errorColor = getColor(props.themeSelect, 'error');
+  const borderColor = getColor(props.themeSelect, 'border');
   const adornmentColor = getColor(props.themeSelect, 'text');
   
 
   useEffect(() => {
 
-    if (info.title.length > 20) {
+    if (info.title.length > 25) {
       setInfo({
         ...info,
-        title: info.title.substring(0, 20)
+        title: info.title.substring(0, 25)
       })
     }
 
@@ -55,14 +64,164 @@ const NewProductPage = (props) => {
       });
     }
 
-  }, [info.title])
+  }, [info.title]);
+
+  useEffect(() => {
+    loadProducts();
+  }, [department]);
+
+  useEffect(() => {
+    if (
+      invalidFields.includes('title') && 
+      info.title !== 'Product already exists.' &&
+      info.title !== 'Title is too short.' 
+    ) {
+      setInvalidFields(invalidFields.filter(item => item !== 'title'));
+      setInfo({
+        ...info,
+        title: '',
+      })
+    }
+  }, [info.title]);
+
+  useEffect(() => {
+    if (
+      invalidFields.includes('description') && 
+      info.description !== 'The description must be at least two characters.'
+    ) {
+      setInvalidFields(invalidFields.filter(item => item !== 'description'));
+      setInfo({
+        ...info,
+        description: '',
+      })
+    }
+  }, [info.description]);
+
+  useEffect(() => {
+    if (
+      invalidFields.includes('stock') && 
+      info.stock !== 'The stock cannot be lower than 0.'
+    ) {
+      setInvalidFields(invalidFields.filter(item => item !== 'stock'));
+      setInfo({
+        ...info,
+        stock: '',
+      })
+    }
+  }, [info.stock]);
+
+  useEffect(() => {
+    if (
+      invalidFields.includes('price') && 
+      info.price !== 'The price must be a number greater than 0.'
+    ) {
+      setInvalidFields(invalidFields.filter(item => item !== 'price'));
+      setInfo({
+        ...info,
+        price: '',
+      })
+    }
+  }, [info.price]);
+
+
+  const loadProducts = async () => {
+
+    let catcher = [];
+
+    switch (department) {
+      case 'appliances': 
+        if (loadedProducts.appliances.length === 0) {
+          await props.productsRef.doc(department).collection('products').get().then(snap => {
+            snap.forEach(doc => {
+              catcher.push(doc.id)
+            });
+            setCurrentDepartmentProducts(catcher);
+            setLoadedProducts({
+              ...loadedProducts,
+              appliances: catcher,
+            })
+          })
+        } else {
+          setCurrentDepartmentProducts(loadedProducts.appliances);
+        }
+        break;
+      case 'clothing': 
+        if (loadedProducts.clothing.length === 0) {
+          await props.productsRef.doc(department).collection('products').get().then(snap => {
+            snap.forEach(doc => {
+              catcher.push(doc.id)
+            });
+            setCurrentDepartmentProducts(catcher);
+            setLoadedProducts({
+              ...loadedProducts,
+              clothing: catcher,
+            })
+          })
+        } else {
+          setCurrentDepartmentProducts(loadedProducts.clothing);
+        }
+        break;
+      case 'electronics': 
+        if (loadedProducts.electronics.length === 0) {
+          await props.productsRef.doc(department).collection('products').get().then(snap => {
+            snap.forEach(doc => {
+              catcher.push(doc.id)
+            });
+            setCurrentDepartmentProducts(catcher);
+            setLoadedProducts({
+              ...loadedProducts,
+              electronics: catcher,
+            })
+          })
+        } else {
+          setCurrentDepartmentProducts(loadedProducts.electronics);
+        }
+        break;
+      case 'furniture': 
+        if (loadedProducts.furniture.length === 0) {
+          await props.productsRef.doc(department).collection('products').get().then(snap => {
+            snap.forEach(doc => {
+              catcher.push(doc.id)
+            });
+            setCurrentDepartmentProducts(catcher);
+            setLoadedProducts({
+              ...loadedProducts,
+              furniture: catcher,
+            })
+          })
+        } else {
+          setCurrentDepartmentProducts(loadedProducts.furniture);
+        }
+        break;
+      case 'outdoors': 
+        if (loadedProducts.outdoors.length === 0) {
+          await props.productsRef.doc(department).collection('products').get().then(snap => {
+            snap.forEach(doc => {
+              catcher.push(doc.id)
+            });
+            setCurrentDepartmentProducts(catcher);
+            setLoadedProducts({
+              ...loadedProducts,
+              outdoors: catcher,
+            })
+          })
+        } else {
+          setCurrentDepartmentProducts(loadedProducts.outdoors);
+        }
+        break;
+      default:
+        break;
+    }
+  }
 
 
 
   const uploadProduct = async () => {
 
-
-
+    if (invalidFields.length > 0) {
+      return;
+    }
+    
     const checkError = (errorArray, field) => {
 
       for (let i=0; i<errorArray.length; i++) {
@@ -97,6 +256,10 @@ const NewProductPage = (props) => {
       setDepartmentError(false);
     }
 
+    if (currentDepartmentProducts.includes(getOrderItemTitle(info.title))) {
+      errors.push({mess: 'Product already exists.', field: 'title'})
+    }
+
     if (Number(info.price) <= 0) {
       errors.push({mess: 'The price must be a number greater than 0.', field: 'price'});
     };
@@ -119,6 +282,13 @@ const NewProductPage = (props) => {
 
     if (errors.length > 0) {
 
+
+      let incorrectCatcher = [];
+      errors.forEach(item => {
+        incorrectCatcher.push(item.field)
+      });
+      setInvalidFields(incorrectCatcher);
+
       let titleErrors = checkError(errors, 'title');
       let descriptionErrors = checkError(errors, 'description');
       let stockErrors = checkError(errors, 'stock');
@@ -138,14 +308,18 @@ const NewProductPage = (props) => {
     }
 
 
-    await props.productsRef.doc(department).collection('products').doc(getOrderItemTitle(info.title)).set({
-      currentlyOrdered: 0,
-      description: info.description,
-      photoURL: info.photoURL,
-      price: info.price,
-      stock: info.stock,
-      title: info.title,
-    }).then(() => {
+    await props.productsRef
+      .doc(department)
+      .collection('products')
+      .doc(getOrderItemTitle(info.title))
+      .set({
+        currentlyOrdered: 0,
+        description: info.description,
+        photoURL: info.photoURL,
+        price: info.price,
+        stock: info.stock,
+        title: info.title,
+      }).then(() => {
       props.switchTab(department);
     })
   }
@@ -224,7 +398,7 @@ const NewProductPage = (props) => {
             width: '27vw',
             height: '8vh',
             input: {
-              color: textColor,
+              color: invalidFields.includes('title') ? errorColor : textColor,
             },
             "& .MuiOutlinedInput-root": {
               "& > fieldset": {
@@ -265,7 +439,7 @@ const NewProductPage = (props) => {
             height: '8vh',
             marginBottom: 'none',
             input: {
-              color: textColor,
+              color: invalidFields.includes('stock') ? errorColor : textColor,
             },
             borderColor: borderColor,
             "& .MuiOutlinedInput-root": {
@@ -306,7 +480,7 @@ const NewProductPage = (props) => {
             height: '8vh',
             marginBottom: 'none',
             input: {
-              color: textColor,
+              color: invalidFields.includes('price') ? errorColor : textColor,
             },
             "& .MuiOutlinedInput-root": {
               "& > fieldset": {
@@ -356,7 +530,7 @@ const NewProductPage = (props) => {
               }
             },
           }}
-          inputProps={{style: {color: textColor}}}
+          inputProps={{style: {color: invalidFields.includes('description') ? errorColor : textColor}}}
         />
         <TextField 
           label='Product Image URL' 
@@ -372,7 +546,7 @@ const NewProductPage = (props) => {
             height: '8vh',
             marginTop: '-11.1vh',
             input: {
-              color: textColor,
+              color: invalidFields.includes('photoURL') ? errorColor : textColor,
             },
             "& .MuiOutlinedInput-root": {
               "& > fieldset": {

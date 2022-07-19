@@ -31,5 +31,6 @@ export default function isSearchResult(search, result) {
   return {
     pass: score / maxScore > 0.3,
     score: score,
+    maxScore: maxScore,
   }
 };
