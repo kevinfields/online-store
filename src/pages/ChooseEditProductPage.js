@@ -123,7 +123,7 @@ const EditProductPage = (props) => {
 
   }, [department])
 
-  const openProduct = (deparment, product) => {
+  const openProduct = (product) => {
     navigate(`/${department}/${product}`);
   }
 
@@ -151,8 +151,8 @@ const EditProductPage = (props) => {
         display: 'flex',
         flexDirection: 'column',
         flexWrap: 'wrap',
-        alignContent: 'start',
-        justifyContent: 'space-around',
+        alignContent: 'flex-start',
+        justifyContent: 'flex-start',
         gap: '2vw',
         color: textColor,
         boxShadow: `1px 1px 3px 3px ${shadowColor}`,
@@ -238,7 +238,7 @@ const EditProductPage = (props) => {
         : null }
         {department !== 'Department' && selectedProduct !== '' ?
         <Button
-          onClick={() => openProduct(department, selectedProduct)}
+          onClick={() => openProduct(selectedProduct)}
           variant='contained'
           sx={{
             width: 'fit-content',

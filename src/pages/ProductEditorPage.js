@@ -273,6 +273,7 @@ const ProductEditorPage = (props) => {
                   height: '3vw',
                   marginTop: '2vh',
                   marginBottom: '2vh',
+                  marginRight: '1vw',
                 }}
               >
                 <Edit />
@@ -289,6 +290,103 @@ const ProductEditorPage = (props) => {
           >
             <img src={productData.photoURL} alt={productData.title} className='product-image'/>
           </CardMedia>
+          { editor.open && editor.field === 'photoURL' ?
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                gap: '1vw',
+              }}
+            >
+              <TextField
+                value={editableData.photoURL}
+                onChange={(e) => setEditableData({
+                  ...editableData,
+                  photoURL: e.target.value
+                })}
+                type='string'
+                required={true}
+                InputLabelProps={{ required: false, shrink: true, style: {color: textColor} }}
+                sx={{
+                  width: '10vw',
+                  overflowX: 'scroll',
+                  overflowY: 'hidden',
+                  whiteSpace: 'no-wrap',
+                  marginLeft: '1vw',
+                  height: '8vh',
+                  input: {
+                    color: textColor,
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    "& > fieldset": {
+                      borderColor: borderColor
+                    }
+                  },
+                  "& .MuiOutlinedInput-root:hover": {
+                    "& > fieldset": {
+                      borderColor: borderColor
+                    }
+                  },
+                  "& .MuiOutlinedInput-root.Mui-focused": {
+                    "& > fieldset": {
+                      borderColor: borderColor
+                    }
+                  },
+                }}
+              />
+            <Button
+              variant='contained'
+              color='primary'
+              onClick={() => saveDetail()}
+              size='small'
+            >
+              <Save />
+            </Button>
+            <Button
+              variant='contained'
+              color='error'
+              size='small'
+              onClick={() => undoDetail()}
+            >
+              <Undo />
+            </Button>
+          </div>
+          :
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '2vw',
+            }}
+          > 
+            <CardContent 
+              children={productData.photoURL}
+              sx={{
+                width: '15vw',
+                height: '7vh',
+                overflowX: 'scroll',
+                overflowY: 'hidden',
+                whiteSpace: 'no-wrap',
+                marginLeft: '1vw',
+                marginTop: '-1vh',
+                lineHeight: '8vh',
+              }}
+            />
+              <Button 
+                variant='contained'
+                size='small'
+                onClick={() => setEditor({open: true, field: 'photoURL'})}
+                sx={{
+                  height: '3vw',
+                  marginTop: '2vh',
+                  marginBottom: '2vh',
+                  marginRight: '1vw',
+                }}
+              >
+                <Edit />
+              </Button>
+            </div>
+          }
           { editor.open && editor.field === 'price' ?
             <div
               style={{
