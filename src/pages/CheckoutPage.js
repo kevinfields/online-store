@@ -56,8 +56,12 @@ const CheckoutPage = (props) => {
         storesProductData = doc.data();
     });
 
-    if (storesProductData.stock < Number(quantity)) {
-      setStockAlert(true);
+    if (storesProductData.stock - storesProductData.currentlyOrdered < Number(quantity)) {
+      setStockAlert({
+        open: true,
+        available: storesProductData.stock - storesProductData.currentlyOrdered,
+        product: item.id,
+      });
       return;
     }
     
@@ -71,9 +75,30 @@ const CheckoutPage = (props) => {
   const placeOrder = async () => {
     
 
-   for (const doc of cartData) {
-     await props.cartRef.doc(doc.id).delete();
-   }
+
+    for (const doc of cartData) {
+
+      let available = 0;
+    
+      await props.departmentsRef
+      .doc(doc.data().department)
+      .collection('products')
+      .doc(doc.id)
+      .get()
+      .then(doc => {
+        available = doc.data().stock - doc.data().currentlyOrdered;
+      });
+
+      if (available < doc.data().quantity) {
+        setStockAlert({
+          open: true,
+          available: available,
+          product: doc.id,
+        });
+        return;
+      }
+      await props.cartRef.doc(doc.id).delete();
+    }
 
     let titleCatcher = [];
     let counter = 0;
@@ -253,7 +278,8 @@ const CheckoutPage = (props) => {
 
         }}
       >
-        <Typography>Sorry, there is not enough of that product in stock.</Typography>
+        <Typography>Sorry, there is not enough of product "{stockAlert.product}" in stock.</Typography>
+        <Typography>{`(${stockAlert.available} available.)`}</Typography>
       </Alert>
       :
       null
