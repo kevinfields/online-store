@@ -153,6 +153,7 @@ function App() {
                       .doc(user.uid)
                       .collection('orders')
                     }
+                    departmentsRef={firestore.collection('departments')}
                     userRef={firestore.collection('users').doc(user.uid)}
                     cardColor={getColor(themeSelect, 'card_background')}
                     themeSelect={themeSelect}

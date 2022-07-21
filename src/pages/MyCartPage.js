@@ -1,6 +1,6 @@
 import {Button, Card, Grid } from '@mui/material';
 import { Box, Container } from '@mui/system';
-import { CheckOutlined, Delete, WifiProtectedSetupRounded } from '@mui/icons-material';
+import { CheckOutlined, Delete,} from '@mui/icons-material';
 import React, {useState, useEffect} from 'react'
 import Loading from '../components/Loading';
 import ProductCard from '../components/ProductCard';

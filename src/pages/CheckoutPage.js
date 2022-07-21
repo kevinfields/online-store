@@ -13,6 +13,12 @@ const CheckoutPage = (props) => {
   const [total, setTotal] = useState(0);
   const [modal, setModal] = useState(false);
   const [orderID, setOrderID] = useState('');
+  const [stockAlert, setStockAlert] = useState({
+    open: false,
+    product: '',
+    available: 0,
+  });
+
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -34,7 +40,27 @@ const CheckoutPage = (props) => {
 
   const multiplyItem = async (item, quantity) => {
 
-  
+    let storesProductData;
+    let productData;
+    
+    await props.cartRef.doc(item.id).get().then(doc => {
+      productData = doc.data();
+    })
+
+    await props.departmentsRef
+      .doc(productData.department)
+      .collection('products')
+      .doc(item.id)
+      .get()
+      .then(doc => {
+        storesProductData = doc.data();
+    });
+
+    if (storesProductData.stock < Number(quantity)) {
+      setStockAlert(true);
+      return;
+    }
+    
     await props.cartRef.doc(item.id).set({
       ...item.data(),
       quantity: quantity
@@ -53,6 +79,7 @@ const CheckoutPage = (props) => {
     let counter = 0;
 
     cartData.forEach(item => {
+      updateItemOrderCount(item.id, item.data().department, item.data().quantity);
       titleCatcher.push(`${item.data().title} | ${item.data().quantity} ~ ${item.data().quantity * item.data().price}`);
       counter += Number(item.data().quantity);
     })
@@ -86,6 +113,22 @@ const CheckoutPage = (props) => {
 
     setModal(true);
     setCartData([]);
+  }
+
+  const updateItemOrderCount = async (id, department, qty) => {
+
+    const productRef = props.departmentsRef.doc(department).collection('products').doc(id);
+    let itemData;
+
+    await productRef.get().then(doc => {
+      itemData = doc.data();
+    });
+
+    await productRef.set({
+      ...itemData,
+      currentlyOrdered: Number(itemData.currentlyOrdered) + Number(qty),
+    })
+
   }
 
   useEffect(() => {
@@ -191,6 +234,31 @@ const CheckoutPage = (props) => {
       :
         null
     }
+    {
+      stockAlert.open ?
+      <Alert
+        open={stockAlert.open}
+        onClose={() => setStockAlert({
+          ...stockAlert,
+          open: false,
+        })}
+        severity='error'
+        sx={{
+          width: '40vw',
+          height: '20vh',
+          position: 'fixed',
+          left: '30vw',
+          marginRight: '10vw',
+          marginTop: '15vh',
+
+        }}
+      >
+        <Typography>Sorry, there is not enough of that product in stock.</Typography>
+      </Alert>
+      :
+      null
+    }
+
     </div>
     
   )

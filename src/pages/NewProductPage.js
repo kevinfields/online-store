@@ -323,8 +323,8 @@ const NewProductPage = (props) => {
         currentlyOrdered: 0,
         description: info.description,
         photoURL: info.photoURL,
-        price: info.price,
-        stock: info.stock,
+        price: Number(info.price),
+        stock: Number(info.stock),
         title: info.title,
       }).then(() => {
       props.switchTab(department);
