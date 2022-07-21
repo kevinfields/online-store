@@ -11,7 +11,7 @@ export default function getColor(theme, type) {
       themeArray = ['#0e02b5', '#FFFFFF', '#111466', '#000000'];
       break;
     case 'error_card_background':
-      themeArray = ['#000073', '#EEEEEE', '#000073', '#400206'];
+      themeArray = ['#000073', '#fac3c3', '#000073', '#400206'];
       break;
     case 'border':
       themeArray = ['#00fff7', '#c2c2c4', '#00fbff', '#09f205'];

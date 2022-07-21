@@ -146,6 +146,9 @@ const DepartmentPage = (props) => {
               height: '10vh',
               fontSize: '15pt',
               textAlign: 'center',
+              backgroundColor: getColor(props.themeSelect, 'error_card_background'),
+              border: `1px solid ${getColor(props.themeSelect, 'error')}`,
+              color: getColor(props.themeSelect, 'error')
             }}
           >
             Sorry, {lowStockAlert.product} has too low of a stock for this order. {`(${lowStockAlert.max} left in stock.)`}

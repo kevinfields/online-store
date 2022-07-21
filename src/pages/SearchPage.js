@@ -129,7 +129,7 @@ const SearchPage = (props) => {
           sx={{
             position: 'fixed',
             left: '5vw',
-            top: '2.5vh',
+            top: '0.5vh',
           }}
         >
           Return to Home
@@ -139,7 +139,7 @@ const SearchPage = (props) => {
           variant='h3'
           sx={{
             color: textColor,
-            paddingTop: '5vh',
+            paddingTop: '2.5vh',
           }}
         >
           Search Results for: {id}

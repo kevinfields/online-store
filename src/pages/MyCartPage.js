@@ -1,6 +1,6 @@
-import { Button, Card, Grid } from '@mui/material';
+import {Button, Card, Grid } from '@mui/material';
 import { Box, Container } from '@mui/system';
-import { CheckOutlined, Delete } from '@mui/icons-material';
+import { CheckOutlined, Delete, WifiProtectedSetupRounded } from '@mui/icons-material';
 import React, {useState, useEffect} from 'react'
 import Loading from '../components/Loading';
 import ProductCard from '../components/ProductCard';
@@ -15,6 +15,11 @@ const MyCartPage = (props) => {
   const [cost, setCost] = useState(0);
   const [count, setCount] = useState(0);
   const [modal, setModal] = useState(false);
+  const [stockAlert, setStockAlert] = useState({
+    open: false,
+    product: '',
+    available: 0,
+  })
   const [loading, setLoading] = useState(true);
 
   const loadMyCart = async () => {
@@ -60,11 +65,48 @@ const MyCartPage = (props) => {
 
   const multiplyItem = async (item, quantity) => {
 
+    if (quantity > Number(item.data().stock)) {
+      setStockAlert({
+        open: true,
+        product: item.id,
+        available: item.data().stock,
+      });
+      return;
+    }
+
     await props.cartRef.doc(item.id).set({
       ...item.data(),
       quantity: Number(quantity),
     });
     loadMyCart();
+  }
+
+  const acceptOrderAll = async (productName, available) => {
+
+    let product;
+
+    await props.cartRef.doc(productName).get().then(doc => {
+      product = doc.data();
+    });
+    await props.cartRef.doc(productName).set({
+      ...product,
+      quantity: Number(available),
+    });
+    
+    loadMyCart();
+    setStockAlert({
+      ...stockAlert,
+      open: false,
+    });
+
+  }
+
+  const declineOrderAll = () => {
+    setStockAlert({
+      ...stockAlert,
+      open: false,
+    });
+    setModal(false);
   }
 
   return (
@@ -146,10 +188,21 @@ const MyCartPage = (props) => {
           open={modal}
           onClose={() => setModal(false)}
           header={'Are you sure you want to clear your cart?'}
-          description={'This cannot be undone'}
+          description={'This cannot be undone.'}
           onAccept={() => clearCart()}
         />
       : null}
+      {
+        stockAlert ? 
+        <Alert
+          open={stockAlert.open}
+          onClose={() => declineOrderAll()}
+          header={`Stock of product ${stockAlert.product} is too low. (${stockAlert.available} available).`}
+          description={'Would you like to order the remaining amount?'}
+          onAccept={() => acceptOrderAll(stockAlert.product, stockAlert.available)}
+        /> 
+        : null
+      }
     </div>
   )
 }

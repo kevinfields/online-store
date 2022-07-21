@@ -142,7 +142,7 @@ const ProfilePage = (props) => {
                     '& .MuiInput-underline:after': { borderBottomColor: getColor(props.themeSelect, 'border') },
                     marginLeft: '3vw',
                   }}
-                  placeholder={imgError ? 'Please use a valid photoURL.' : ''}
+                  placeholder={imgError ? 'Please use a valid photo URL.' : ''}
                 />
               </>
               }

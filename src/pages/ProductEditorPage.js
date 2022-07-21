@@ -264,6 +264,10 @@ const ProductEditorPage = (props) => {
             > 
               <CardContent 
                 children={productData.description}
+                sx={{
+                  height: '8vh',
+                  overflowY: 'scroll',
+                }}
               />
               <Button 
                 variant='contained'
