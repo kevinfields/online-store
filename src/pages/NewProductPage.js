@@ -40,6 +40,13 @@ const NewProductPage = (props) => {
 
   useEffect(() => {
 
+    loadProducts();
+
+  }, [department]);
+
+
+  useEffect(() => {
+
     if (info.title.length > 25) {
       setInfo({
         ...info,
@@ -64,13 +71,6 @@ const NewProductPage = (props) => {
       });
     }
 
-  }, [info.title]);
-
-  useEffect(() => {
-    loadProducts();
-  }, [department]);
-
-  useEffect(() => {
     if (
       invalidFields.includes('title') && 
       info.title !== 'Product already exists.' &&
@@ -82,9 +82,11 @@ const NewProductPage = (props) => {
         title: '',
       })
     }
+
   }, [info.title]);
 
   useEffect(() => {
+    
     if (
       invalidFields.includes('description') && 
       info.description !== 'The description must be at least two characters.'
@@ -95,9 +97,11 @@ const NewProductPage = (props) => {
         description: '',
       })
     }
+
   }, [info.description]);
 
   useEffect(() => {
+
     if (
       invalidFields.includes('stock') && 
       info.stock !== 'The stock cannot be lower than 0.'
@@ -108,9 +112,11 @@ const NewProductPage = (props) => {
         stock: '',
       })
     }
+
   }, [info.stock]);
 
   useEffect(() => {
+
     if (
       invalidFields.includes('price') && 
       info.price !== 'The price must be a number greater than 0.'
@@ -121,6 +127,7 @@ const NewProductPage = (props) => {
         price: '',
       })
     }
+
   }, [info.price]);
 
 
@@ -221,7 +228,7 @@ const NewProductPage = (props) => {
     if (invalidFields.length > 0) {
       return;
     }
-    
+
     const checkError = (errorArray, field) => {
 
       for (let i=0; i<errorArray.length; i++) {
@@ -502,7 +509,7 @@ const NewProductPage = (props) => {
         <TextField 
           label='Product Description'
           multiline
-          rows={5} 
+          rows={10} 
           required={true}
           InputLabelProps={{ required: false, shrink: true, style: {color: textColor} }}
           onChange={(e) => setInfo({

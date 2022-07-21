@@ -121,7 +121,9 @@ const DepartmentPage = (props) => {
                 height: '10vh',
                 fontSize: '15pt',
                 textAlign: 'center',
-                backgroundColor: getColor(props.themeSelect, 'card_background'),
+                backgroundColor: getColor(props.themeSelect, 'error_card_background'),
+                border: `1px solid ${getColor(props.themeSelect, 'error')}`,
+                color: getColor(props.themeSelect, 'error')
               }}
             >
               Sorry, {stockAlert.product} is out of stock!
