@@ -46,7 +46,16 @@ const MyCartPage = (props) => {
 
   useEffect(() => {
     loadMyCart();
-  }, [])
+  }, []);
+
+  const getStock = async (product, department) => {
+    let stock = 0;
+
+    await props.departmentsRef.doc(department).collection('products').doc(product).get().then(doc => {
+      stock = Number(doc.data().stock) - Number(doc.data().currentlyOrdered);
+    });
+    return stock;
+  }
 
   const removeFromCart = async (item) => {
     await props.cartRef.doc(item.id).delete();
@@ -65,11 +74,14 @@ const MyCartPage = (props) => {
 
   const multiplyItem = async (item, quantity) => {
 
-    if (quantity > Number(item.data().stock)) {
+    let available = await getStock(item.id, item.data().department);
+    console.log('available: ' + available)
+
+    if (quantity > available) {
       setStockAlert({
         open: true,
         product: item.id,
-        available: item.data().stock,
+        available: Number(available),
       });
       return;
     }

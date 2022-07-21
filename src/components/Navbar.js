@@ -244,7 +244,8 @@ const Navbar = (props) => {
               props.firestore.collection('users')
               .doc(props.user.uid)
               .collection('cart')
-            } 
+            }
+            departmentsRef={props.firestore.collection('departments')}
             user={props.user}
             cardColor={props.cardColor}
             themeSelect={props.themeSelect}

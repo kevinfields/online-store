@@ -56,13 +56,14 @@ const DepartmentPage = (props) => {
 
   const addToCart = async (product, quantity) => {
 
-    if (Number(quantity) > Number(product.data().stock)) {
+    if (Number(quantity) > (Number(product.data().stock) - Number(product.data().currentlyOrdered))) {
       quantity = product.data().stock;
       setLowStockAlert({
         open: true,
         product: product.data().title,
-        max: product.data().stock,
+        max: Number(product.data().stock) - Number(product.data().currentlyOrdered),
       });
+      return;
     }
 
     await props.cartRef.doc(product.id).set({

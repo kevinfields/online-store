@@ -77,7 +77,7 @@ const ProductCard = (props) => {
       </CardMedia>
       {props.onAdd ?
         <>
-        {props.product.stock > 0 ?
+        {(props.product.stock - props.product.currentlyOrdered) > 0 ?
           <Button 
             variant={props.cardColor === 'white' ? 'contained' : 'outlined'}
             color='primary'
