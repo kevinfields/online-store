@@ -133,8 +133,32 @@ const DepartmentPage = (props) => {
       default:
         break;
     };
-
   }
+
+  useEffect(() => {
+
+    if (filter.length > 20) {
+      setFilter(filter.substring(0, 20));
+    };
+
+    if (filter !== '') {
+      let successes = [];
+      let failures = [];
+      products.forEach(item => {
+        let itemTitle = item.data().title.toLowerCase();
+        let filterTest = filter.toLowerCase();
+        if (itemTitle.split(filterTest).length > 1) {
+          console.log(itemTitle + 'was a success');
+          successes.push(item);
+        } else {
+          failures.push(item);
+        }
+      });
+      let catcher = successes.concat(failures);
+      setProducts(catcher);
+    } 
+
+  }, [filter])
 
   return (
     <div className='page'>
@@ -148,7 +172,7 @@ const DepartmentPage = (props) => {
           marginBottom: '1vh',
           width: '72vw',
           justifyContent: 'space-evenly',
-          marginLeft: '14vw',
+          marginLeft: '11vw',
         }}
       >
         <TextField
