@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid, MenuItem, Select, TextField, Typography } from '@mui/material';
 import React, {useState, useEffect} from 'react';
 import Loading from '../components/Loading';
 import ProductCard from '../components/ProductCard';
@@ -20,6 +20,11 @@ const DepartmentPage = (props) => {
     max: 0,
   })
   const [loading, setLoading] = useState(true);
+  const [sort, setSort] = useState('alpha');
+  const [filter, setFilter] = useState('');
+
+  const textColor = getColor(props.themeSelect, 'text');
+  const borderColor = getColor(props.themeSelect, 'border');
 
   const loadCartIds = async () => {
 
@@ -107,16 +112,98 @@ const DepartmentPage = (props) => {
       open: false,
       max: 0,
     })
+  };
+
+  const sortSwitcher = (opt) => {
+
+    setSort(opt);
+    switch (opt) {
+      case 'alpha':
+        setProducts(products.sort((a, b) => a.data().title.localeCompare(b.data().title)));
+        break;
+      case 'price':
+        setProducts(products.sort((a, b) => a.data().price - b.data().price));
+        break;
+      case 'reverse alpha':
+        setProducts(products.sort((a, b) => b.data().title.localeCompare(a.data().title)));
+        break;
+      case 'reverse price':
+        setProducts(products.sort((a, b) => b.data().price - a.data().price));
+        break;
+      default:
+        break;
+    };
+
   }
 
   return (
     <div className='page'>
-        <h1 style={{
-          textAlign: 'center',
-          color: getColor(props.themeSelect, 'text'),
-        }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'nowrap',
+          gap: '10vw',
+          marginTop: '3vh',
+          marginBottom: '1vh',
+          width: '72vw',
+          justifyContent: 'space-evenly',
+          marginLeft: '14vw',
+        }}
+      >
+        <TextField
+          value={sort}
+          onChange={(e) => sortSwitcher(e.target.value)}
+          select
+          label='Sort By'
+          InputLabelProps={{shrink: true, style: {color: getColor(props.themeSelect, 'text')}}}
+          sx={{
+            width: '28vw',
+            color: textColor,
+          }}
+        >
+          <MenuItem value='alpha'>Alphabetical</MenuItem>
+          <MenuItem value='price'>Price {"("}Low to High{")"}</MenuItem>
+          <MenuItem value='reverse alpha'>Reverse Alphabetical</MenuItem>
+          <MenuItem value='reverse price'>Price {"("}High to Low{")"}</MenuItem>
+        </TextField>
+        <Typography
+          variant='h4'
+          color={getColor(props.themeSelect, 'text')}
+          sx={{
+            width: '20vw',
+          }}
+        >
           {props.department}
-        </h1>
+        </Typography>
+        <TextField
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          InputLabelProps={{ required: false, style: {color: textColor} }}
+          label='Search'
+          sx={{
+            width: '20vw',
+            input: {
+              color: textColor,
+            },
+            "& .MuiOutlinedInput-root": {
+              "& > fieldset": {
+                borderColor: borderColor
+              }
+            },
+            "& .MuiOutlinedInput-root:hover": {
+              "& > fieldset": {
+                borderColor: borderColor
+              }
+            },
+            "& .MuiOutlinedInput-root.Mui-focused": {
+              "& > fieldset": {
+                borderColor: borderColor
+              }
+            },
+          }}
+        />
+      </div>
         { loading ? <Loading /> : 
         <>
           { stockAlert.open ? 
