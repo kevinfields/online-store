@@ -14,7 +14,11 @@ const ProductEditorPage = (props) => {
     open: false,
     field: '',
   })
-  const [editableData, setEditableData] = useState({});
+  const [editableData, setEditableData] = useState({
+    title: '',
+    price: 0,
+    stock: 0,
+  });
 
   const {id} = useParams();
   const navigate = useNavigate();
@@ -31,6 +35,22 @@ const ProductEditorPage = (props) => {
   }
 
   const saveDetail = async () => {
+
+    if (editableData.title === '') {
+      return;
+    }
+
+    if (editableData.description === '') {
+      return;
+    }
+
+    if (isNaN(editableData.price) || editableData.price <= 0) {
+      return;
+    }
+
+    if (isNaN(editableData.stock) || editableData.stock < 0) {
+      return;
+    }
 
 
     await props.productsRef.doc(id).set({
@@ -66,7 +86,37 @@ const ProductEditorPage = (props) => {
 
   useEffect(() => {
     loadProductData();
-  }, [])
+  }, []);
+
+  useEffect(() => {
+
+    if (editableData.title.length > 25) {
+      setEditableData({
+        ...editableData,
+        title: editableData.title.substring(0, 25),
+      })
+    }
+  }, [editableData.title]);
+
+  useEffect(() => {
+
+    if (Number(editableData.price) <= 0) {
+      setEditableData({
+        ...editableData,
+        price: 0,
+      });
+    }
+  }, [editableData.price]);
+
+  useEffect(() => {
+
+    if (Number(editableData.stock) < 0) {
+      setEditableData({
+        ...editableData,
+        stock: 0,
+      })
+    }
+  }, [editableData.stock])
 
   return (
     <div className='page'>
@@ -403,7 +453,7 @@ const ProductEditorPage = (props) => {
                 value={editableData.price}
                 onChange={(e) => setEditableData({
                   ...editableData,
-                  price: e.target.value
+                  price: Number(e.target.value)
                 })}
                 type='number'
                 required={true}
@@ -485,7 +535,7 @@ const ProductEditorPage = (props) => {
                 value={editableData.stock}
                 onChange={(e) => setEditableData({
                   ...editableData,
-                  stock: e.target.value
+                  stock: Number(e.target.value)
                 })}
                 type='number'
                 required={true}

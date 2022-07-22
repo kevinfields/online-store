@@ -15,7 +15,12 @@ const EditProductPage = (props) => {
     clothing: [],
     furniture: [],
   });
-  const [selectedProduct, setSelectedProduct] = useState('');
+
+  const [selectedProduct, setSelectedProduct] = useState({
+    title: '',
+    description: '',
+  });
+
   const navigate = useNavigate();
 
   const textColor = getColor(props.themeSelect, 'text');
@@ -29,7 +34,7 @@ const EditProductPage = (props) => {
     let catcher = [];
     await props.departmentsRef.doc(department).collection('products').get().then(snap => {
       snap.forEach(doc => {
-        catcher.push(doc.id);
+        catcher.push({title: doc.data().title, description: doc.data().description, id: doc.id});
       })
     });
 
@@ -120,7 +125,6 @@ const EditProductPage = (props) => {
       default:
         break;
     }
-
   }, [department])
 
   const openProduct = (product) => {
@@ -231,22 +235,38 @@ const EditProductPage = (props) => {
               }}
             >
               {products.map(item => (
-                <MenuItem value={item}>{item}</MenuItem>
+                <MenuItem value={item}>{item.title}</MenuItem>
               ))}
             </Select>
           </div>
         : null }
-        {department !== 'Department' && selectedProduct !== '' ?
-        <Button
-          onClick={() => openProduct(selectedProduct)}
-          variant='contained'
-          sx={{
-            width: 'fit-content',
-            marginBottom: '5vh',
+        {department !== 'Department' && selectedProduct.title !== '' ?
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'nowrap',
+            gap: '7vw',
           }}
         >
-          Edit {selectedProduct}
-        </Button>
+          <Button
+            onClick={() => openProduct(selectedProduct.id)}
+            variant='contained'
+            sx={{
+              width: '15vw',
+              marginBottom: '5vh',
+            }}
+          >
+            Edit {selectedProduct.title}
+          </Button>
+          <Typography
+            sx={{
+              width: '28vw',
+            }}
+          >
+            {selectedProduct.title} - {selectedProduct.description}
+          </Typography>
+        </div> 
         : null}
       </FormControl>
     </div>

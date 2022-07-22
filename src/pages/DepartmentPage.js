@@ -1,7 +1,8 @@
-import { Alert, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import React, {useState, useEffect} from 'react';
 import Loading from '../components/Loading';
 import ProductCard from '../components/ProductCard';
+import Alert from '../components/Alert';
 import getColor from '../functions/getColor';
 
 const DepartmentPage = (props) => {
@@ -10,6 +11,7 @@ const DepartmentPage = (props) => {
   const [cartIds, setCartIds] = useState([]);
   const [stockAlert, setStockAlert] = useState({
     product: '',
+    available: '',
     open: false,
   });
   const [lowStockAlert, setLowStockAlert] = useState({
@@ -57,11 +59,10 @@ const DepartmentPage = (props) => {
   const addToCart = async (product, quantity) => {
 
     if (Number(quantity) > (Number(product.data().stock) - Number(product.data().currentlyOrdered))) {
-      quantity = product.data().stock;
       setLowStockAlert({
         open: true,
-        product: product.data().title,
-        max: Number(product.data().stock) - Number(product.data().currentlyOrdered),
+        product: product,
+        max: product.data().stock - product.data().currentlyOrdered, 
       });
       return;
     }
@@ -89,10 +90,22 @@ const DepartmentPage = (props) => {
     setProducts([...catcher]);
   }
 
-  const openAlert = (data) => {
+  const openAlert = (id, data) => {
     setStockAlert({
       product: data.title,
+      department: props.department,
       open: true,
+      id: id,
+    })
+  };
+
+  const acceptOrderAll = async (alertObject) => {
+
+    await addToCart(alertObject.product, alertObject.max);
+    setLowStockAlert({
+      product: {},
+      open: false,
+      max: 0,
     })
   }
 
@@ -106,55 +119,38 @@ const DepartmentPage = (props) => {
         </h1>
         { loading ? <Loading /> : 
         <>
-          {stockAlert.open ? 
+          { stockAlert.open ? 
             <Alert 
               open={stockAlert.open}
               onClose={() => setStockAlert({
                 product: '',
                 open: false,
               })}
-              severity='error'
-              sx={{
-                position: 'fixed',
-                width: '50vw',
-                left: '25vw',
-                top: '20vh',
-                height: '10vh',
-                fontSize: '15pt',
-                textAlign: 'center',
-                backgroundColor: getColor(props.themeSelect, 'error_card_background'),
-                border: `1px solid ${getColor(props.themeSelect, 'error')}`,
-                color: getColor(props.themeSelect, 'error')
-              }}
-            >
-              Sorry, {stockAlert.product} is out of stock!
-            </Alert>
+              // will have to rewrite the onAccept to just call a seperate function
+              // to add the user to the list of people to notify when the stock increases.
+              onAccept={() => setStockAlert({
+                product: '',
+                open: false,
+              })}
+              header={`Sorry, ${stockAlert.product} is out of stock.`}
+              description={'Would you like to be notified when it is back in stock?'}
+            />
             : null
           }
-          {lowStockAlert.open ?
-          <Alert
-            open={lowStockAlert.open}
-            onClose={() => setLowStockAlert({
-              product: '',
-              open: false,
-            })}
-            severity='error'
-            sx={{
-              position: 'fixed',
-              width: '50vw',
-              left: '25vw',
-              top: '20vh',
-              height: '10vh',
-              fontSize: '15pt',
-              textAlign: 'center',
-              backgroundColor: getColor(props.themeSelect, 'error_card_background'),
-              border: `1px solid ${getColor(props.themeSelect, 'error')}`,
-              color: getColor(props.themeSelect, 'error')
-            }}
-          >
-            Sorry, {lowStockAlert.product} has too low of a stock for this order. {`(${lowStockAlert.max} left in stock.)`}
-          </Alert>
-          : null  }
+          { lowStockAlert.open ?
+            <Alert
+              open={lowStockAlert.open}
+              onClose={() => setLowStockAlert({
+                product: {},
+                open: false,
+                max: 0,
+              })}
+              onAccept={() => acceptOrderAll(lowStockAlert)}
+              header={`Sorry, ${lowStockAlert.product.data().title} has a stock of only ${lowStockAlert.product.data().stock - lowStockAlert.product.data().currentlyOrdered}.`}
+              description={'Would you like to order the remaining stock?'}
+            />
+            : null  
+          }
           <Grid container rowSpacing={4} columnSpacing={{ xs: 2, sm: 4, md: 4 }}>
             {products.map(product => (
               <Grid item xs={2} sm={4} md={4} key={product.id}>
@@ -165,7 +161,7 @@ const DepartmentPage = (props) => {
                     () => addToCart(product, 1) :
                     null
                   }
-                  outOfStockAlert={() => openAlert(product.data())}
+                  outOfStockAlert={() => openAlert(product.id, product.data())}
                   quantity={product.quantity ? product.quantity : 1}
                   loggedIn={props.loggedIn}
                   onMultiply={(quantity) => addToCart(product, quantity)}
