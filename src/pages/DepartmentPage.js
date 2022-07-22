@@ -68,7 +68,6 @@ const DepartmentPage = (props) => {
 
     await props.cartRef.doc(product.id).set({
       ...product.data(),
-      department: props.department.toLowerCase(),
       quantity: Number(quantity)
     });
     setCartIds(cartIds.concat(product.id));

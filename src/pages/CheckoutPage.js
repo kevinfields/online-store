@@ -275,7 +275,6 @@ const CheckoutPage = (props) => {
           left: '30vw',
           marginRight: '10vw',
           marginTop: '15vh',
-
         }}
       >
         <Typography>Sorry, there is not enough of product "{stockAlert.product}" in stock.</Typography>
