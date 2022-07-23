@@ -111,26 +111,23 @@ const DepartmentPage = (props) => {
     setLowStockAlert({
       product: {},
       open: false,
-      max: 0,
+      available: 0,
     })
   };
 
   const watchProduct = async (productId) => {
 
-    console.log('productId: ' + productId)
-
     let productData;
 
     await props.productsRef.doc(productId).get().then(doc => {
       productData = doc.data();
-      console.log(JSON.stringify(productData));
     })
 
     await props.userRef.collection('watchedItems').doc(productId).set({
       ...productData
     });
 
-    setLowStockAlert({
+    setStockAlert({
       open: false,
       product: '',
       max: 0,

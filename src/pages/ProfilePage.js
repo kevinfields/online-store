@@ -144,12 +144,12 @@ const ProfilePage = (props) => {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '1vh',
-              wrap: 'nowrap',
+              gap: '5vh',
+              width: '20vw',
+              height: '65vh',
               overflowY: 'scroll',
-              width: '15vw',
-              height: '60vh',
               marginLeft: '5vw',
+              border: `1px solid ${getColor(props.themeSelect, 'border')}`
             }}
             departmentsRef={props.departmentsRef}
             user={props.user}

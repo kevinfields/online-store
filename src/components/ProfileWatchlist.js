@@ -1,12 +1,15 @@
 import { Card } from '@material-ui/core';
-import { Delete } from '@mui/icons-material';
+import { Delete, KeyboardReturn } from '@mui/icons-material';
 import { Button, CardActionArea, CardContent, CardHeader, CardMedia, Typography } from '@mui/material'
 import React, {useState} from 'react'
 import getColor from '../functions/getColor'
 
 const ProfileWatchlist = (props) => {
 
-  const [removing, setRemoving] = useState(false);
+  const [removing, setRemoving] = useState({
+    open: false,
+    productId: '',
+  });
 
   const removeItem = async (itemObj) => {
 
@@ -18,7 +21,7 @@ const ProfileWatchlist = (props) => {
       objectRef = doc.data();
     });
 
-    let watchlistCatcher = objectRef.watchlist ? objectRef.watchlist : [];
+    let watchlistCatcher = objectRef.alertList ? objectRef.alertList : [];
 
     watchlistCatcher = watchlistCatcher.filter(user => user !== props.user.uid);
 
@@ -39,6 +42,7 @@ const ProfileWatchlist = (props) => {
             backgroundColor: getColor(props.themeSelect, 'card_background'),
             color: getColor(props.themeSelect, 'text'),
             marginRight: '1vw',
+            flexShrink: 0,
           }}
         >
           <CardHeader title={item.data.title} />
@@ -54,36 +58,54 @@ const ProfileWatchlist = (props) => {
           />
           <CardContent>{item.data.description}</CardContent>
           <CardActionArea>
-            { !removing ?
+            { removing.open && removing.productId === item.id ?
+              <>
+                <Typography 
+                  variant='h6'
+                  sx={{
+                    textAlign: 'center',
+                  }}
+                >
+                  Are you sure?
+                </Typography>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    margin: '1vh',
+                  }}
+                >
+                  <Button
+                    onClick={() => removeItem(item)}
+                    variant='contained'
+                    color={'primary'}
+                    endIcon={<Delete />}
+                  >
+                    YES
+                  </Button>
+                  <Button
+                    onClick={() => setRemoving(false)}
+                    variant='contained'
+                    color={'error'}
+                    endIcon={<KeyboardReturn />}
+                  >
+                    NO
+                  </Button>
+                </div> 
+              </>
+              :
               <Button
-                onClick={() => setRemoving(true)}
+                onClick={() => setRemoving({
+                  open: true,
+                  productId: item.id,
+                })}
                 variant='outlined'
                 endIcon={<Delete />}
               >
                 Remove from Watch List
               </Button>
-              :
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                }}
-              >
-                <Button
-                  onClick={() => removeItem(item)}
-                  variant='contained'
-                  endIcon={<Delete />}
-                >
-                  YES
-                </Button>
-                <Button
-                  onClick={() => setRemoving(false)}
-                  variant='contained'
-                  endIcon={<Delete />}
-                >
-                  NO
-                </Button>
-              </div>
+              
             }
           </CardActionArea>
         </Card>
