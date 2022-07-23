@@ -1,4 +1,4 @@
-import { Grid, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { FormControlLabel, FormGroup, Grid, MenuItem, Select, Switch, TextField, Typography } from '@mui/material';
 import React, {useState, useEffect} from 'react';
 import Loading from '../components/Loading';
 import ProductCard from '../components/ProductCard';
@@ -22,6 +22,7 @@ const DepartmentPage = (props) => {
   const [loading, setLoading] = useState(true);
   const [sort, setSort] = useState('alpha');
   const [filter, setFilter] = useState('');
+  const [inStockOnly, setInStockOnly] = useState(false);
 
   const textColor = getColor(props.themeSelect, 'text');
   const borderColor = getColor(props.themeSelect, 'border');
@@ -158,7 +159,16 @@ const DepartmentPage = (props) => {
       setProducts(catcher);
     } 
 
-  }, [filter])
+  }, [filter]);
+
+  useEffect(() => {
+
+    if (inStockOnly) {
+      setProducts(products.filter(item => item.data().stock - item.data().currentlyOrdered  > 0 ));
+    } else {
+      loadProducts();
+    }
+  }, [inStockOnly])
 
   return (
     <div className='page'>
@@ -180,10 +190,34 @@ const DepartmentPage = (props) => {
           onChange={(e) => sortSwitcher(e.target.value)}
           select
           label='Sort By'
-          InputLabelProps={{shrink: true, style: {color: getColor(props.themeSelect, 'text')}}}
+          color='primary'
+          InputLabelProps={{shrink: true, style: {color: textColor}}}
+          SelectProps={{
+            style: {
+              color: textColor,
+            }
+          }}
           sx={{
             width: '28vw',
             color: textColor,
+            input: {
+              color: 'red',
+            },
+            "& .MuiOutlinedInput-root": {
+              "& > fieldset": {
+                borderColor: borderColor
+              }
+            },
+            "& .MuiOutlinedInput-root:hover": {
+              "& > fieldset": {
+                borderColor: borderColor
+              }
+            },
+            "& .MuiOutlinedInput-root.Mui-focused": {
+              "& > fieldset": {
+                borderColor: borderColor
+              }
+            },
           }}
         >
           <MenuItem value='alpha'>Alphabetical</MenuItem>
@@ -200,6 +234,23 @@ const DepartmentPage = (props) => {
         >
           {props.department}
         </Typography>
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={inStockOnly}
+                onChange={() => setInStockOnly(!inStockOnly)}
+              />
+            }
+            label={'Show In Stock Only'}
+            labelPlacement='start'
+            sx={{
+              width: '10vw',
+              fontSize: '8pt',
+            }}
+          >
+          </FormControlLabel>
+        </FormGroup>
         <TextField
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
