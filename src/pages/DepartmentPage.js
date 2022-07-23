@@ -115,6 +115,28 @@ const DepartmentPage = (props) => {
     })
   };
 
+  const watchProduct = async (productId) => {
+
+    console.log('productId: ' + productId)
+
+    let productData;
+
+    await props.productsRef.doc(productId).get().then(doc => {
+      productData = doc.data();
+      console.log(JSON.stringify(productData));
+    })
+
+    await props.userRef.collection('watchedItems').doc(productId).set({
+      ...productData
+    });
+
+    setLowStockAlert({
+      open: false,
+      product: '',
+      max: 0,
+    });
+  };
+
   const sortSwitcher = (opt) => {
 
     setSort(opt);
@@ -149,7 +171,7 @@ const DepartmentPage = (props) => {
         let itemTitle = item.data().title.toLowerCase();
         let filterTest = filter.toLowerCase();
         if (itemTitle.split(filterTest).length > 1) {
-          console.log(itemTitle + 'was a success');
+          console.log(itemTitle + ' was a success');
           successes.push(item);
         } else {
           failures.push(item);
@@ -177,7 +199,7 @@ const DepartmentPage = (props) => {
           display: 'flex',
           flexDirection: 'row',
           flexWrap: 'nowrap',
-          gap: '10vw',
+          gap: '5vw',
           marginTop: '3vh',
           marginBottom: '1vh',
           width: '72vw',
@@ -226,7 +248,7 @@ const DepartmentPage = (props) => {
           <MenuItem value='reverse price'>Price {"("}High to Low{")"}</MenuItem>
         </TextField>
         <Typography
-          variant='h4'
+          variant='h3'
           color={getColor(props.themeSelect, 'text')}
           sx={{
             width: '20vw',
@@ -240,10 +262,11 @@ const DepartmentPage = (props) => {
               <Switch
                 checked={inStockOnly}
                 onChange={() => setInStockOnly(!inStockOnly)}
+                color='secondary'
               />
             }
-            label={'Show In Stock Only'}
-            labelPlacement='start'
+            label={inStockOnly ? 'Show All' : 'Show In Stock'}
+            labelPlacement={'start'}
             sx={{
               width: '10vw',
               fontSize: '8pt',
@@ -290,10 +313,7 @@ const DepartmentPage = (props) => {
               })}
               // will have to rewrite the onAccept to just call a seperate function
               // to add the user to the list of people to notify when the stock increases.
-              onAccept={() => setStockAlert({
-                product: '',
-                open: false,
-              })}
+              onAccept={() => watchProduct(stockAlert.id)}
               header={`Sorry, ${stockAlert.product} is out of stock.`}
               description={'Would you like to be notified when it is back in stock?'}
             />
@@ -303,9 +323,9 @@ const DepartmentPage = (props) => {
             <Alert
               open={lowStockAlert.open}
               onClose={() => setLowStockAlert({
-                product: {},
                 open: false,
                 max: 0,
+                product: '',
               })}
               onAccept={() => acceptOrderAll(lowStockAlert)}
               header={`Sorry, ${lowStockAlert.product.data().title} has a stock of only ${lowStockAlert.product.data().stock - lowStockAlert.product.data().currentlyOrdered}.`}
