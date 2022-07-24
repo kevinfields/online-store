@@ -92,6 +92,12 @@ const ProfilePage = (props) => {
     }
   }, [newImageURL]);
 
+  const deleteMessage = (id) => {
+    let messagesCatcher = [...messages];
+    messagesCatcher = messages.filter(item => item.id !== id);
+    setMessages(messagesCatcher);
+  }
+
   return (
     <div className='page'>
       <div
@@ -100,32 +106,32 @@ const ProfilePage = (props) => {
           flexDirection: 'row',
           flexWrap: 'nowrap',
           width: '80vw',
-          gap: '16vw',
+          gap: '20vw',
           marginLeft: '5vw',
         }}
       >
-        <h1
+        <h3
           style={{
             color: textColor,
           }}
         >
           My Watch List
-        </h1>
-        <h1
+        </h3>
+        <h3
           style={{
             marginLeft: '5vw',
             color: textColor
           }}
         >
           My Profile
-        </h1>
-        <h1
+        </h3>
+        <h3
           style={{
             color: textColor,
           }}
         >
           My Messages
-        </h1>
+        </h3>
       </div>
       { loading ? 
         <Loading />
@@ -133,9 +139,12 @@ const ProfilePage = (props) => {
         <div
           style={{
             display: 'flex',
+            width: '90vw',
             flexDirection: 'row',
             flexWrap: 'nowrap',
             gap: '0px',
+            padding: '0px',
+            margin: '0px',
           }}
         >
           <ProfileWatchlist 
@@ -160,7 +169,7 @@ const ProfilePage = (props) => {
             variant='outlined' 
             color='secondary' 
             sx={{
-              width: '35vw',
+              width: '30vw',
               height: 'fit-content',
               position: 'fixed',
               left: '29vw',
@@ -198,7 +207,7 @@ const ProfilePage = (props) => {
                 width: '10vw',
                 height: '10vw',
                 alignSelf: 'flex-end',
-                marginRight: '5vw',
+                marginRight: '2.5vw',
                 marginTop: '-18vh',
                 marginBottom: '2vh',
               }}
@@ -287,18 +296,9 @@ const ProfilePage = (props) => {
           <ProfileMessagesList
             messages={messages}
             themeSelect={props.themeSelect}
-            sx={{
-              width: '15vw',
-              height: 'fit-content',
-              position: 'fixed',
-              left: '69vw',
-              top: '30vh',
-              display: 'flex',
-              flexDirection: 'column',
-              flexWrap: 'nowrap',
-            }}
             userRef={props.userRef}
             user={props.user}
+            delete={(id) => deleteMessage(id)}
           />
         </div>
       }

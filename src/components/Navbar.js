@@ -154,7 +154,7 @@ const Navbar = (props) => {
             department={'Clothing'}
             cardColor={props.cardColor}
             themeSelect={props.themeSelect}
-            userRef={props.firestore.collection('users').doc(props.user.uid)}
+            userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
           />
         </TabPanel>
         <TabPanel value={opened} index={2}>
@@ -175,7 +175,7 @@ const Navbar = (props) => {
             department={'Furniture'}
             cardColor={props.cardColor}
             themeSelect={props.themeSelect}
-            userRef={props.firestore.collection('users').doc(props.user.uid)}
+            userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
           />
         </TabPanel>
         <TabPanel value={opened} index={3}>
@@ -196,7 +196,7 @@ const Navbar = (props) => {
             department={'Electronics'}
             cardColor={props.cardColor}
             themeSelect={props.themeSelect}
-            userRef={props.firestore.collection('users').doc(props.user.uid)}
+            userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
           />
         </TabPanel>
         <TabPanel value={opened} index={4}>
@@ -217,7 +217,7 @@ const Navbar = (props) => {
             department={'Appliances'}
             cardColor={props.cardColor}
             themeSelect={props.themeSelect}
-            userRef={props.firestore.collection('users').doc(props.user.uid)}
+            userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
           />
         </TabPanel>
         <TabPanel value={opened} index={5}>
@@ -238,7 +238,7 @@ const Navbar = (props) => {
             department={'Outdoors'}
             cardColor={props.cardColor}
             themeSelect={props.themeSelect}
-            userRef={props.firestore.collection('users').doc(props.user.uid)}
+            userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
           />
         </TabPanel>
         {props.loggedIn ?
@@ -254,7 +254,7 @@ const Navbar = (props) => {
             user={props.user}
             cardColor={props.cardColor}
             themeSelect={props.themeSelect}
-            userRef={props.firestore.collection('users').doc(props.user.uid)}
+            userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
           />
         </TabPanel>
         <TabPanel value={opened} index={7}>
@@ -267,14 +267,14 @@ const Navbar = (props) => {
             user={props.user}
             cardColor={props.cardColor}
             themeSelect={props.themeSelect}
-            userRef={props.firestore.collection('users').doc(props.user.uid)}
+            userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
           />
         </TabPanel>
         <TabPanel value={opened} index={8}>
           <ProfilePage
             user={props.user}
             cardColor={props.cardColor}
-            userRef={props.firestore.collection('users').doc(props.user.uid)}
+            userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
             openPage={(num, e) => handleChange(e, num)}
             themeSelect={props.themeSelect}
             departmentsRef={props.firestore.collection('departments')}
@@ -287,7 +287,7 @@ const Navbar = (props) => {
             productsRef={props.firestore.collection('departments')}
             switchTab={(department) => switchTab(department)}
             themeSelect={props.themeSelect}
-            userRef={props.firestore.collection('users').doc(props.user.uid)}
+            userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
           />
         </TabPanel>
         <TabPanel value={opened} index={10}>
@@ -295,7 +295,7 @@ const Navbar = (props) => {
             user={props.user}
             themeSelect={props.themeSelect}
             departmentsRef={props.firestore.collection('departments')}
-            userRef={props.firestore.collection('users').doc(props.user.uid)}
+            userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
           />
         </TabPanel>
         </>

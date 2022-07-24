@@ -57,57 +57,64 @@ const ProfileWatchlist = (props) => {
             }}
           />
           <CardContent>{item.data.description}</CardContent>
-          <CardActionArea>
-            { removing.open && removing.productId === item.id ?
-              <>
-                <Typography 
-                  variant='h6'
-                  sx={{
-                    textAlign: 'center',
-                  }}
-                >
-                  Are you sure?
-                </Typography>
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    margin: '1vh',
-                  }}
-                >
-                  <Button
-                    onClick={() => removeItem(item)}
-                    variant='contained'
-                    color={'primary'}
-                    endIcon={<Delete />}
-                  >
-                    YES
-                  </Button>
-                  <Button
-                    onClick={() => setRemoving(false)}
-                    variant='contained'
-                    color={'error'}
-                    endIcon={<KeyboardReturn />}
-                  >
-                    NO
-                  </Button>
-                </div> 
-              </>
-              :
-              <Button
-                onClick={() => setRemoving({
-                  open: true,
-                  productId: item.id,
-                })}
-                variant='outlined'
-                endIcon={<Delete />}
+          { removing.open && removing.productId === item.id ?
+            <>
+              <Typography 
+                variant='h6'
+                sx={{
+                  textAlign: 'center',
+                }}
               >
-                Remove from Watch List
-              </Button>
-              
-            }
-          </CardActionArea>
+                Are you sure?
+              </Typography>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  margin: '1vh',
+                }}
+              >
+                <Button
+                  onClick={() => removeItem(item)}
+                  variant='contained'
+                  color={'primary'}
+                  endIcon={<Delete />}
+                >
+                  YES
+                </Button>
+                <Button
+                  onClick={() => setRemoving(false)}
+                  variant='contained'
+                  color={'error'}
+                  endIcon={<KeyboardReturn />}
+                >
+                  NO
+                </Button>
+              </div> 
+            </>
+            :
+            <Button
+              onClick={() => setRemoving({
+                open: true,
+                productId: item.id,
+              })}
+              variant='outlined'
+              style={{
+                width: '50%',
+                left: '25%',
+                marginBottom: '0.5vh',
+              }}
+              color='secondary'
+              endIcon={
+                <Delete 
+                  color='error'
+                />
+              }
+            >
+              Remove
+            </Button> 
+          }
         </Card>
       ))}
     </div>

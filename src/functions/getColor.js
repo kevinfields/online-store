@@ -32,7 +32,7 @@ export default function getColor(theme, type) {
       themeArray = ['#adffa1', '#19690e', '#34bf21', '#22f505'];
       break;
     case 'error':
-      themeArray = ['#ff1100', '#ff4538', '#d60e00', '#d60e00'];
+      themeArray = ['#ff1100', '#fa2f20', '#d60e00', '#d60e00'];
       break;
     case 'info':
       themeArray = ['#dd00ff', '#000b45', '#61cfe8', '#11ff00'];

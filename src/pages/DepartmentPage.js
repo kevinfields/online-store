@@ -262,7 +262,7 @@ const DepartmentPage = (props) => {
                 color='secondary'
               />
             }
-            label={inStockOnly ? 'Show All' : 'Show In Stock'}
+            label={inStockOnly ? 'Showing Stocked' : 'Showing All'}
             labelPlacement={'start'}
             sx={{
               width: '10vw',
