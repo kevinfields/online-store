@@ -20,6 +20,7 @@ const ProductCard = (props) => {
 
     if (quantity <= 0) {
       props.onRemove();
+      setEditing(false);
       return;
     }
 
@@ -152,22 +153,24 @@ const ProductCard = (props) => {
                 marginBottom: '1vh',
               }}
               onClick={() => setEditing(true)}
-            >Edit Quantity</Button>
+            >
+              Edit Quantity
+            </Button>
           }
-          <Button
-            variant='contained'
-            color='error'
-            size='large'
-            endIcon={<Delete />}
-            sx={{
-              float: 'right',
-              marginRight: '1vh',
-              marginBottom: '1vh',
-            }}
-            onClick={() => props.onRemove()}
-          >
-            Remove from My Cart
-          </Button>
+            <Button
+              variant='contained'
+              color='error'
+              size='large'
+              endIcon={<Delete />}
+              sx={{
+                float: 'right',
+                marginRight: '1vh',
+                marginBottom: '1vh',
+              }}
+              onClick={() => props.onRemove()}
+            >
+              Remove from My Cart
+            </Button>
         </>
        }
     </Card>

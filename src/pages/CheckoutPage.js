@@ -5,6 +5,7 @@ import Loading from '../components/Loading';
 import PlaceOrderCard from '../components/PlaceOrderCard';
 import ProductCard from '../components/ProductCard';
 import calculateRewards from '../functions/calculateRewards';
+import ADD_TO_CART from '../reducers/ADD_TO_CART';
 import '../styling/CheckoutPage.css';
 
 const CheckoutPage = (props) => {
@@ -65,10 +66,7 @@ const CheckoutPage = (props) => {
       return;
     }
     
-    await props.cartRef.doc(item.id).set({
-      ...item.data(),
-      quantity: quantity
-    });
+    await ADD_TO_CART(item, quantity, props.cartRef);
     loadCartData();
   }
 

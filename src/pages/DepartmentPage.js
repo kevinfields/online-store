@@ -4,6 +4,7 @@ import Loading from '../components/Loading';
 import ProductCard from '../components/ProductCard';
 import Alert from '../components/Alert';
 import getColor from '../functions/getColor';
+import ADD_TO_CART from '../reducers/ADD_TO_CART';
 
 const DepartmentPage = (props) => {
 
@@ -73,10 +74,8 @@ const DepartmentPage = (props) => {
       return;
     }
 
-    await props.cartRef.doc(product.id).set({
-      ...product.data(),
-      quantity: Number(quantity)
-    });
+    await ADD_TO_CART(product, quantity, props.cartRef);
+
     setCartIds(cartIds.concat(product.id));
     let catcher = [...products];
     catcher[products.indexOf(product)].quantity = Number(quantity);

@@ -6,6 +6,7 @@ import ProfileMessagesList from '../components/ProfileMessagesList';
 import ProfileWatchlist from '../components/ProfileWatchlist';
 import getColor from '../functions/getColor';
 import goodPhotoURL from '../functions/goodPhotoURL';
+import ORDER_CONFIRMATION from '../reducers/ORDER_CONFIRMATION';
 
 const ProfilePage = (props) => {
 
@@ -96,6 +97,12 @@ const ProfilePage = (props) => {
     let messagesCatcher = [...messages];
     messagesCatcher = messages.filter(item => item.id !== id);
     setMessages(messagesCatcher);
+  };
+
+  const orderConfirmation = async () => {
+    await ORDER_CONFIRMATION(props.userRef).then(() => {
+      loadUserData();
+    });
   }
 
   return (
@@ -299,6 +306,7 @@ const ProfilePage = (props) => {
             userRef={props.userRef}
             user={props.user}
             delete={(id) => deleteMessage(id)}
+            orderConfirmation={() => orderConfirmation()}
           />
         </div>
       }

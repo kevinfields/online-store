@@ -8,6 +8,7 @@ import CheckoutCard from '../components/CheckoutCard';
 import Alert from '../components/Alert';
 import getColor from '../functions/getColor';
 import fixCost from '../functions/fixCost';
+import ADD_TO_CART from '../reducers/ADD_TO_CART';
 
 const MyCartPage = (props) => {
   
@@ -100,10 +101,8 @@ const MyCartPage = (props) => {
     await props.cartRef.doc(productName).get().then(doc => {
       product = doc.data();
     });
-    await props.cartRef.doc(productName).set({
-      ...product,
-      quantity: Number(available),
-    });
+    
+    await ADD_TO_CART(product, available, props.cartRef);
     
     loadMyCart();
     setStockAlert({

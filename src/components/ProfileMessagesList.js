@@ -1,8 +1,9 @@
 import { Button, CardActionArea, Typography } from '@material-ui/core';
 import { Delete, KeyboardReturn } from '@mui/icons-material';
-import { Card, CardContent, CardHeader } from '@mui/material';
+import { Card, CardContent, CardHeader, getFormControlLabelUtilityClasses } from '@mui/material';
 import React, {useState} from 'react';
 import getColor from '../functions/getColor';
+import getFont from '../functions/getFont';
 
 const ProfileMessagesList = (props) => {
 
@@ -62,52 +63,51 @@ const ProfileMessagesList = (props) => {
               >
                 Are you sure?
               </p>
-              <Button 
-                onClick={() => deleteMessage(item)}
-                color='secondary'
-                variant='contained'
+              <button
                 style={{
-                  margin: '0.5vw',
-                }}
+                  width: '10vw',
+                  marginLeft: '2.5vw',
+                  marginBottom: '1vh',
+                  fontFamily: getFont(props.themeSelect),
+                  borderRadius: '7px',
+                }} 
+                onClick={() => deleteMessage(item)}
               >
                 <Delete />
-              </Button>
-              <Button 
+              </button>
+              <button 
+                style={{
+                  width: '10vw',
+                  marginLeft: '2.5vw',
+                  marginBottom: '1vh',
+                  fontFamily: getFont(props.themeSelect),
+                  borderRadius: '7px',
+                }}
                 onClick={() => setDeleting({
                   open: false,
                   id: '',
                 })}
-                color='primary'
-                variant='contained'
-                style={{
-                  margin: '0.5vw',
-                }}
               >
                 <KeyboardReturn />
-              </Button>
+              </button>
             </>
           :
             <>
-              <Button
-                endIcon={
-                  <Delete 
-                    color='error'
-                  />
-                }
+              <button
+                style={{
+                  width: '10vw',
+                  marginLeft: '2.5vw',
+                  marginBottom: '1vh',
+                  fontFamily: getFont(props.themeSelect),
+                  borderRadius: '7px',
+                }}
                 onClick={() => setDeleting({
                   open: true,
                   id: item.id,
                 })}
-                style={{
-                  width: '50%',
-                  left: '25%',
-                  marginBottom: '0.5vh',
-                }}
-                color='secondary'
-                variant='outlined'
               >
                 Delete
-              </Button>
+              </button>
             </>
           }
         </Card>
@@ -123,6 +123,18 @@ const ProfileMessagesList = (props) => {
         >
           <CardHeader title='No Unread Messages' />
           <CardContent>You have no unread messages.</CardContent>
+          <button
+            style={{
+              width: '10vw',
+              marginLeft: '2.5vw',
+              marginBottom: '1vh',
+              fontFamily: getFont(props.themeSelect),
+              borderRadius: '7px',
+            }}
+            onClick={() => props.orderConfirmation()}
+          >
+            Get Confirmation Message
+          </button>
         </Card>
       }
     </div>
