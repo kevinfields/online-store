@@ -47,10 +47,7 @@ const ProductEditorPage = (props) => {
     if (isNaN(editableData.price) || editableData.price <= 0) {
       return;
     }
-
-    if (isNaN(editableData.stock) || editableData.stock < 0) {
-      return;
-    }
+    
 
 
     await props.productsRef.doc(id).set({
@@ -107,16 +104,6 @@ const ProductEditorPage = (props) => {
       });
     }
   }, [editableData.price]);
-
-  useEffect(() => {
-
-    if (Number(editableData.stock) < 0) {
-      setEditableData({
-        ...editableData,
-        stock: 0,
-      })
-    }
-  }, [editableData.stock])
 
   return (
     <div className='page'>
@@ -523,88 +510,17 @@ const ProductEditorPage = (props) => {
               </Button>
             </div>
           }
-          { editor.open && editor.field === 'stock' ?
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                gap: '1vw',
-              }}
-            >
-              <TextField
-                value={editableData.stock}
-                onChange={(e) => setEditableData({
-                  ...editableData,
-                  stock: Number(e.target.value)
-                })}
-                type='number'
-                required={true}
-                InputLabelProps={{ required: false, shrink: true, style: {color: textColor} }}
-                sx={{
-                  width: 'fit-content',
-                  height: '8vh',
-                  input: {
-                    color: textColor,
-                  },
-                  "& .MuiOutlinedInput-root": {
-                    "& > fieldset": {
-                      borderColor: borderColor
-                    }
-                  },
-                  "& .MuiOutlinedInput-root:hover": {
-                    "& > fieldset": {
-                      borderColor: borderColor
-                    }
-                  },
-                  "& .MuiOutlinedInput-root.Mui-focused": {
-                    "& > fieldset": {
-                      borderColor: borderColor
-                    }
-                  },
-                }}
-              />
-              <Button
-                variant='contained'
-                color='primary'
-                onClick={() => saveDetail()}
-                size='small'
-              >
-                <Save />
-              </Button>
-              <Button
-                variant='contained'
-                color='error'
-                size='small'
-                onClick={() => undoDetail()}
-              >
-                <Undo />
-              </Button>
-            </div>
-            :
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                gap: '2vw',
-              }}
-            > 
-              <CardContent 
-                children={`Stock: ${productData.stock}`}
-              />
-              <Button 
-                variant='contained'
-                size='small'
-                onClick={() => setEditor({open: true, field: 'stock'})}
-                sx={{
-                  height: '3vw',
-                  marginTop: '2vh',
-                  marginBottom: '2vh',
-                }}
-              >
-                <Edit />
-              </Button>
-            </div>
-          }
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '2vw',
+            }}
+          > 
+            <CardContent 
+              children={`Stock: ${productData.stock}`}
+            />
+          </div>
         </Card>
         </div>
       }

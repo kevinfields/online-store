@@ -14,6 +14,7 @@ import ProfilePage from '../pages/ProfilePage';
 import getColor from '../functions/getColor';
 import ChooseEditProductPage from '../pages/ChooseEditProductPage';
 import {MODERATOR_LIST} from '../store/MODERATOR_LIST';
+import ReportRestockPage from '../pages/ReportRestockPage';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -52,6 +53,7 @@ const Navbar = (props) => {
 
   const sxDefault = {
     color: getColor(props.themeSelect, 'text'),
+    padding: '0.5vw',
   }
 
   const [opened, setOpened] = useState(props.openedTab);
@@ -72,6 +74,7 @@ const Navbar = (props) => {
     <Tab label='My Profile' sx={sxDefault} {...a11yProps(8)} />,
     <Tab label='New Product' sx={sxDefault} {...a11yProps(9)} />,
     <Tab label='Edit Product' sx={sxDefault} {...a11yProps(10)} />,
+    <Tab label='Report Restock' sx={sxDefault} {...a11yProps(11)} />,
   ];
 
   const loggedInTabs = [
@@ -150,6 +153,7 @@ const Navbar = (props) => {
               .collection('cart')
               : null
             }
+            outOfStockRef={props.firestore.collection('out_of_stock')}
             loggedIn={props.loggedIn}
             department={'Clothing'}
             cardColor={props.cardColor}
@@ -173,6 +177,7 @@ const Navbar = (props) => {
             }
             loggedIn={props.loggedIn}
             department={'Furniture'}
+            outOfStockRef={props.firestore.collection('out_of_stock')}
             cardColor={props.cardColor}
             themeSelect={props.themeSelect}
             userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
@@ -194,6 +199,7 @@ const Navbar = (props) => {
             }
             loggedIn={props.loggedIn}
             department={'Electronics'}
+            outOfStockRef={props.firestore.collection('out_of_stock')}
             cardColor={props.cardColor}
             themeSelect={props.themeSelect}
             userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
@@ -215,6 +221,7 @@ const Navbar = (props) => {
             }
             loggedIn={props.loggedIn}
             department={'Appliances'}
+            outOfStockRef={props.firestore.collection('out_of_stock')}
             cardColor={props.cardColor}
             themeSelect={props.themeSelect}
             userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
@@ -236,6 +243,7 @@ const Navbar = (props) => {
             }
             loggedIn={props.loggedIn}
             department={'Outdoors'}
+            outOfStockRef={props.firestore.collection('out_of_stock')}
             cardColor={props.cardColor}
             themeSelect={props.themeSelect}
             userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
@@ -253,6 +261,7 @@ const Navbar = (props) => {
             departmentsRef={props.firestore.collection('departments')}
             user={props.user}
             cardColor={props.cardColor}
+            outOfStockRef={props.firestore.collection('out_of_stock')}
             themeSelect={props.themeSelect}
             userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
           />
@@ -266,6 +275,7 @@ const Navbar = (props) => {
             } 
             user={props.user}
             cardColor={props.cardColor}
+            outOfStockRef={props.firestore.collection('out_of_stock')}
             themeSelect={props.themeSelect}
             userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
           />
@@ -287,6 +297,7 @@ const Navbar = (props) => {
             productsRef={props.firestore.collection('departments')}
             switchTab={(department) => switchTab(department)}
             themeSelect={props.themeSelect}
+            outOfStockRef={props.firestore.collection('out_of_stock')}
             userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
           />
         </TabPanel>
@@ -294,8 +305,19 @@ const Navbar = (props) => {
           <ChooseEditProductPage
             user={props.user}
             themeSelect={props.themeSelect}
+            outOfStockRef={props.firestore.collection('out_of_stock')}
             departmentsRef={props.firestore.collection('departments')}
             userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
+          />
+        </TabPanel>
+        <TabPanel value={opened} index={11}>
+          <ReportRestockPage
+            user={props.user}
+            themeSelect={props.themeSelect}
+            departmentsRef={props.firestore.collection('departments')}
+            usersRef={props.firestore.collection('users')}
+            firestore={props.firestore}
+            outOfStockRef={props.firestore.collection('out_of_stock')}
           />
         </TabPanel>
         </>

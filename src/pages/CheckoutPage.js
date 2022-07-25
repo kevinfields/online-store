@@ -142,15 +142,21 @@ const CheckoutPage = (props) => {
 
     const productRef = props.departmentsRef.doc(department).collection('products').doc(id);
     let itemData;
+    let itemId;
 
     await productRef.get().then(doc => {
       itemData = doc.data();
+      itemId = doc.id;
     });
 
     await productRef.set({
       ...itemData,
       currentlyOrdered: Number(itemData.currentlyOrdered) + Number(qty),
     })
+
+    if (Number(itemData.currentlyOrdered) + Number(qty) >= Number(itemData.stock)) {
+      await props.outOfStockRef.doc(itemId).set({});
+    }
 
   }
 

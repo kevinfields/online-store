@@ -99,8 +99,8 @@ const ProfilePage = (props) => {
     setMessages(messagesCatcher);
   };
 
-  const orderConfirmation = async () => {
-    await ORDER_CONFIRMATION(props.userRef).then(() => {
+  const orderConfirmation = async (type) => {
+    await ORDER_CONFIRMATION(props.userRef, type).then(() => {
       loadUserData();
     });
   }
@@ -306,7 +306,7 @@ const ProfilePage = (props) => {
             userRef={props.userRef}
             user={props.user}
             delete={(id) => deleteMessage(id)}
-            orderConfirmation={() => orderConfirmation()}
+            orderConfirmation={(type) => orderConfirmation(type)}
           />
         </div>
       }

@@ -2,27 +2,29 @@ import { Button, CardActionArea, Typography } from '@material-ui/core';
 import { Delete, KeyboardReturn } from '@mui/icons-material';
 import { Card, CardContent, CardHeader, getFormControlLabelUtilityClasses } from '@mui/material';
 import React, {useState} from 'react';
+import formatTime from '../functions/formatTime';
 import getColor from '../functions/getColor';
 import getFont from '../functions/getFont';
+import DELETE_MESSAGE from '../reducers/DELETE_MESSAGE';
 
 const ProfileMessagesList = (props) => {
+
+  const [deleting, setDeleting] = useState({
+    open: false,
+    id: '',
+  });
+
+  const [deleteError, setDeleteError] = useState(false);
 
   const textColor = getColor(props.themeSelect, 'text');
   const cardColor = getColor(props.themeSelect, 'card_background');
   const borderColor = getColor(props.themeSelect, 'border');
 
-  const primaryColor = getColor(props.themeSelect, 'primary');
-
-  const [deleting, setDeleting] = useState({
-    open: false,
-    id: '',
-  })
-
   const deleteMessage = async (mess) => {
 
-    await props.userRef.collection('messages').doc(mess.id).delete();
-    props.delete(mess.id);
-
+    await DELETE_MESSAGE(mess.id, props.userRef).then(() => {
+      props.delete(mess.id);
+    })
   }
 
   return (
@@ -53,6 +55,13 @@ const ProfileMessagesList = (props) => {
         >
           <CardHeader title={item.data.title} />
           <CardContent>{item.data.text}</CardContent>
+          <CardContent
+            sx={{
+              fontSize: '9pt',
+            }}
+          > 
+            - {formatTime(item.data.time.seconds * 1000, 'timestamp')}
+          </CardContent>
           { deleting.open && deleting.id === item.id ?
             <>
               <p
@@ -64,6 +73,7 @@ const ProfileMessagesList = (props) => {
                 Are you sure?
               </p>
               <button
+                className={`styled-button-${props.themeSelect}`}
                 style={{
                   width: '10vw',
                   marginLeft: '2.5vw',
@@ -75,7 +85,8 @@ const ProfileMessagesList = (props) => {
               >
                 <Delete />
               </button>
-              <button 
+              <button
+                className={`styled-button-${props.themeSelect}`} 
                 style={{
                   width: '10vw',
                   marginLeft: '2.5vw',
@@ -94,6 +105,7 @@ const ProfileMessagesList = (props) => {
           :
             <>
               <button
+                className={`styled-button-${props.themeSelect}`}
                 style={{
                   width: '10vw',
                   marginLeft: '2.5vw',
@@ -120,20 +132,41 @@ const ProfileMessagesList = (props) => {
             borderColor: borderColor,
             backgroundColor: cardColor,
           }}
+          style={{
+            backgroundColor: cardColor,
+            border: `1px solid ${borderColor}`,
+            color: textColor,
+          }}
         >
           <CardHeader title='No Unread Messages' />
           <CardContent>You have no unread messages.</CardContent>
           <button
+            className={`styled-button-${props.themeSelect}`}
             style={{
               width: '10vw',
               marginLeft: '2.5vw',
               marginBottom: '1vh',
               fontFamily: getFont(props.themeSelect),
               borderRadius: '7px',
+              backgroundColor: cardColor,
             }}
-            onClick={() => props.orderConfirmation()}
+            onClick={() => props.orderConfirmation('standard')}
           >
             Get Confirmation Message
+          </button>
+          <button
+            className={`styled-button-${props.themeSelect}`}
+            style={{
+              width: '10vw',
+              marginLeft: '2.5vw',
+              marginBottom: '1vh',
+              fontFamily: getFont(props.themeSelect),
+              borderRadius: '7px',
+              backgroundColor: cardColor,
+            }}
+            onClick={() => props.orderConfirmation('random')}
+          >
+            Get Random Message
           </button>
         </Card>
       }

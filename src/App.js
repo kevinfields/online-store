@@ -121,6 +121,7 @@ function App() {
                 cardColor={getColor(themeSelect, 'card_background')}
                 themeSelect={themeSelect}
                 openedTab={tab}
+                outOfStockRef={firestore.collection('out_of_stock')}
               />
             }
           />
@@ -154,6 +155,7 @@ function App() {
                       .collection('orders')
                     }
                     departmentsRef={firestore.collection('departments')}
+                    outOfStockRef={firestore.collection('out_of_stock')}
                     userRef={firestore.collection('users').doc(user.uid)}
                     cardColor={getColor(themeSelect, 'card_background')}
                     themeSelect={themeSelect}
@@ -184,6 +186,7 @@ function App() {
                     themeSelect={themeSelect}
                     openDepartmentPage={() => setTab(4)}
                     openSelector={() => setTab(10)}
+                    outOfStockRef={firestore.collection('out_of_stock')}
                   />
                 }
               />
@@ -195,6 +198,7 @@ function App() {
                     themeSelect={themeSelect}
                     openDepartmentPage={() => setTab(1)}
                     openSelector={() => setTab(10)}
+                    outOfStockRef={firestore.collection('out_of_stock')}
                   />
                 }
               />
@@ -206,6 +210,7 @@ function App() {
                     themeSelect={themeSelect}
                     openDepartmentPage={() => setTab(3)}
                     openSelector={() => setTab(10)}
+                    outOfStockRef={firestore.collection('out_of_stock')}
                   />
                 }
               />
@@ -217,6 +222,7 @@ function App() {
                     themeSelect={themeSelect}
                     openDepartmentPage={() => setTab(2)}
                     openSelector={() => setTab(10)}
+                    outOfStockRef={firestore.collection('out_of_stock')}
                   />
                 }
               />
@@ -228,6 +234,7 @@ function App() {
                     themeSelect={themeSelect}
                     openDepartmentPage={() => setTab(5)}
                     openSelector={() => setTab(10)}
+                    outOfStockRef={firestore.collection('out_of_stock')}
                   />
                 }
               />
@@ -238,6 +245,7 @@ function App() {
                     departmentsRef={firestore.collection('departments')}
                     themeSelect={themeSelect}
                     viewInStore={(dep) => setTab(dep)}
+                    outOfStockRef={firestore.collection('out_of_stock')}
                   />
                 }
               />

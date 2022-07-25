@@ -1,4 +1,4 @@
-export default function formatTime(s) {
+export default function formatTime(s, mode) {
   let str = s.toString();
   let arr = str.split("");
 
@@ -15,5 +15,6 @@ export default function formatTime(s) {
   const cutIndex = briefArr.lastIndexOf(":");
   briefArr.splice(cutIndex, 3);
   time = briefArr.join("");
+
   return time;
 }

@@ -78,3 +78,52 @@ code {
   top: 10vh;
   width: 10vw;
 }
+
+
+.styled-button-cyber {
+  background: transparent;
+  box-shadow: #015c07;
+  color: #1ecc18;
+  border-color: 1px solid #09f205;
+}
+
+.styled-button-cyber:hover {
+  cursor: pointer;
+  background-color: lightgreen;
+}
+
+.styled-button-synth {
+  background: transparent;
+  box-shadow: #00d5ff;
+  color: #ff0080;
+  border-color: #00fff7;
+}
+
+.styled-button-synth:hover {
+  cursor: pointer;
+  background-color: lightskyblue;
+}
+
+.styled-button-day {
+  background: transparent;
+  box-shadow: #03005e;
+  color: #011c45;
+  border-color: #c2c2c4;
+}
+
+.styled-button-day:hover {
+  cursor: pointer;
+  background-color: gainsboro;
+}
+
+.styled-button-night {
+  background-color: transparent;
+  box-shadow: #0802c2;
+  color: #fffb00;
+  border-color: #00fbff;
+}
+
+.styled-button-night:hover {
+  cursor: pointer;
+  background-color: lightblue;
+}
