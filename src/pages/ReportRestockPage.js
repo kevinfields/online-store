@@ -64,20 +64,38 @@ const ReportRestockPage = (props) => {
           <div>
             <CardContent
               style={{
-                color: textColor
+                color: textColor,
+                textAlign: 'center'
               }}
             >
-              Choose an out-of-stock product.
+              Choose an out-of-stock product by id.
             </CardContent>
-            <Grid>
+            <Grid
+              direction='row'
+              columns='5'
+              rowSpacing='5vh'
+              columnSpacing='2vw'
+              container={true}
+              style={{
+                width: '54vw',
+                marginLeft: '9vw',
+                border: `1px solid ${borderColor}`,
+                boxShadow: `1px 1px ${shadowColor}`,
+                borderRadius: '10px',
+                justifyContent: 'space-around',
+              }}
+            >
               {products.map(product => (
-                <Grid item>
+                <Grid 
+                  item
+                >
                   <button
                     className={`styled-button-${props.themeSelect}`}
                     style={{
                       borderRadius: '7px',
-                      width: 'fit-content',
-                      height: '3vh',
+                      width: '10vw',
+                      height: '5vh',
+                      margin: '1vh',
                     }}
                     onClick={() => setProduct(product)}
                   >
@@ -92,9 +110,10 @@ const ReportRestockPage = (props) => {
             <CardContent
               style={{
                 color: textColor,
+                textAlign: 'center',
               }}
             >
-              Update {product}
+              Report restock of product: {product}
             </CardContent>
             <button
               onClick={() => setPhase('select')}
@@ -104,6 +123,7 @@ const ReportRestockPage = (props) => {
                 width: 'fit-content',
                 height: '3vh',
                 marginLeft: '5vw',
+                boxShadow: `1px 1px ${shadowColor}`
               }}
             >
               Go Back

@@ -82,21 +82,21 @@ code {
 
 .styled-button-cyber {
   background: transparent;
-  box-shadow: #015c07;
+  box-shadow: 1px 1px #015c07;
   color: #1ecc18;
-  border-color: 1px solid #09f205;
+  border: 1px solid #09f205;
 }
 
 .styled-button-cyber:hover {
   cursor: pointer;
-  background-color: lightgreen;
+  background-color: rgb(201, 242, 201);
 }
 
 .styled-button-synth {
   background: transparent;
-  box-shadow: #00d5ff;
+  box-shadow: 1px 1px #00d5ff;
   color: #ff0080;
-  border-color: #00fff7;
+  border: 1px solid #00fff7;
 }
 
 .styled-button-synth:hover {
@@ -106,9 +106,9 @@ code {
 
 .styled-button-day {
   background: transparent;
-  box-shadow: #03005e;
+  box-shadow: 1px 1px #03005e;
   color: #011c45;
-  border-color: #c2c2c4;
+  border: 1px solid #c2c2c4;
 }
 
 .styled-button-day:hover {
@@ -118,9 +118,9 @@ code {
 
 .styled-button-night {
   background-color: transparent;
-  box-shadow: #0802c2;
+  box-shadow: 1px 1px #0802c2;
   color: #fffb00;
-  border-color: #00fbff;
+  border: 1px solid #00fbff;
 }
 
 .styled-button-night:hover {
