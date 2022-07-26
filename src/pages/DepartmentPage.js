@@ -122,6 +122,17 @@ const DepartmentPage = (props) => {
       productData = doc.data();
     })
 
+    if (productData.alertList === undefined) {
+      productData = {
+        ...productData,
+        alertList: [],
+      }
+    }
+
+    await props.productsRef.doc(productId).set({
+      ...productData,
+      alertList: props.userId !== '' ? productData.alertList.concat(props.userId) : productData.alertList
+    })
     await props.userRef.collection('watchedItems').doc(productId).set({
       ...productData
     });

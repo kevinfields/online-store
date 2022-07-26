@@ -158,6 +158,7 @@ const Navbar = (props) => {
             department={'Clothing'}
             cardColor={props.cardColor}
             themeSelect={props.themeSelect}
+            userId={props.loggedIn ? props.user.uid : ''}
             userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
           />
         </TabPanel>
@@ -180,6 +181,7 @@ const Navbar = (props) => {
             outOfStockRef={props.firestore.collection('out_of_stock')}
             cardColor={props.cardColor}
             themeSelect={props.themeSelect}
+            userId={props.loggedIn ? props.user.uid : ''}
             userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
           />
         </TabPanel>
@@ -202,6 +204,7 @@ const Navbar = (props) => {
             outOfStockRef={props.firestore.collection('out_of_stock')}
             cardColor={props.cardColor}
             themeSelect={props.themeSelect}
+            userId={props.loggedIn ? props.user.uid : ''}
             userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
           />
         </TabPanel>
@@ -224,6 +227,7 @@ const Navbar = (props) => {
             outOfStockRef={props.firestore.collection('out_of_stock')}
             cardColor={props.cardColor}
             themeSelect={props.themeSelect}
+            userId={props.loggedIn ? props.user.uid : ''}
             userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
           />
         </TabPanel>
@@ -246,6 +250,7 @@ const Navbar = (props) => {
             outOfStockRef={props.firestore.collection('out_of_stock')}
             cardColor={props.cardColor}
             themeSelect={props.themeSelect}
+            userId={props.loggedIn ? props.user.uid : ''}
             userRef={props.loggedIn ? props.firestore.collection('users').doc(props.user.uid) : null}
           />
         </TabPanel>
@@ -318,6 +323,7 @@ const Navbar = (props) => {
             usersRef={props.firestore.collection('users')}
             firestore={props.firestore}
             outOfStockRef={props.firestore.collection('out_of_stock')}
+            openPage={(num, e) => handleChange(e, num)}
           />
         </TabPanel>
         </>

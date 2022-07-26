@@ -1,6 +1,9 @@
-import { Button, Card, CardContent, CardHeader, Grid, MenuItem, Select } from '@material-ui/core'
-import React, {useState, useEffect} from 'react'
-import getColor from '../functions/getColor'
+import { Button, Card, CardContent, CardHeader, Grid, MenuItem, Select, TextField, Typography } from '@material-ui/core';
+import { KeyboardReturn } from '@mui/icons-material';
+import React, {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
+import getColor from '../functions/getColor';
+import ALERT_USERS from '../reducers/ALERT_USERS';
 
 const ReportRestockPage = (props) => {
 
@@ -8,6 +11,10 @@ const ReportRestockPage = (props) => {
   const [phase, setPhase] = useState('select');
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState('');
+  const [restockValue, setRestockValue] = useState(0);
+
+  const navigate = useNavigate();
+
 
   const textColor = getColor(props.themeSelect, 'text');
   const borderColor = getColor(props.themeSelect, 'border');
@@ -16,13 +23,54 @@ const ReportRestockPage = (props) => {
 
   const loadOutOfStockProducts = async () => {
 
-    let productIds = [];
+    let productsData = [];
     await props.outOfStockRef.get().then(snap => {
       snap.forEach(doc => {
-        productIds.push(doc.id);
+        productsData.push({
+          id: doc.id,
+          department: doc.data().department,
+        });
       })
     });
-    setProducts(productIds);
+    setProducts(productsData);
+  };
+
+  const confirmAmount = async () => {
+
+
+    //functions:
+    //A: update stock in departments/:department/products/:product
+    //B: delete out_of_stock/:product
+    //C: for each userId in product's alertList:
+    //  Ca: delete users/:userId/watchedItems/:product
+    //  Cb: add message document to users/:userId/messages
+
+    let tabArray = ['clothing', 'furniture', 'appliances', 'outdoors'];
+    const tabSelect = tabArray.indexOf(product.department) + 2;
+
+    let productRef = props.departmentsRef.doc(product.department).collection('products').doc(product.id);
+   
+
+    let data;
+    await productRef.get().then(doc => {
+      data = doc.data();
+    });
+
+    console.log(JSON.stringify(data));
+
+    //A
+    await productRef.set({
+      ...data,
+      stock: Number(data.stock) + Number(restockValue),
+    });
+
+    //B
+    await props.outOfStockRef.doc(product.id).delete();
+    
+    //Ca / Cb
+    await ALERT_USERS(productRef, props.usersRef);
+
+    props.openPage(tabSelect);
   };
 
   useEffect(() => {
@@ -39,7 +87,19 @@ const ReportRestockPage = (props) => {
     if (phase === 'select') {
       setProduct('');
     }
-  }, [phase])
+  }, [phase]);
+
+  useEffect(() => {
+
+    if (isNaN(restockValue)) {
+      setRestockValue(0);
+    };
+
+    if (restockValue < 0) {
+      setRestockValue(0);
+    };
+
+  }, [restockValue]);
 
   return (
     <div className='page'>
@@ -99,7 +159,7 @@ const ReportRestockPage = (props) => {
                     }}
                     onClick={() => setProduct(product)}
                   >
-                    {product}
+                    {product.id}
                   </button>
                 </Grid>
               ))}
@@ -113,27 +173,82 @@ const ReportRestockPage = (props) => {
                 textAlign: 'center',
               }}
             >
-              Report restock of product: {product}
+              Report restock of product: {product.id}
             </CardContent>
             <button
               onClick={() => setPhase('select')}
               className={`styled-button-${props.themeSelect}`}
               style={{
                 borderRadius: '7px',
-                width: 'fit-content',
-                height: '3vh',
+                width: '10vw',
+                height: '5vh',
                 marginLeft: '5vw',
-                boxShadow: `1px 1px ${shadowColor}`
+                boxShadow: `1px 1px ${shadowColor}`,
+                position: 'fixed',
+                left: '10vw',
+                top: '23vh',
+                fontSize: '12pt',
+                paddingTop: '1vh',
+                paddingBottom: '1vh',
               }}
             >
-              Go Back
+              GO BACK
+            </button>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                width: '28vw',
+                marginLeft: '22vw',
+              }}
+            >
+              <Typography>New Number in Stock: </Typography>
+              <TextField
+                type='number'
+                value={restockValue}
+                onChange={(e) => setRestockValue(e.target.value)}
+                sx={{
+                  input: {
+                    color: textColor,
+                  },
+                  border: `1px solid ${borderColor}`
+                }}
+              />
+            </div>
+            <button
+              className={`styled-button-${props.themeSelect}`}
+              style={{
+                width: '20vw',
+                height: '10vh',
+              }}
+              onClick={() => setPhase('confirm')}
+            >
+              CONFIRM
             </button>
           </div>
           : phase === 'confirm' ?
           <div>
             <CardContent>
-              Are you sure this product has this amount?
+              Are you sure that product "{product.id}" has a stock of {restockValue}?
             </CardContent>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+              }}
+            >
+              <button
+                onClick={() => confirmAmount()}
+              >
+                YES
+              </button>
+              <button
+                onClick={() => setPhase('update-amount')}
+              >
+                NO
+              </button>
+            </div>
           </div>
           : 
           null
