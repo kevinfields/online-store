@@ -13,9 +13,6 @@ const ReportRestockPage = (props) => {
   const [product, setProduct] = useState('');
   const [restockValue, setRestockValue] = useState(0);
 
-  const navigate = useNavigate();
-
-
   const textColor = getColor(props.themeSelect, 'text');
   const borderColor = getColor(props.themeSelect, 'border');
   const shadowColor = getColor(props.themeSelect, 'box_shadow');
@@ -48,9 +45,8 @@ const ReportRestockPage = (props) => {
     let tabArray = ['clothing', 'furniture', 'appliances', 'outdoors'];
     const tabSelect = tabArray.indexOf(product.department) + 2;
 
-    let productRef = props.departmentsRef.doc(product.department).collection('products').doc(product.id);
+    const productRef = props.departmentsRef.doc(product.department).collection('products').doc(product.id);
    
-
     let data;
     await productRef.get().then(doc => {
       data = doc.data();
@@ -111,6 +107,7 @@ const ReportRestockPage = (props) => {
           left: '14vw',
           top: '22vh',
           backgroundColor: cardColor,
+          boxShadow: `1px 1px 3px 3px ${shadowColor}`
         }}
       >
         <CardHeader 
@@ -203,17 +200,24 @@ const ReportRestockPage = (props) => {
                 marginLeft: '22vw',
               }}
             >
-              <Typography>New Number in Stock: </Typography>
+              <Typography
+                style={{
+                  color: textColor,
+                }}
+              >
+                New Number in Stock: 
+              </Typography>
               <TextField
                 type='number'
                 value={restockValue}
+                variant='standard'
                 onChange={(e) => setRestockValue(e.target.value)}
+                InputLabelProps={{ required: false, shrink: true, style: {color: textColor} }}
+                label='Quantity: '
                 sx={{
-                  input: {
-                    color: textColor,
-                  },
-                  border: `1px solid ${borderColor}`
+                  color: 'secondary'
                 }}
+                color='secondary'
               />
             </div>
             <button
@@ -221,6 +225,9 @@ const ReportRestockPage = (props) => {
               style={{
                 width: '20vw',
                 height: '10vh',
+                position: 'fixed',
+                left: '40vw',
+                bottom: '35vh',
               }}
               onClick={() => setPhase('confirm')}
             >

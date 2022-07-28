@@ -82,7 +82,7 @@ const Navbar = (props) => {
     <Tab label='Clothing' sx={sxDefault} {...a11yProps(1)} />, 
     <Tab label='Furniture' sx={sxDefault} {...a11yProps(2)} />,
     <Tab label='Electronics' sx={sxDefault} {...a11yProps(3)} />,
-    <Tab label='Applicances' sx={sxDefault} {...a11yProps(4)} />,
+    <Tab label='Appliances' sx={sxDefault} {...a11yProps(4)} />,
     <Tab label='Outdoors' sx={sxDefault} {...a11yProps(5)} />,
     <Tab label='My Cart' sx={sxDefault} {...a11yProps(6)} />,
     <Tab label='My Orders' sx={sxDefault} {...a11yProps(7)} />,
@@ -94,7 +94,7 @@ const Navbar = (props) => {
     <Tab label='Clothing' sx={sxDefault} {...a11yProps(1)} />, 
     <Tab label='Furniture' sx={sxDefault} {...a11yProps(2)} />,
     <Tab label='Electronics' sx={sxDefault} {...a11yProps(3)} />,
-    <Tab label='Applicances' sx={sxDefault} {...a11yProps(4)} />,
+    <Tab label='Appliances' sx={sxDefault} {...a11yProps(4)} />,
     <Tab label='Outdoors' sx={sxDefault} {...a11yProps(5)} />
   ];
 
