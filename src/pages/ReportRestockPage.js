@@ -1,5 +1,6 @@
 import { Button, Card, CardContent, CardHeader, Grid, MenuItem, Select, TextField, Typography } from '@material-ui/core';
 import { KeyboardReturn } from '@mui/icons-material';
+import { Input, OutlinedInput } from '@mui/material';
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import getColor from '../functions/getColor';
@@ -10,7 +11,7 @@ const ReportRestockPage = (props) => {
 
   const [phase, setPhase] = useState('select');
   const [products, setProducts] = useState([]);
-  const [product, setProduct] = useState('');
+  const [product, setProduct] = useState(null);
   const [restockValue, setRestockValue] = useState(0);
 
   const textColor = getColor(props.themeSelect, 'text');
@@ -42,8 +43,8 @@ const ReportRestockPage = (props) => {
     //  Ca: delete users/:userId/watchedItems/:product
     //  Cb: add message document to users/:userId/messages
 
-    let tabArray = ['clothing', 'furniture', 'appliances', 'outdoors'];
-    const tabSelect = tabArray.indexOf(product.department) + 2;
+    let tabArray = ['clothing', 'furniture', 'electronics', 'appliances', 'outdoors'];
+    const tabSelect = tabArray.indexOf(product.department) + 1;
 
     const productRef = props.departmentsRef.doc(product.department).collection('products').doc(product.id);
    
@@ -52,6 +53,7 @@ const ReportRestockPage = (props) => {
       data = doc.data();
     });
 
+    console.log(JSON.stringify(product))
     console.log(JSON.stringify(data));
 
     //A
@@ -69,19 +71,24 @@ const ReportRestockPage = (props) => {
     props.openPage(tabSelect);
   };
 
+  const productEditor = (product) => {
+    console.log(JSON.stringify(product));
+    setProduct(product);
+  }
+
   useEffect(() => {
     loadOutOfStockProducts();
   }, []);
 
   useEffect(() => {
-    if (product !== '') {
+    if (product !== null) {
       setPhase('update-amount');
     }
   }, [product]);
 
   useEffect(() => {
     if (phase === 'select') {
-      setProduct('');
+      setProduct(null);
     }
   }, [phase]);
 
@@ -154,7 +161,7 @@ const ReportRestockPage = (props) => {
                       height: '5vh',
                       margin: '1vh',
                     }}
-                    onClick={() => setProduct(product)}
+                    onClick={() => productEditor(product)}
                   >
                     {product.id}
                   </button>
@@ -203,21 +210,39 @@ const ReportRestockPage = (props) => {
               <Typography
                 style={{
                   color: textColor,
+                  marginTop: '2.5vh',
                 }}
               >
                 New Number in Stock: 
               </Typography>
-              <TextField
+              <OutlinedInput
                 type='number'
                 value={restockValue}
-                variant='standard'
+                autoFocus={true}
                 onChange={(e) => setRestockValue(e.target.value)}
                 InputLabelProps={{ required: false, shrink: true, style: {color: textColor} }}
-                label='Quantity: '
+                variant='outined'
+                color='primary'
                 sx={{
-                  color: 'secondary'
+                  input: {
+                    color: textColor,
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    "& > fieldset": {
+                      borderColor: borderColor
+                    }
+                  },
+                  "& .MuiOutlinedInput-root:hover": {
+                    "& > fieldset": {
+                      borderColor: borderColor
+                    }
+                  },
+                  "& .MuiOutlinedInput-root.Mui-focused": {
+                    "& > fieldset": {
+                      borderColor: borderColor
+                    }
+                  },
                 }}
-                color='secondary'
               />
             </div>
             <button
@@ -228,6 +253,8 @@ const ReportRestockPage = (props) => {
                 position: 'fixed',
                 left: '40vw',
                 bottom: '35vh',
+                borderRadius: '5px',
+                boxShadow: `1px 1px 3px 3px ${shadowColor}`,
               }}
               onClick={() => setPhase('confirm')}
             >
@@ -235,10 +262,31 @@ const ReportRestockPage = (props) => {
             </button>
           </div>
           : phase === 'confirm' ?
-          <div>
-            <CardContent>
+          <CardContent
+            style={{
+              border: `1px solid ${borderColor}`,
+              boxShadow: `1px 1px 3px 3px ${shadowColor}`,
+              borderRadius: '10px',
+              position: 'fixed',
+              bottom: '25vh',
+              left: '34vw',
+              width: '32vw',
+              height: '40vh',
+            }}
+          >
+            <Typography
+              style={{
+                textAlign: 'center',
+                width: '30vw',
+                position: 'fixed',
+                left: '35vw',
+                bottom: '50vh',
+                color: textColor,
+              }}
+              variant='h4'
+            >
               Are you sure that product "{product.id}" has a stock of {restockValue}?
-            </CardContent>
+            </Typography>
             <div
               style={{
                 display: 'flex',
@@ -247,16 +295,34 @@ const ReportRestockPage = (props) => {
             >
               <button
                 onClick={() => confirmAmount()}
+                className={`styled-button-${props.themeSelect}`}
+                style={{
+                  position: 'fixed',
+                  left: '38vw', 
+                  width: '10vw',
+                  height: '10vh',
+                  bottom: '30vh',
+                  borderRadius: '5px',
+                }}
               >
                 YES
               </button>
               <button
                 onClick={() => setPhase('update-amount')}
+                className={`styled-button-${props.themeSelect}`}
+                style={{
+                  position: 'fixed',
+                  left: '54vw', 
+                  width: '10vw',
+                  height: '10vh',
+                  bottom: '30vh',
+                  borderRadius: '5px',
+                }}
               >
                 NO
               </button>
             </div>
-          </div>
+          </CardContent>
           : 
           null
         }

@@ -155,7 +155,9 @@ const CheckoutPage = (props) => {
     })
 
     if (Number(itemData.currentlyOrdered) + Number(qty) >= Number(itemData.stock)) {
-      await props.outOfStockRef.doc(itemId).set({});
+      await props.outOfStockRef.doc(itemId).set({
+        department: itemData.department,
+      });
     }
 
   }
@@ -227,7 +229,6 @@ const CheckoutPage = (props) => {
             left: '30vw',
             marginRight: '10vw',
             marginTop: '15vh',
-
           }}
         >
           <div
