@@ -165,7 +165,6 @@ const ProfilePage = (props) => {
               height: '65vh',
               overflowY: 'scroll',
               marginLeft: '5vw',
-              border: `1px solid ${getColor(props.themeSelect, 'border')}`
             }}
             departmentsRef={props.departmentsRef}
             user={props.user}

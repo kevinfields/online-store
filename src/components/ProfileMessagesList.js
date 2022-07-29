@@ -39,8 +39,8 @@ const ProfileMessagesList = (props) => {
         display: 'flex',
         flexDirection: 'column',
         flexWrap: 'nowrap',
-        border: `1px solid ${borderColor}`,
       }}
+      className='message-list'
     >
       {props.messages.length > 0 ? props.messages.map(item => (
         <Card

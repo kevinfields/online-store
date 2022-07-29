@@ -127,3 +127,21 @@ code {
   cursor: pointer;
   background-color: lightblue;
 }
+
+.message-list::-webkit-scrollbar {
+  display: none;  /* Chrome */
+}
+
+.message-list {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.product-watchlist::-webkit-scrollbar {
+  display: none;  /* Chrome */
+}
+
+.product-watchlist {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

@@ -35,88 +35,111 @@ const ProfileWatchlist = (props) => {
   }
 
   return (
-    <div style={props.sx}>  
-      {props.watchlist.map(item => (
-        <Card
-          style={{
-            backgroundColor: getColor(props.themeSelect, 'card_background'),
-            color: getColor(props.themeSelect, 'text'),
-            marginRight: '1vw',
-            flexShrink: 0,
-          }}
-        >
-          <CardHeader title={item.data.title} />
-          <CardMedia 
-            component='img'
-            src={item.data.photoURL}
-            alt={item.id}
-            sx={{
-              maxWidth: '10vh',
-              maxHeight: '10vh',
-              marginLeft: '2.5vh',
+    <div 
+      style={props.sx}
+      className='product-watchlist'
+    >  
+      { props.watchlist.length > 0 ? 
+        props.watchlist.map(item => (
+          <Card
+            style={{
+              backgroundColor: getColor(props.themeSelect, 'card_background'),
+              color: getColor(props.themeSelect, 'text'),
+              marginRight: '1vw',
+              flexShrink: 0,
             }}
-          />
-          <CardContent>{item.data.description}</CardContent>
-          { removing.open && removing.productId === item.id ?
-            <>
-              <Typography 
-                variant='h6'
-                sx={{
-                  textAlign: 'center',
-                }}
-              >
-                Are you sure?
-              </Typography>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  margin: '1vh',
-                }}
-              >
-                <Button
-                  onClick={() => removeItem(item)}
-                  variant='contained'
-                  color={'primary'}
-                  endIcon={<Delete />}
-                >
-                  YES
-                </Button>
-                <Button
-                  onClick={() => setRemoving(false)}
-                  variant='contained'
-                  color={'error'}
-                  endIcon={<KeyboardReturn />}
-                >
-                  NO
-                </Button>
-              </div> 
-            </>
-            :
-            <Button
-              onClick={() => setRemoving({
-                open: true,
-                productId: item.id,
-              })}
-              variant='outlined'
-              style={{
-                width: '50%',
-                left: '25%',
-                marginBottom: '0.5vh',
+          >
+            <CardHeader title={item.data.title} />
+            <CardMedia 
+              component='img'
+              src={item.data.photoURL}
+              alt={item.id}
+              sx={{
+                maxWidth: '10vh',
+                maxHeight: '10vh',
+                marginLeft: '2.5vh',
               }}
-              color='secondary'
-              endIcon={
-                <Delete 
-                  color='error'
-                />
-              }
+            />
+            <CardContent>{item.data.description}</CardContent>
+            { removing.open && removing.productId === item.id ?
+              <>
+                <Typography 
+                  variant='h6'
+                  sx={{
+                    textAlign: 'center',
+                  }}
+                >
+                  Are you sure?
+                </Typography>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    margin: '1vh',
+                  }}
+                >
+                  <Button
+                    onClick={() => removeItem(item)}
+                    variant='contained'
+                    color={'primary'}
+                    endIcon={<Delete />}
+                  >
+                    YES
+                  </Button>
+                  <Button
+                    onClick={() => setRemoving(false)}
+                    variant='contained'
+                    color={'error'}
+                    endIcon={<KeyboardReturn />}
+                  >
+                    NO
+                  </Button>
+                </div> 
+              </>
+              :
+              <Button
+                onClick={() => setRemoving({
+                  open: true,
+                  productId: item.id,
+                })}
+                variant='outlined'
+                style={{
+                  width: '50%',
+                  left: '25%',
+                  marginBottom: '0.5vh',
+                }}
+                color='secondary'
+                endIcon={
+                  <Delete 
+                    color='error'
+                  />
+                }
+              >
+                Remove
+              </Button> 
+            }
+          </Card>
+        ))
+        :
+          <Card
+            sx={{
+              backgroundColor: getColor(props.themeSelect, 'card_background'),
+              color: getColor(props.themeSelect, 'text'),
+              marginRight: '1vw',
+              flexShrink: 0,
+            }}
+          >
+            <CardHeader title='You are not watching any products.' />
+            <Typography
+              sx={{
+                margin: '1vh',
+              }}
             >
-              Remove
-            </Button> 
-          }
-        </Card>
-      ))}
+              If you want to receive notifications when a certain product is back in stock, it will appear here.
+              </Typography>
+          </Card>
+        }
     </div>
   )
 }
