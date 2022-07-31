@@ -1,4 +1,4 @@
-import { AccountCircle, Close, Computer, ComputerTwoTone, DarkMode, LightMode, Schedule, Search, ShoppingCart, WbTwilightSharp } from '@mui/icons-material';
+import { AccountCircle, BeachAccess, Close, Computer, ComputerTwoTone, DarkMode, LightMode, Schedule, Search, ShoppingCart, WbTwilightSharp, WbTwilightTwoTone } from '@mui/icons-material';
 import { AppBar, Button, InputAdornment, Switch, TextField, Toolbar } from '@mui/material';
 import React, {useState, useEffect, useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -185,13 +185,13 @@ const HomePage = (props) => {
         <DarkMode color='info' />
       </Button>
       <Button
-        onClick={() => changeTheme('bluecyber')}
+        onClick={() => changeTheme('blue')}
         sx={{
           position: 'fixed',
           right: '25vw',
           top: '2.5vh',
-          border: props.themeSelect === 'bluecyber' ? `1px solid ${getColor(props.themeSelect, 'border')}` : 'none',
-          boxShadow: props.themeSelect === 'bluecyber' ? `2px 2px ${getColor(props.themeSelect, 'box_shadow')}` : 'none'
+          border: props.themeSelect === 'blue' ? `1px solid ${getColor(props.themeSelect, 'border')}` : 'none',
+          boxShadow: props.themeSelect === 'blue' ? `2px 2px ${getColor(props.themeSelect, 'box_shadow')}` : 'none'
         }}
       >
         <ComputerTwoTone color='info' />
@@ -206,7 +206,7 @@ const HomePage = (props) => {
           boxShadow: props.themeSelect === 'sunrise' ? `2px 2px ${getColor(props.themeSelect, 'box_shadow')}` : 'none'
         }}
       >
-        <ComputerTwoTone color='info' />
+        <BeachAccess color='info' />
       </Button>
       { props.user ?
       <>

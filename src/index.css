@@ -128,23 +128,23 @@ code {
   background-color: lightblue;
 }
 
-.styled-button-bluecyber {
+.styled-button-blue {
   background-color: transparent;
   box-shadow: 1px 1px #0802c2;
   color: #ffffff;
   border: 1px solid #00fbff;
 }
 
-.styled-button-bluecyber:hover {
+.styled-button-blue:hover {
   cursor: pointer;
   background-color: lightblue;
 }
 
 .styled-button-sunrise {
   background-color: transparent;
-  box-shadow: 1px 1px #0802c2;
-  color: #ffffff;
-  border: 1px solid #00fbff;
+  box-shadow: 1px 1px #030055;
+  color: #2f00ff;
+  border: 1px solid #1c00a7;
 }
 
 .styled-button-sunrise:hover {

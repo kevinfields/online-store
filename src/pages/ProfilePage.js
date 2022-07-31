@@ -223,7 +223,7 @@ const ProfilePage = (props) => {
                 height: '10vw',
                 alignSelf: 'flex-end',
                 marginRight: '2.5vw',
-                marginTop: '-18vh',
+                marginTop: '-16vh',
                 marginBottom: '2vh',
               }}
             />
