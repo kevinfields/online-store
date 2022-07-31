@@ -31,7 +31,9 @@ const OrderCard = (props) => {
         <CardContent children={`Total Cost: $${fixCost(props.order.data().totalCost)}`} />
         <CardContent children={`Number of Items: ${props.order.data().itemCount}`} />
         <CardContent children={`Reward Points Earned: ${props.order.data().rewardPoints ? props.order.data().rewardPoints : 0}`} />
-        <CardContent children={`Order Status: ${props.order.data().orderStatus}`} />
+        <CardContent>
+          Order Status: {props.order.data().orderStatus}
+        </CardContent>
         <CardContent children={`Ordered on ${formatTime(props.order.data().orderPlaced.seconds * 1000)}`} />
       </CardActionArea>
     </Card>

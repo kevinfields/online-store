@@ -121,7 +121,7 @@ const SingleOrderPage = (props) => {
                     bgcolor: getColor(props.themeSelect, 'card_background'),
                     color: getColor(props.themeSelect, 'text'),
                     width: '5vw',
-                    fontSize: '10pt',
+                    fontSize: '8pt',
                   }}
                   variant='rounded'
                 >

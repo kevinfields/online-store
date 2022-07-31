@@ -11,6 +11,10 @@ export default function getFont(theme) {
       return "Courier, monospace";
     case ('synth'):
       return 'Futura';
+    case ('bluecyber'):
+      return "Courier, monospace";
+    case ('sunrise'):
+      return "Quicksand";
     default:
       return 'Times New Roman';
   };

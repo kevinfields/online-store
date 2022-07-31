@@ -18,6 +18,7 @@ const ProfilePage = (props) => {
   const [newImageURL, setNewImageURL] = useState('');
   const [imgError, setImgError] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [allowOrder, setAllowOrder] = useState(false);
 
   useEffect(() => {
     loadUserData();
@@ -100,8 +101,16 @@ const ProfilePage = (props) => {
   };
 
   const orderConfirmation = async (type) => {
+
+    if (!allowOrder) {
+      return;
+    }
+
+    setAllowOrder(false);
+
     await ORDER_CONFIRMATION(props.userRef, type).then(() => {
       loadUserData();
+      setAllowOrder(true);
     });
   }
 
@@ -305,6 +314,7 @@ const ProfilePage = (props) => {
             userRef={props.userRef}
             user={props.user}
             delete={(id) => deleteMessage(id)}
+            allowOrder={allowOrder}
             orderConfirmation={(type) => orderConfirmation(type)}
           />
         </div>

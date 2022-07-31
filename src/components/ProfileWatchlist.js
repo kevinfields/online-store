@@ -123,7 +123,7 @@ const ProfileWatchlist = (props) => {
         ))
         :
           <Card
-            sx={{
+            style={{
               backgroundColor: getColor(props.themeSelect, 'card_background'),
               color: getColor(props.themeSelect, 'text'),
               marginRight: '1vw',
@@ -133,7 +133,7 @@ const ProfileWatchlist = (props) => {
             <CardHeader title='You are not watching any products.' />
             <Typography
               sx={{
-                margin: '1vh',
+                margin: '1vw',
               }}
             >
               If you want to receive notifications when a certain product is back in stock, it will appear here.

@@ -4,6 +4,7 @@ import { Input, OutlinedInput } from '@mui/material';
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import getColor from '../functions/getColor';
+import getFont from '../functions/getFont';
 import ALERT_USERS from '../reducers/ALERT_USERS';
 
 const ReportRestockPage = (props) => {
@@ -122,6 +123,7 @@ const ReportRestockPage = (props) => {
           style={{
             textAlign: 'center',
             color: textColor,
+            fontFamily: getFont(props.themeSelect),
           }} 
         />
         { phase === 'select' ?

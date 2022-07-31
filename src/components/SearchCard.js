@@ -2,6 +2,7 @@ import { Button, Card, CardActions, CardContent, CardHeader } from '@material-ui
 import { Typography } from '@mui/material';
 import React from 'react';
 import getColor from '../functions/getColor';
+import outOfTen from '../functions/outOfTen';
 
 const SearchCard = (props) => {
 
@@ -52,7 +53,7 @@ const SearchCard = (props) => {
               color: getColor(props.themeSelect, 'success')
             }}
           >
-            {`Result Strength: ${props.item.score} / ${props.item.maxScore}`}
+            {`Strength: ${outOfTen(props.item.score, props.item.maxScore)} / 10`}
           </Typography>
         </CardContent>
         <CardActions>

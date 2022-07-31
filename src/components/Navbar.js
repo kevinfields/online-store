@@ -15,6 +15,7 @@ import getColor from '../functions/getColor';
 import ChooseEditProductPage from '../pages/ChooseEditProductPage';
 import {MODERATOR_LIST} from '../store/MODERATOR_LIST';
 import ReportRestockPage from '../pages/ReportRestockPage';
+import getFont from '../functions/getFont';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -67,7 +68,7 @@ const Navbar = (props) => {
     <Tab label='Clothing' sx={sxDefault} {...a11yProps(1)} />, 
     <Tab label='Furniture' sx={sxDefault} {...a11yProps(2)} />,
     <Tab label='Electronics' sx={sxDefault} {...a11yProps(3)} />,
-    <Tab label='Applicances' sx={sxDefault} {...a11yProps(4)} />,
+    <Tab label='Appliances' sx={sxDefault} {...a11yProps(4)} />,
     <Tab label='Outdoors' sx={sxDefault} {...a11yProps(5)} />,
     <Tab label='My Cart' sx={sxDefault} {...a11yProps(6)} />,
     <Tab label='My Orders' sx={sxDefault} {...a11yProps(7)} />,

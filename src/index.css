@@ -128,6 +128,30 @@ code {
   background-color: lightblue;
 }
 
+.styled-button-bluecyber {
+  background-color: transparent;
+  box-shadow: 1px 1px #0802c2;
+  color: #ffffff;
+  border: 1px solid #00fbff;
+}
+
+.styled-button-bluecyber:hover {
+  cursor: pointer;
+  background-color: lightblue;
+}
+
+.styled-button-sunrise {
+  background-color: transparent;
+  box-shadow: 1px 1px #0802c2;
+  color: #ffffff;
+  border: 1px solid #00fbff;
+}
+
+.styled-button-sunrise:hover {
+  cursor: pointer;
+  background-color: lightblue;
+}
+
 .message-list::-webkit-scrollbar {
   display: none;  /* Chrome */
 }

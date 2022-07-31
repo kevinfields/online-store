@@ -15,7 +15,7 @@ export default async function ALERT_USERS(productRef, usersRef) {
 
   for (const user of userList) {
     await SEND_MESSAGE(usersRef.doc(user), {
-      title: `${productData.data.title} is back in stock!`,
+      title: `"${productData.data.title}" is back in stock!`,
       text: `We've just stocked x${productData.data.stock}. Order as soon as possible, as they are currently selling!`,
     });
     await usersRef.doc(user).collection('watchedItems').doc(productData.id).delete();
