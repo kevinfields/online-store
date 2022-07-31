@@ -114,6 +114,31 @@ const ProfilePage = (props) => {
     });
   }
 
+  const viewOrderHistory = async () => {
+
+    let data = {
+      items: [],
+      price: 0,
+    };
+
+    let orderCatcher = [];
+
+    await props.userRef.collection('orders').get().then(snap => {
+
+      snap.forEach(doc => {
+        for (const item of doc.data().items) {
+          orderCatcher.push(item);
+        }
+        data.price += Number(doc.data().totalCost);
+      })
+
+      data.items = orderCatcher;
+    })
+
+    alert('Total Cost: ' + data.price);
+    alert('Items: ' + data.items)
+  }
+
   return (
     <div className='page'>
       <div
@@ -305,6 +330,13 @@ const ProfilePage = (props) => {
                 onClick={() => setEditingImage(!editingImage)}
               >
                 Change Profile Picture
+              </Button>
+              <Button
+                size='small'
+                variant='outlined'
+                onClick={() => viewOrderHistory()}
+              >
+                View Order History
               </Button>
             </CardActions>
           </Card>

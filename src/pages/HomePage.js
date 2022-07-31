@@ -114,7 +114,7 @@ const HomePage = (props) => {
               position: 'fixed',
               right: '50vw',
               top: '2.5vh',
-              width: '25vw',
+              width: '22.5vw',
               input: {
                 color: textColor,
               },
