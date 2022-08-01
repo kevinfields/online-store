@@ -1,10 +1,13 @@
 
+import { ProductionQuantityLimits } from '@mui/icons-material';
 import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Input, TextField, Typography } from '@mui/material';
 import React, {useState, useEffect} from 'react';
+import HistoryBox from '../components/HistoryBox';
 import Loading from '../components/Loading';
 import ProfileMessagesList from '../components/ProfileMessagesList';
 import ProfileWatchlist from '../components/ProfileWatchlist';
 import getColor from '../functions/getColor';
+import getOrderItem from '../functions/getOrderItem';
 import goodPhotoURL from '../functions/goodPhotoURL';
 import ORDER_CONFIRMATION from '../reducers/ORDER_CONFIRMATION';
 
@@ -16,6 +19,8 @@ const ProfilePage = (props) => {
   const [messages, setMessages] = useState([]);
   const [editingImage, setEditingImage] = useState(false);
   const [newImageURL, setNewImageURL] = useState('');
+  const [purchaseHistory, setPurchaseHistory] = useState([]);
+  const [historyMode, setHistoryMode] = useState(false);
   const [imgError, setImgError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [allowOrder, setAllowOrder] = useState(false);
@@ -122,21 +127,56 @@ const ProfilePage = (props) => {
     };
 
     let orderCatcher = [];
+    let productTitleCatcher = [];
+
 
     await props.userRef.collection('orders').get().then(snap => {
 
       snap.forEach(doc => {
         for (const item of doc.data().items) {
-          orderCatcher.push(item);
+
+          const product = getOrderItem(item, 'title');
+          const quantity = getOrderItem(item, 'quantity');
+          const price = getOrderItem(item, 'price');
+          
+          const productObject = {
+            product: product,
+            quantity: Number(quantity),
+            price: Number(price),
+          };
+
+          if (!productTitleCatcher.includes(product)) {
+            productTitleCatcher.push(product);
+            orderCatcher.push(productObject);
+          } else {
+            
+            let duplicateObjectRef = orderCatcher.find(obj => obj.product === product);
+
+            const referenceIndex = orderCatcher.indexOf(duplicateObjectRef);
+            
+            const replacementObject = {
+              ...duplicateObjectRef,
+              quantity: Number(duplicateObjectRef.quantity) + Number(quantity),
+              price: Number(duplicateObjectRef.price) + Number(duplicateObjectRef.price),
+            };
+            
+            orderCatcher[referenceIndex] = replacementObject;
+      
+          }
+          
         }
+
         data.price += Number(doc.data().totalCost);
+
       })
 
       data.items = orderCatcher;
+
     })
 
-    alert('Total Cost: ' + data.price);
-    alert('Items: ' + data.items)
+    setHistoryMode(true);
+    setPurchaseHistory(data.items);
+
   }
 
   return (
@@ -151,6 +191,7 @@ const ProfilePage = (props) => {
           marginLeft: '5vw',
         }}
       >
+        { !loading && !historyMode ?
         <h3
           style={{
             color: textColor,
@@ -158,6 +199,7 @@ const ProfilePage = (props) => {
         >
           My Watch List
         </h3>
+        : null }
         <h3
           style={{
             marginLeft: '5vw',
@@ -166,6 +208,7 @@ const ProfilePage = (props) => {
         >
           My Profile
         </h3>
+        { !historyMode && !loading ?
         <h3
           style={{
             color: textColor,
@@ -173,9 +216,17 @@ const ProfilePage = (props) => {
         >
           My Messages
         </h3>
+        : null }
       </div>
       { loading ? 
         <Loading />
+        :
+        historyMode ? 
+        <HistoryBox
+          history={purchaseHistory}
+          themeSelect={props.themeSelect}
+          onClose={() => setHistoryMode(false)}
+        />
         :
         <div
           style={{
