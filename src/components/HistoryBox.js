@@ -2,6 +2,7 @@ import { Button, Card, CardContent, Typography } from '@mui/material';
 import React from 'react';
 import fixCost from '../functions/fixCost';
 import getColor from '../functions/getColor';
+import numericCommaAdder from '../functions/numericCommaAdder';
 
 const HistoryBox = (props) => {
 
@@ -29,7 +30,7 @@ const HistoryBox = (props) => {
         // }}
         sx={{
           position: 'fixed',
-          left: '62.5vw',
+          left: '67.5vw',
           top: '32.5vh',
         }}
       >
@@ -43,20 +44,26 @@ const HistoryBox = (props) => {
             borderRadius: '10px',
             boxShadow: getColor(props.themeSelect, 'box_shadow'),
             width: '50%',
-            marginLeft: '10%',
+            marginLeft: '25%',
             marginTop: '1vh',
             marginBottom: '1vh',
           }}
         >
           <Typography
             color={getColor(props.themeSelect, 'text')}
+            sx={{
+              textAlign: 'center'
+            }}
           >
             {item.product}  {"("}x{item.quantity}{")"}
           </Typography>
           <Typography
             color={getColor(props.themeSelect, 'text')}
+            sx={{
+              textAlign: 'center'
+            }}
           >
-            $ {fixCost(item.price)}
+            $ {numericCommaAdder(fixCost(item.price))}
           </Typography>
         </CardContent>
       ))}
