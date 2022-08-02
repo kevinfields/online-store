@@ -102,7 +102,7 @@ const SingleOrderPage = (props) => {
                     }}
                     variant="rounded"
                   >
-                    {'$' + getOrderItem(item, 'price')}
+                    {'$' + fixCost(getOrderItem(item, 'price'))}
                   </Avatar>
                 </ListItemIcon>
               </ListItem>

@@ -392,7 +392,7 @@ const ProfilePage = (props) => {
             </CardActions>
           </Card>
           <ProfileMessagesList
-            messages={messages}
+            messages={messages.sort((a, b) => b.time - a.time)}
             themeSelect={props.themeSelect}
             userRef={props.userRef}
             user={props.user}

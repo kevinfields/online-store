@@ -13,7 +13,7 @@ export default async function ORDER_CONFIRMATION(userRef, type) {
     case 'random':
       let randomWords = getRandomWords(5);
       await userRef.collection('messages').add({
-        title: 'You ordered this message',
+        title: 'You ordered this random message',
         text: randomWords,
         time: new Date(),
       })
