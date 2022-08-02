@@ -51,6 +51,7 @@ const ProfileMessagesList = (props) => {
             backgroundColor: cardColor,
             flexShrink: 0,
           }}
+          key={item.data.time}
           variant='contained'
         >
           <CardHeader title={item.data.title} />

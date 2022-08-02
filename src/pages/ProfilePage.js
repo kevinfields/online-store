@@ -23,7 +23,7 @@ const ProfilePage = (props) => {
   const [historyMode, setHistoryMode] = useState(false);
   const [imgError, setImgError] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [allowOrder, setAllowOrder] = useState(false);
+  const [allowOrder, setAllowOrder] = useState(true);
 
   useEffect(() => {
     loadUserData();
