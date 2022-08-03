@@ -1,6 +1,6 @@
-import { AccountCircle, BeachAccess, Close, Computer, ComputerTwoTone, DarkMode, LightMode, Schedule, Search, ShoppingCart, WbTwilightSharp, WbTwilightTwoTone } from '@mui/icons-material';
-import { AppBar, Button, InputAdornment, Switch, TextField, Toolbar } from '@mui/material';
-import React, {useState, useEffect, useRef} from 'react';
+import { AccountCircle, BeachAccess, Close, Computer, ComputerTwoTone, DarkMode, LightMode, Schedule, Search, ShoppingCart, WbTwilightSharp } from '@mui/icons-material';
+import { Button, InputAdornment, TextField } from '@mui/material';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import getColor from '../functions/getColor';

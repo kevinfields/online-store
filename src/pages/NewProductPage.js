@@ -1,11 +1,7 @@
-
-import { Box } from '@material-ui/core';
-import { Alert, Button, FormControl, Grid, Input, InputAdornment, InputLabel, MenuItem, Select, TextField } from '@mui/material'
+import { Button, FormControl, InputAdornment, MenuItem, Select, TextField } from '@mui/material'
 import React, {useState, useEffect} from 'react';
 import getColor from '../functions/getColor';
 import getOrderItemTitle from '../functions/getOrderItemTitle';
-import goodPhotoURL from '../functions/goodPhotoURL';
-import lowerFirst from '../functions/lowerFirst';
 import '../styling/NewProductGrid.css';
 
 const NewProductPage = (props) => {

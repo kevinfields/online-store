@@ -1,6 +1,6 @@
 import { Card } from '@material-ui/core';
 import { Delete, KeyboardReturn } from '@mui/icons-material';
-import { Button, CardActionArea, CardContent, CardHeader, CardMedia, Typography } from '@mui/material'
+import { Button, CardContent, CardHeader, CardMedia, Typography } from '@mui/material'
 import React, {useState} from 'react'
 import getColor from '../functions/getColor'
 

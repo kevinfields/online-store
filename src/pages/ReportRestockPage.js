@@ -1,8 +1,6 @@
-import { Button, Card, CardContent, CardHeader, Grid, MenuItem, Select, TextField, Typography } from '@material-ui/core';
-import { KeyboardReturn } from '@mui/icons-material';
-import { Input, OutlinedInput } from '@mui/material';
+import {Card, CardContent, CardHeader, Grid, Typography } from '@material-ui/core';
+import {OutlinedInput } from '@mui/material';
 import React, {useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
 import getColor from '../functions/getColor';
 import getFont from '../functions/getFont';
 import ALERT_USERS from '../reducers/ALERT_USERS';
@@ -151,7 +149,7 @@ const ReportRestockPage = (props) => {
                 justifyContent: 'space-around',
               }}
             >
-              {products.map(product => (
+              {products.length > 0 ? products.map(product => (
                 <Grid 
                   item
                 >
@@ -168,7 +166,22 @@ const ReportRestockPage = (props) => {
                     {product.id}
                   </button>
                 </Grid>
-              ))}
+              ))
+              : 
+                <Grid
+                  item
+                >
+                  <Typography
+                    sx={{
+                      width: '10vw',
+                      height: '5vh',
+                      margin: '1vh',
+                    }}
+                  >
+                    All Products are in stock.
+                  </Typography>
+                </Grid>
+              }
             </Grid>
           </div>
           : phase === 'update-amount' ?

@@ -1,11 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Button, Tab, Tabs, Typography, AppBar, Toolbar } from '@mui/material';
+import { Tab, Tabs, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import DepartmentPage from '../pages/DepartmentPage';
-import LoginPage from '../pages/LoginPage';
-import LogoutPage from '../pages/LogoutPage';
 import MyCartPage from '../pages/MyCartPage';
 import MyOrdersPage from '../pages/MyOrdersPage';
 import LoginScreen from './LoginScreen';
@@ -15,7 +12,6 @@ import getColor from '../functions/getColor';
 import ChooseEditProductPage from '../pages/ChooseEditProductPage';
 import {MODERATOR_LIST} from '../store/MODERATOR_LIST';
 import ReportRestockPage from '../pages/ReportRestockPage';
-import getFont from '../functions/getFont';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

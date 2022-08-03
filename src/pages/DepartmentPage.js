@@ -1,4 +1,4 @@
-import { FormControlLabel, FormGroup, Grid, MenuItem, Select, Switch, TextField, Typography } from '@mui/material';
+import { FormControlLabel, FormGroup, Grid, MenuItem, Switch, TextField, Typography } from '@mui/material';
 import React, {useState, useEffect} from 'react';
 import Loading from '../components/Loading';
 import ProductCard from '../components/ProductCard';

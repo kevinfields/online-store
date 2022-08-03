@@ -1,6 +1,5 @@
-import { Button, CardActionArea, Typography } from '@material-ui/core';
 import { Delete, KeyboardReturn } from '@mui/icons-material';
-import { Card, CardContent, CardHeader, getFormControlLabelUtilityClasses } from '@mui/material';
+import { Card, CardContent, CardHeader} from '@mui/material';
 import React, {useState} from 'react';
 import formatTime from '../functions/formatTime';
 import getColor from '../functions/getColor';
@@ -14,7 +13,6 @@ const ProfileMessagesList = (props) => {
     id: '',
   });
 
-  const [deleteError, setDeleteError] = useState(false);
 
   const textColor = getColor(props.themeSelect, 'text');
   const cardColor = getColor(props.themeSelect, 'card_background');
