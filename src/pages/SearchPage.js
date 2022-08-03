@@ -7,6 +7,7 @@ import ProductCard from '../components/ProductCard';
 import SearchCard from '../components/SearchCard';
 import getColor from '../functions/getColor';
 import isSearchResult from '../functions/isSearchResult';
+import UPDATE_SEARCH_HISTROY from '../reducers/UPDATE_SEARCH_HISTORY';
 
 const SearchPage = (props) => {
 
@@ -96,12 +97,31 @@ const SearchPage = (props) => {
         }
       })
     });
-    setSearchResults(catcher.sort((a , b) => b.score - a.score));
+
+    const orderedResults = catcher.sort((a, b) => ((b.score / b.maxScore ) * 10) - ((a.score / a.maxScore ) * 10));
+    
+    setSearchResults(orderedResults);
+    if (props.userRef) {
+
+      let orderedIds = [];
+
+      orderedResults.forEach(item => {
+        orderedIds.push(item.product)
+      })
+
+      await UPDATE_SEARCH_HISTROY(props.userRef, {
+        search: id,
+        searchTime: new Date(),
+        results: orderedIds,
+      })
+    }
     setLoading(false);
   };
 
   useEffect(() => {
+
     makeSearch();
+
   }, [])
 
   const textColor = getColor(props.themeSelect, 'text');

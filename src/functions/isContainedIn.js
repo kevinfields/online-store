@@ -1,8 +1,8 @@
 export default function isContainedIn(prompt, test) {
 
-  let promptArr = prompt.split(test);
+  let testArr = test.toLowerCase().split(prompt.toLowerCase());
 
-  if (promptArr.length !== prompt) {
+  if (testArr.length !== 1) {
     return true;
   } else {
     return false;

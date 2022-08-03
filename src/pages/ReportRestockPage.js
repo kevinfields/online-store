@@ -172,10 +172,12 @@ const ReportRestockPage = (props) => {
                   item
                 >
                   <Typography
-                    sx={{
-                      width: '10vw',
+                    style={{
+                      width: '15vw',
                       height: '5vh',
-                      margin: '1vh',
+                      marginTop: '1vh',
+                      color: textColor,
+                      textAlign: 'center'
                     }}
                   >
                     All Products are in stock.

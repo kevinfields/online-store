@@ -146,7 +146,7 @@ const EditProductPage = (props) => {
         width: '62vw',
         paddingLeft: '1vw',
         paddingRight: '1vw',
-        height: '35vh',
+        height: '40vh',
         paddingTop: '3vh',
         left: '18vw',
         top: '29vh',

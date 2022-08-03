@@ -126,6 +126,7 @@ function App() {
             }
           />
           {!user ? (
+            <>
             <Route
               path="/login"
               element={
@@ -138,6 +139,18 @@ function App() {
                 />
               }
             />
+            <Route
+              path='/search/:id'
+              element={
+                <SearchPage 
+                  departmentsRef={firestore.collection('departments')}
+                  themeSelect={themeSelect}
+                  viewInStore={(dep) => setTab(dep)}
+                  outOfStockRef={firestore.collection('out_of_stock')}
+                />
+              }
+            />
+            </>
           ) : (
             <>
               <Route path="/logout" element={<LogoutPage auth={auth} />} />
@@ -173,6 +186,18 @@ function App() {
                     cardColor={getColor(themeSelect, 'card_background')}
                     themeSelect={themeSelect}
                     returnToOrders={() => setTab(7)}
+                  />
+                }
+              />
+              <Route
+                path='/search/:id'
+                element={
+                  <SearchPage 
+                    departmentsRef={firestore.collection('departments')}
+                    userRef={firestore.collection('users').doc(user.uid)}
+                    themeSelect={themeSelect}
+                    viewInStore={(dep) => setTab(dep)}
+                    outOfStockRef={firestore.collection('out_of_stock')}
                   />
                 }
               />
@@ -243,6 +268,7 @@ function App() {
                 element={
                   <SearchPage 
                     departmentsRef={firestore.collection('departments')}
+                    userRef={user ? firestore.collection('users').doc(user.uid) : null}
                     themeSelect={themeSelect}
                     viewInStore={(dep) => setTab(dep)}
                     outOfStockRef={firestore.collection('out_of_stock')}

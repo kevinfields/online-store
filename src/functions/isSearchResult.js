@@ -1,4 +1,5 @@
-import lowerAll from "./lowerAll"
+import lowerAll from "./lowerAll";
+import isContainedIn from './isContainedIn';
 
 export default function isSearchResult(search, result) {
 
@@ -26,6 +27,10 @@ export default function isSearchResult(search, result) {
         }
       }
     }
+  }
+
+  if (score / maxScore < 0.75 && isContainedIn(result, search)) {
+    score += search.length;
   }
 
   return {

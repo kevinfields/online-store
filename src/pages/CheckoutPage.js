@@ -21,7 +21,6 @@ const CheckoutPage = (props) => {
   });
 
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   const loadCartData = async () => {
     let catcher = [];
@@ -84,6 +83,7 @@ const CheckoutPage = (props) => {
       .doc(doc.id)
       .get()
       .then(doc => {
+        console.log(JSON.stringify(doc));
         available = doc.data().stock - doc.data().currentlyOrdered;
       });
 

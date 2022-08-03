@@ -31,9 +31,7 @@ const SearchCard = (props) => {
   return (
     <div 
       style={{
-        color: getColor(props.themeSelect, 'text'),
-        backgroundColor: getColor(props.themeSelect, 'card_background'),
-        boxShadow: `1px 1px 3px 3px ${getColor(props.themeSelect, 'box_shadow')}`,
+        
         width: '15vw',
         height: 'fit-content',
         marginLeft: '2.5vw',
@@ -42,7 +40,13 @@ const SearchCard = (props) => {
         padding: '0px',
       }}
     >
-      <Card>
+      <Card
+        style={{
+          color: getColor(props.themeSelect, 'text'),
+          backgroundColor: getColor(props.themeSelect, 'card_background'),
+          boxShadow: `1px 1px 3px 3px ${getColor(props.themeSelect, 'box_shadow')}`,
+        }}
+      >
         <CardHeader 
           title={props.item.product}
         />
