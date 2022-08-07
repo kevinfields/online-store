@@ -1,11 +1,11 @@
 body {
   margin: 0;
-  font-family: 'Quicksand';
+  font-family: "Quicksand";
   font-size: large;
 }
 
 code {
-  font-family: 'Quicksand';
+  font-family: "Quicksand";
 }
 
 .page {
@@ -15,6 +15,7 @@ code {
   height: 80vh;
   bottom: 2.5vh;
   overflow-y: scroll;
+  margin-bottom: -3vh;
 }
 
 .store-header {
@@ -78,7 +79,6 @@ code {
   top: 10vh;
   width: 10vw;
 }
-
 
 .styled-button-cyber {
   background: transparent;
@@ -153,19 +153,19 @@ code {
 }
 
 .message-list::-webkit-scrollbar {
-  display: none;  /* Chrome */
+  display: none; /* Chrome */
 }
 
 .message-list {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .product-watchlist::-webkit-scrollbar {
-  display: none;  /* Chrome */
+  display: none; /* Chrome */
 }
 
 .product-watchlist {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
