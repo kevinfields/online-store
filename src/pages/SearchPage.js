@@ -156,7 +156,7 @@ const SearchPage = (props) => {
         </Button>
         <Typography
           align='center'
-          variant='h3'
+          variant='h4'
           sx={{
             color: textColor,
             paddingTop: '2.5vh',

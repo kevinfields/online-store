@@ -3,6 +3,7 @@ import { Typography } from '@mui/material';
 import React from 'react';
 import getColor from '../functions/getColor';
 import outOfTen from '../functions/outOfTen';
+import truncatePercentage from '../functions/truncatePercentage';
 
 const SearchCard = (props) => {
 
@@ -57,7 +58,7 @@ const SearchCard = (props) => {
               color: getColor(props.themeSelect, 'success')
             }}
           >
-            {`Strength: ${outOfTen(props.item.score, props.item.maxScore)} / 10`}
+            {`Strength: ${truncatePercentage((props.item.score / props.item.maxScore * 100).toString(), 2)}%`}
           </Typography>
         </CardContent>
         <CardActions>
