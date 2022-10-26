@@ -1,2 +1,3 @@
 This is a basic template for an online store.
-Deploy: meek-churros-5a32d9.netlify.app
+
+To view, please visit https://meek-churros-5a32d9.netlify.app
