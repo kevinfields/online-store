@@ -137,7 +137,7 @@ const Navbar = (props) => {
           textColor="secondary"
           variant="scrollable"
           sx={{
-            marginTop: "-3vh",
+            marginTop: "-1vh",
           }}
         >
           {!props.loggedIn
