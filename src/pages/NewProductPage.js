@@ -640,7 +640,7 @@ const NewProductPage = (props) => {
             border: `1px solid ${borderColor}`,
             position: "fixed",
             left: "20vw",
-            top: "66vh",
+            top: "70vh",
           }}
         />
       </FormControl>
