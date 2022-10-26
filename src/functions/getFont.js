@@ -12,9 +12,9 @@ export default function getFont(theme) {
     case ('blue'):
       return "Courier, monospace";
     case ('sunrise'):
-      return "Quicksand";
+      return "Montserrat";
     default:
-      return 'Times New Roman';
+      return 'Muli';
   };
 
 }
