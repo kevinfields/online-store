@@ -2,6 +2,7 @@ import { AccountCircle, BeachAccess, Close, Computer, ComputerTwoTone, DarkMode,
 import { Button, InputAdornment, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AccessibilityPanel from '../components/AccessibilityPanel';
 import Navbar from '../components/Navbar';
 import getColor from '../functions/getColor';
 
@@ -50,6 +51,18 @@ const HomePage = (props) => {
   const enterHandler = (e) => {
     if (e.key === 'Enter') {
       submitSearch();
+    }
+  };
+
+  const adjustTextSize = (dir) => {
+
+    //WHEN I GET BACK FROM WORK I WILL HAVE TO FIGURE OUT THE BEST WAY
+    //TO DO THIS.
+    
+    if (dir) {
+      alert('You want bigger text.');
+    } else {
+      alert('You want smalled text.');
     }
   }
 
@@ -244,6 +257,7 @@ const HomePage = (props) => {
       
        : null
       }
+      <AccessibilityPanel adjustTextSize={(dir) => adjustTextSize(dir)} />
     </div>
   );
 };
