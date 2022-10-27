@@ -12,11 +12,13 @@ const HomePage = (props) => {
 
   const [openedTab, setOpenedTab] = useState(props.openedTab);
   const [searchBar, setSearchBar] = useState(false);
+  const [accessPanel, setAccessPanel] = useState(false);
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
   
   const borderColor = getColor(props.themeSelect, props.themeSelect !== 'day' ? 'border' : 'text');
   const textColor = getColor(props.themeSelect, 'text');
+  const backgroundColor = getColor(props.themeSelect, 'card_background');
 
   const changeTheme = (mode) => {
     props.onThemeChange(mode);
@@ -58,7 +60,7 @@ const HomePage = (props) => {
 
     //WHEN I GET BACK FROM WORK I WILL HAVE TO FIGURE OUT THE BEST WAY
     //TO DO THIS.
-    
+
     if (dir) {
       alert('You want bigger text.');
     } else {
@@ -257,7 +259,28 @@ const HomePage = (props) => {
       
        : null
       }
-      <AccessibilityPanel adjustTextSize={(dir) => adjustTextSize(dir)} />
+      { accessPanel ?
+        <AccessibilityPanel 
+          adjustTextSize={(dir) => adjustTextSize(dir)}
+          onClose={() => setAccessPanel(false)}
+        />
+        :
+        <Button
+          onClick={() => setAccessPanel(true)}
+          sx={{
+            color: textColor,
+            width: '8em',
+            height: '5em',
+            backgroundColor: backgroundColor,
+            borderStyle: `1px solid ${borderColor}`,
+            position: 'fixed',
+            right: '5vw',
+            top: '20vh',
+          }}
+        >
+          Open Accessibility
+        </Button>
+      }
     </div>
   );
 };
