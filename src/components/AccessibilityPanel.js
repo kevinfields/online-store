@@ -1,4 +1,5 @@
 import React from 'react'
+import '../styling/AccessibilityPanel.css';
 
 const AccessibilityPanel = (props) => {
   return (
