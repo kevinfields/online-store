@@ -7,4 +7,5 @@
   position: fixed;
   left: 80vw;
   top: 45vh;
+  overflow-y: scroll;
 }

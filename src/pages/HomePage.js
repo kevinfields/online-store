@@ -72,6 +72,7 @@ const HomePage = (props) => {
         openedTab={openedTab}
         changeOpenedTab={(num) => changeOpenedTab(num)}
         outOfStockRef={props.firestore.collection('out_of_stock')}
+        textSize={props.textSize}
       />
       { !searchBar ?
         <Button

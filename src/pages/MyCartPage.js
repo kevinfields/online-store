@@ -121,7 +121,7 @@ const MyCartPage = (props) => {
   }
 
   return (
-    <div className='page'>
+    <div className='page' style={{fontSize: `${props.textSize}pt`}}>
       <h1 
         style={{
           textAlign: 'center',

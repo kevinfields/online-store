@@ -118,7 +118,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App" style={{fontSize: `${textSize}pt`}}>
       <ThemeProvider theme={theme}>
         <Routes>
           <Route

@@ -302,6 +302,7 @@ const Navbar = (props) => {
                     ? props.firestore.collection("users").doc(props.user.uid)
                     : null
                 }
+                textSize={props.textSize}
               />
             </TabPanel>
             <TabPanel value={opened} index={7}>
@@ -319,6 +320,7 @@ const Navbar = (props) => {
                     ? props.firestore.collection("users").doc(props.user.uid)
                     : null
                 }
+                textSize={props.textSize}
               />
             </TabPanel>
             <TabPanel value={opened} index={8}>
@@ -333,6 +335,7 @@ const Navbar = (props) => {
                 openPage={(num, e) => handleChange(e, num)}
                 themeSelect={props.themeSelect}
                 departmentsRef={props.firestore.collection("departments")}
+                textSize={props.textSize}
               />
             </TabPanel>
             <TabPanel value={opened} index={9}>
@@ -348,6 +351,7 @@ const Navbar = (props) => {
                     ? props.firestore.collection("users").doc(props.user.uid)
                     : null
                 }
+                textSize={props.textSize}
               />
             </TabPanel>
             <TabPanel value={opened} index={10}>
@@ -361,6 +365,7 @@ const Navbar = (props) => {
                     ? props.firestore.collection("users").doc(props.user.uid)
                     : null
                 }
+                textSize={props.textSize}
               />
             </TabPanel>
             <TabPanel value={opened} index={11}>
@@ -372,6 +377,7 @@ const Navbar = (props) => {
                 firestore={props.firestore}
                 outOfStockRef={props.firestore.collection("out_of_stock")}
                 openPage={(num, e) => handleChange(e, num)}
+                textSize={props.textSize}
               />
             </TabPanel>
           </>
