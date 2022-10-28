@@ -57,19 +57,11 @@ const HomePage = (props) => {
   };
 
   const adjustTextSize = (dir) => {
-
-    //WHEN I GET BACK FROM WORK I WILL HAVE TO FIGURE OUT THE BEST WAY
-    //TO DO THIS.
-
-    if (dir) {
-      alert('You want bigger text.');
-    } else {
-      alert('You want smalled text.');
-    }
+    props.adjustTextSize(dir);
   }
 
   return (
-    <div>
+    <div style={{fontSize: `${props.textSize}pt`}}>
       <Navbar 
         firestore={props.firestore} 
         user={props.user} 

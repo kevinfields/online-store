@@ -35,7 +35,7 @@ const LoginPage = (props) => {
   };
 
   return (
-    <div className="page">
+    <div className="page" style={`font-size: ${props.textSize}pt`}>
       <button className='login-button' onClick={() => login()}>Log In or Sign Up</button>
     </div>
   );

@@ -33,6 +33,7 @@ function App() {
   const background = document.getElementsByTagName("html")[0];
   const [user] = useAuthState(auth);
   const [themeSelect, setThemeSelect] = useState('day');
+  const [textSize, setTextSize] = useState(14);
   const [tab, setTab] = useState(1);
   
   const navigate = useNavigate();
@@ -101,6 +102,19 @@ function App() {
       ...data,
       theme: theme
     })
+  };
+
+  const adjustTextSize = (dir) => {
+
+    if (dir) {
+      if (textSize <= 17) {
+        setTextSize(textSize + 1);
+      }
+    } else {
+      if (textSize >= 6) {
+        setTextSize(textSize - 1);
+      }
+    }
   }
 
   return (
@@ -122,6 +136,8 @@ function App() {
                 themeSelect={themeSelect}
                 openedTab={tab}
                 outOfStockRef={firestore.collection('out_of_stock')}
+                adjustTextSize={(dir) => adjustTextSize(dir)}
+                textSize={textSize}
               />
             }
           />
@@ -136,6 +152,7 @@ function App() {
                   onLogin={() => loginUser()}
                   cardColor={getColor(themeSelect, 'card_background')}
                   themeSelect={themeSelect}
+                  textSize={textSize}
                 />
               }
             />
@@ -147,13 +164,22 @@ function App() {
                   themeSelect={themeSelect}
                   viewInStore={(dep) => setTab(dep)}
                   outOfStockRef={firestore.collection('out_of_stock')}
+                  textSize={textSize}
                 />
               }
             />
             </>
           ) : (
             <>
-              <Route path="/logout" element={<LogoutPage auth={auth} />} />
+              <Route 
+                path="/logout" 
+                element={
+                  <LogoutPage 
+                    auth={auth} 
+                    textSize={textSize}
+                  />
+                } 
+              />
               <Route
                 path="/checkout"
                 element={
@@ -172,6 +198,7 @@ function App() {
                     userRef={firestore.collection('users').doc(user.uid)}
                     cardColor={getColor(themeSelect, 'card_background')}
                     themeSelect={themeSelect}
+                    textSize={textSize}
                   />
                 }
               />
@@ -186,6 +213,7 @@ function App() {
                     cardColor={getColor(themeSelect, 'card_background')}
                     themeSelect={themeSelect}
                     returnToOrders={() => setTab(7)}
+                    textSize={textSize}
                   />
                 }
               />
@@ -198,6 +226,7 @@ function App() {
                     themeSelect={themeSelect}
                     viewInStore={(dep) => setTab(dep)}
                     outOfStockRef={firestore.collection('out_of_stock')}
+                    textSize={textSize}
                   />
                 }
               />
@@ -212,6 +241,7 @@ function App() {
                     openDepartmentPage={() => setTab(4)}
                     openSelector={() => setTab(10)}
                     outOfStockRef={firestore.collection('out_of_stock')}
+                    textSize={textSize}
                   />
                 }
               />
@@ -224,6 +254,7 @@ function App() {
                     openDepartmentPage={() => setTab(1)}
                     openSelector={() => setTab(10)}
                     outOfStockRef={firestore.collection('out_of_stock')}
+                    textSize={textSize}
                   />
                 }
               />
@@ -236,6 +267,7 @@ function App() {
                     openDepartmentPage={() => setTab(3)}
                     openSelector={() => setTab(10)}
                     outOfStockRef={firestore.collection('out_of_stock')}
+                    textSize={textSize}
                   />
                 }
               />
@@ -248,6 +280,7 @@ function App() {
                     openDepartmentPage={() => setTab(2)}
                     openSelector={() => setTab(10)}
                     outOfStockRef={firestore.collection('out_of_stock')}
+                    textSize={textSize}
                   />
                 }
               />
@@ -260,6 +293,7 @@ function App() {
                     openDepartmentPage={() => setTab(5)}
                     openSelector={() => setTab(10)}
                     outOfStockRef={firestore.collection('out_of_stock')}
+                    textSize={textSize}
                   />
                 }
               />
@@ -272,6 +306,7 @@ function App() {
                     themeSelect={themeSelect}
                     viewInStore={(dep) => setTab(dep)}
                     outOfStockRef={firestore.collection('out_of_stock')}
+                    textSize={textSize}
                   />
                 }
               />
