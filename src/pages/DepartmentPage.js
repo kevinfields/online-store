@@ -250,8 +250,8 @@ const DepartmentPage = (props) => {
           }}
         >
           <MenuItem value='alpha'>Alphabetical</MenuItem>
-          <MenuItem value='price'>Price {"("}Low to High{")"}</MenuItem>
           <MenuItem value='reverse alpha'>Reverse Alphabetical</MenuItem>
+          <MenuItem value='price'>Price {"("}Low to High{")"}</MenuItem>
           <MenuItem value='reverse price'>Price {"("}High to Low{")"}</MenuItem>
         </TextField>
         <Typography
