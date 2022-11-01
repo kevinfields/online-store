@@ -65,6 +65,10 @@ const DepartmentPage = (props) => {
 
   const addToCart = async (product, quantity) => {
 
+
+    if (!props.loggedIn) {
+      props.setOpenedTab(0);
+    }
     if (Number(quantity) > (Number(product.data().stock) - Number(product.data().currentlyOrdered))) {
       setLowStockAlert({
         open: true,
@@ -350,6 +354,7 @@ const DepartmentPage = (props) => {
                     () => addToCart(product, 1) :
                     null
                   }
+                  setLoginTab={() => props.setLoginTab()}
                   outOfStockAlert={() => openAlert(product.id, product.data())}
                   quantity={product.quantity ? product.quantity : 1}
                   loggedIn={props.loggedIn}

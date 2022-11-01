@@ -1,6 +1,6 @@
 import { AccountCircle, BeachAccess, Close, Computer, ComputerTwoTone, DarkMode, LightMode, Schedule, Search, ShoppingCart, WbTwilightSharp } from '@mui/icons-material';
 import { Button, InputAdornment, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AccessibilityPanel from '../components/AccessibilityPanel';
 import Navbar from '../components/Navbar';
@@ -58,7 +58,8 @@ const HomePage = (props) => {
 
   const adjustTextSize = (dir) => {
     props.adjustTextSize(dir);
-  }
+  };
+
 
   return (
     <div style={{fontSize: `${props.textSize}pt`}}>
@@ -70,6 +71,7 @@ const HomePage = (props) => {
         cardColor={props.cardColor} 
         themeSelect={props.themeSelect}
         openedTab={openedTab}
+        setLoginTab={() => changeOpenedTab(0)}
         changeOpenedTab={(num) => changeOpenedTab(num)}
         outOfStockRef={props.firestore.collection('out_of_stock')}
         textSize={props.textSize}

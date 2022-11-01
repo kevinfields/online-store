@@ -117,6 +117,8 @@ function App() {
     }
   }
 
+
+
   return (
     <div className="App" style={{fontSize: `${textSize}pt`}}>
       <ThemeProvider theme={theme}>
@@ -135,6 +137,7 @@ function App() {
                 cardColor={getColor(themeSelect, 'card_background')}
                 themeSelect={themeSelect}
                 openedTab={tab}
+                setLoginTab={() => setTab(0)}
                 outOfStockRef={firestore.collection('out_of_stock')}
                 adjustTextSize={(dir) => adjustTextSize(dir)}
                 textSize={textSize}

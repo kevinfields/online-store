@@ -89,8 +89,7 @@ const ProductCard = (props) => {
               marginBottom: '1vh',
               zIndex: '0',
             }}
-            onClick={props.loggedIn ? () => addOne() : null}
-            href={!props.loggedIn ? 'login' : null}
+            onClick={props.loggedIn ? () => addOne() : () => props.setLoginTab()}
           >
             Add to My Cart
           </Button>

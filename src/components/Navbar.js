@@ -165,6 +165,7 @@ const Navbar = (props) => {
             }
             outOfStockRef={props.firestore.collection("out_of_stock")}
             loggedIn={props.loggedIn}
+            setLoginTab={() => props.setLoginTab()}
             department={"Clothing"}
             cardColor={props.cardColor}
             themeSelect={props.themeSelect}
@@ -191,6 +192,7 @@ const Navbar = (props) => {
                 : null
             }
             loggedIn={props.loggedIn}
+            setLoginTab={() => props.setLoginTab()}
             department={"Furniture"}
             outOfStockRef={props.firestore.collection("out_of_stock")}
             cardColor={props.cardColor}
@@ -218,6 +220,7 @@ const Navbar = (props) => {
                 : null
             }
             loggedIn={props.loggedIn}
+            setLoginTab={() => props.setLoginTab()}
             department={"Electronics"}
             outOfStockRef={props.firestore.collection("out_of_stock")}
             cardColor={props.cardColor}
@@ -245,6 +248,7 @@ const Navbar = (props) => {
                 : null
             }
             loggedIn={props.loggedIn}
+            setLoginTab={() => props.setLoginTab()}
             department={"Appliances"}
             outOfStockRef={props.firestore.collection("out_of_stock")}
             cardColor={props.cardColor}
@@ -272,6 +276,7 @@ const Navbar = (props) => {
                 : null
             }
             loggedIn={props.loggedIn}
+            setLoginTab={() => props.setLoginTab()}
             department={"Outdoors"}
             outOfStockRef={props.firestore.collection("out_of_stock")}
             cardColor={props.cardColor}
