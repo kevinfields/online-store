@@ -8,4 +8,19 @@
   left: 80vw;
   top: 45vh;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.accessibility-header {
+  align-self: center;
+}
+
+.close-accessibility-button {
+  position: relative;
+  align-self: center;
+  width: 5vw;
+  height: 5vh;
+  padding: 1vh;
 }

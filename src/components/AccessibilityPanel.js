@@ -5,7 +5,7 @@ import '../styling/AccessibilityPanel.css';
 const AccessibilityPanel = (props) => {
   return (
     <div className='accessibility-panel'>
-      <h4>Accessibilty</h4>
+      <h4 className='accessibility-header'>Accessibilty</h4>
       <Button 
         onClick={() => props.adjustTextSize(true)}
       >
@@ -16,7 +16,10 @@ const AccessibilityPanel = (props) => {
         Make Text Smaller
       </Button>
       <Button
-        onClick={() => props.onClose()}>
+        variant='contained'
+        className='close-accessibility-button'
+        onClick={() => props.onClose()}
+      >
           Close
       </Button>
     </div>
