@@ -9,11 +9,18 @@ const AccessibilityPanel = (props) => {
       <div className='accessibility-row'>
         <Button 
           onClick={() => props.adjustTextSize(true)}
+          className='accessibility-button'
+          variant='contained'
+          color='primary'
         >
           Make Text Bigger
         </Button>
         <Button 
-          onClick={() => props.adjustTextSize(false)}>
+          onClick={() => props.adjustTextSize(false)}
+          className='accessibility-button'
+          variant='contained'
+          color='secondary'
+        >
           Make Text Smaller
         </Button>
       </div>
