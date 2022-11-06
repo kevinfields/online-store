@@ -11,10 +11,17 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding: 1vh;
 }
 
 .accessibility-header {
   align-self: center;
+}
+
+.accessibility-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .close-accessibility-button {
