@@ -56,9 +56,6 @@ const HomePage = (props) => {
     }
   };
 
-  const adjustTextSize = (dir) => {
-    props.adjustTextSize(dir);
-  };
 
 
   return (
@@ -256,7 +253,8 @@ const HomePage = (props) => {
       }
       { accessPanel ?
         <AccessibilityPanel 
-          adjustTextSize={(dir) => adjustTextSize(dir)}
+          adjustTextSize={(dir) => props.adjustTextSize(dir)}
+          adjustTextSpacing={(dir) => props.adjustTextSpacing(dir)}
           onClose={() => setAccessPanel(false)}
         />
         :

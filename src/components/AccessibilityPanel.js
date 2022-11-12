@@ -24,6 +24,24 @@ const AccessibilityPanel = (props) => {
           Smaller Text
         </Button>
       </div>
+      <div className='accessibility-row'>
+        <Button
+          onClick={() => props.adjustTextSpacing(true)}
+          className='accessibility-button'
+          variant='contained'
+          color='primary'
+        >
+          Spread Out Text
+        </Button>
+        <Button
+          onClick={() => props.adjustTextSpacing(false)}
+          className='accessibility-button'
+          variant='contained'
+          color='secondary'
+        >
+          Bring Together Text
+        </Button>
+      </div>
       <Button
         variant='contained'
         color='error'

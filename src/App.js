@@ -44,7 +44,8 @@ function App() {
 
   const theme = createTheme({
     typography: {
-      fontFamily: getFont(themeSelect)
+      fontFamily: getFont(themeSelect),
+      fontSize: `${textSize}pt`,
     },
     palette: {
       primary: {
@@ -115,6 +116,11 @@ function App() {
         setTextSize(textSize - 1);
       }
     }
+  };
+
+  const adjustTextSpacing = (dir) => {
+
+    console.log('do this later.');
   }
 
 
@@ -140,6 +146,7 @@ function App() {
                 setLoginTab={() => setTab(0)}
                 outOfStockRef={firestore.collection('out_of_stock')}
                 adjustTextSize={(dir) => adjustTextSize(dir)}
+                adjustTextSpacing={(dir) => adjustTextSpacing(dir)}
                 textSize={textSize}
               />
             }
