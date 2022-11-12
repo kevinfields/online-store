@@ -119,7 +119,6 @@ function App() {
   };
 
   const adjustTextSpacing = (dir) => {
-
     console.log('do this later.');
   }
 

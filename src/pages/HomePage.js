@@ -122,6 +122,8 @@ const HomePage = (props) => {
               right: '50vw',
               top: '2.5vh',
               width: '22.5vw',
+              zIndex: '1',
+              backgroundColor: backgroundColor,
               input: {
                 color: textColor,
               },

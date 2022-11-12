@@ -10,12 +10,14 @@
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  gap: 2vh;
   justify-content: space-around;
   padding: 1vh;
 }
 
 .accessibility-header {
   align-self: center;
+  margin: 1vh;
 }
 
 .accessibility-row {
