@@ -13,7 +13,7 @@ const AccessibilityPanel = (props) => {
           variant='contained'
           color='primary'
         >
-          Make Text Bigger
+          Bigger Text
         </Button>
         <Button 
           onClick={() => props.adjustTextSize(false)}
@@ -21,7 +21,7 @@ const AccessibilityPanel = (props) => {
           variant='contained'
           color='secondary'
         >
-          Make Text Smaller
+          Smaller Text
         </Button>
       </div>
       <Button
